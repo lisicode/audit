@@ -2,9 +2,9 @@
     <van-row>
         <van-col span="24">
             <div class="banner">
-                <van-icon name="wap-nav" @click="showPopup" />
-                <h1>您好，李思</h1>
-                <p>移动信贷审批系统</p>
+                <van-icon name="wap-nav" />
+                <h1 @click="popupUserNameInput" v-html="text"></h1>
+                <p>信贷移动审批系统</p>
                 <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                     <defs>
                         <path id="gentle-wave"
@@ -17,31 +17,28 @@
                         <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff"></use>
                     </g>
                 </svg>
+                <van-popup v-model="userNameInput" position="top" :style="{ width: '100%' }">
+                    <van-cell-group>
+                        <van-field v-model="userName" placeholder="请输入用户名">
+                            <van-button slot="button" size="small" type="info" @click="popupPasswordInput">确认</van-button>
+                        </van-field>
+                    </van-cell-group>
+                </van-popup>
             </div>
         </van-col>
         <van-col span="24">
-            <!-- 密码输入框 -->
-            <van-password-input
-                    :value="password"
-                    :length="5"
-                    info="请输入密码"
-                    :focused="showKeyboard"
-                    @focus="showKeyboard = true"
-            />
-            <!-- 数字键盘 -->
-            <van-number-keyboard
-                    :show="showKeyboard"
-                    @input="onInput"
-                    @delete="onDelete"
-                    @blur="showKeyboard = false"
-            />
-            <!--弹出层-->
-            <van-popup
-                    v-model="popup"
-                    position="right"
-                    :style="{ width: '20%',height: '100%' }"
-            />
+            <div class="footer">
+                <van-skeleton title :row="3" />
+                <van-skeleton title :row="3" />
+                <van-divider>开封新东方村镇银行</van-divider>
+            </div>
         </van-col>
+        <transition name="van-slide-up">
+            <van-col span="24" v-show="userPasswordInput">
+                <van-password-input :value="password" :length="5" info="验证密码" :focused="showKeyboard" @focus="showKeyboard = true" />
+                <van-number-keyboard :show="showKeyboard" @blur="showKeyboard = false" @input="onInput" @delete="onDelete" />
+            </van-col>
+        </transition>
     </van-row>
 </template>
 
@@ -53,8 +50,10 @@
             return {
                 userName: '',
                 password: '',
-                showKeyboard: true,
-                popup: false
+                userNameInput: false,
+                userPasswordInput: false,
+                showKeyboard: false,
+                text: '请登录，<span class="animated flash infinite">__</span>'
             }
         },
 
@@ -75,23 +74,37 @@
         },
 
         methods: {
+            popupUserNameInput() {
+                this.userNameInput = true;
+                this.password = ''
+            },
+            popupPasswordInput() {
+                let _this = this;
+                if (this.userName != '') {
+                    this.userNameInput = false;
+                    this.userPasswordInput = true;
+                    this.text = '欢迎，' + this.userName;
+                    setTimeout(function () {
+                        _this.showKeyboard = true
+                    },500)
+                }
+            },
             onInput(key) {
                 this.password = (this.password + key).slice(0, 5);
                 if (this.password.length == 5) {
                     console.log(this.password)
+                    console.log(this.userName)
                 }
             },
             onDelete() {
                 this.password = this.password.slice(0, this.password.length - 1);
             },
-            showPopup() {
-                this.popup = true;
-            }
         }
     }
 </script>
 
 <style scoped lang="scss">
+    @import '../assets/css/animate.css';
     .banner {
         position: relative;
         color: white;
@@ -138,33 +151,38 @@
             margin-top: 60px;
             margin-left: 20px;
             margin-bottom: 0;
-            font: 30px arial;
+            font-size: 30px;
             font-weight: 400;
-            animation: fadeIn 1s 1 0s;
-            @-webkit-keyframes fadeIn {
-                0% {
-                    opacity: 0;
-                }
-                50% {
-                    opacity: 0.5;
-                }
-                100% {
-                    opacity: 1;
-                }
-            }
         }
         p {
+            font-size: 20px;
             margin-left: 20px;
         }
         .van-icon {
             position: absolute;
             top: 10px;
             right: 10px;
+            font-size: 20px;
         }
     }
-
     .van-password-input {
         margin-top: 30px;
     }
+    .footer {
+        position: absolute;
+        top: 300px;
+        width: 100%;
+        height: 50%;
+        .van-skeleton {
+            margin-top: 20px;
+        }
+        .van-divider {
+            /*margin-top: 50px;*/
+        }
+
+    }
+
+
+
 
 </style>
