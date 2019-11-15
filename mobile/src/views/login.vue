@@ -26,13 +26,6 @@
                 </van-popup>
             </div>
         </van-col>
-        <van-col span="24">
-            <div class="footer">
-                <van-skeleton title :row="3" />
-                <van-skeleton title :row="3" />
-                <van-divider>开封新东方村镇银行</van-divider>
-            </div>
-        </van-col>
         <transition name="van-slide-up">
             <van-col span="24" v-show="userPasswordInput">
                 <van-password-input :value="password" :length="5" info="验证密码" :focused="showKeyboard" @focus="showKeyboard = true" />
@@ -53,7 +46,7 @@
                 userNameInput: false,
                 userPasswordInput: false,
                 showKeyboard: false,
-                text: '请登录，<span class="animated flash infinite">__</span>'
+                text: '请登录，<span class="animated flash infinite">__</span>',
             }
         },
 
@@ -167,19 +160,6 @@
     }
     .van-password-input {
         margin-top: 30px;
-    }
-    .footer {
-        position: absolute;
-        top: 300px;
-        width: 100%;
-        height: 50%;
-        .van-skeleton {
-            margin-top: 20px;
-        }
-        .van-divider {
-            /*margin-top: 50px;*/
-        }
-
     }
 
 
