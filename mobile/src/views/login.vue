@@ -3,7 +3,7 @@
         <van-col span="24">
             <div class="banner">
                 <van-icon name="wap-nav" />
-                <h1 @click="popupUserNameInput" v-html="text"></h1>
+                <h1 @click="switchUser" v-html="text"></h1>
                 <p>信贷移动审批系统</p>
                 <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
                     <defs>
@@ -20,7 +20,7 @@
                 <van-popup v-model="userNameInput" position="top" :style="{ width: '100%' }">
                     <van-cell-group>
                         <van-field v-model="userName" placeholder="请输入用户名">
-                            <van-button slot="button" size="small" type="info" @click="popupPasswordInput">确认</van-button>
+                            <van-button slot="button" size="small" type="info" @click="confirmUserName">确认</van-button>
                         </van-field>
                     </van-cell-group>
                 </van-popup>
@@ -29,7 +29,7 @@
         <transition name="van-slide-up">
             <van-col span="24" v-show="userPasswordInput">
                 <van-password-input :value="password" :length="5" info="验证密码" :focused="showKeyboard" @focus="showKeyboard = true" />
-                <van-number-keyboard :show="showKeyboard" @blur="showKeyboard = false" @input="onInput" @delete="onDelete" />
+                <van-number-keyboard :show="showKeyboard" @blur="showKeyboard = false" @input="confirmLogin" @delete="onDelete" />
             </van-col>
         </transition>
     </van-row>
@@ -65,16 +65,18 @@
 
             console.log(this.$store.state.todos)
 
-            //
-            this.popupPasswordInput()
+            // 检查登陆
+            this.confirmUserName()
         },
 
         methods: {
-            popupUserNameInput() {
+            // 用户切换
+            switchUser() {
                 this.userNameInput = true;
                 this.password = ''
             },
-            popupPasswordInput() {
+            // 确认用户名
+            confirmUserName() {
                 let _this = this;
                 if (this.userName != '') {
                     this.userNameInput = false;
@@ -85,13 +87,15 @@
                     },500)
                 }
             },
-            onInput(key) {
+            // 确认登录
+            confirmLogin(key) {
                 this.password = (this.password + key).slice(0, 5);
                 if (this.password.length == 5) {
                     console.log(this.password)
                     console.log(this.userName)
                 }
             },
+            // 删除
             onDelete() {
                 this.password = this.password.slice(0, this.password.length - 1);
             },
