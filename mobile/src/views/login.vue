@@ -41,7 +41,7 @@
         name: 'login',
         data() {
             return {
-                userName: '',
+                userName: '李思',
                 password: '',
                 userNameInput: false,
                 userPasswordInput: false,
@@ -64,6 +64,9 @@
             })
 
             console.log(this.$store.state.todos)
+
+            //
+            this.popupPasswordInput()
         },
 
         methods: {
