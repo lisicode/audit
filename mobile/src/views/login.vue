@@ -2,7 +2,7 @@
     <van-row>
         <van-col span="24">
             <div class="banner">
-                <van-icon name="wap-nav" />
+                <van-icon name="wap-nav"/>
                 <h1 @click="switchUser" v-html="text"></h1>
                 <p>信贷移动审批系统</p>
                 <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
@@ -28,17 +28,37 @@
         </van-col>
         <transition name="van-slide-up">
             <van-col span="24" v-show="userPasswordInput">
-                <van-password-input :value="password" :length="5" info="验证密码" :focused="showKeyboard" @focus="showKeyboard = true" />
-                <van-number-keyboard :show="showKeyboard" @blur="showKeyboard = false" @input="confirmLogin" @delete="onDelete" />
+                <van-password-input
+                        :value="password"
+                        :length="5"
+                        info="验证密码"
+                        :focused="showKeyboard"
+                        @focus="showKeyboard = true"
+                />
+                <van-number-keyboard
+                        :show="showKeyboard"
+                        @blur="showKeyboard = false"
+                        @input="confirmLogin"
+                        @delete="onDelete"
+                />
             </van-col>
         </transition>
     </van-row>
 </template>
 
 <script>
+    import {interfaceMod, headRequestMod, requestMod} from '../assets/js/config'
 
     export default {
         name: 'login',
+        load: {
+            dom() {
+
+            },
+            plus() {
+                // console.log(plus.device.imei)
+            }
+        },
         data() {
             return {
                 userName: '李思',
@@ -51,22 +71,27 @@
         },
 
         created() {
-            console.log(this.$store.state.count)
+            // console.log(this.$store.state.count)
+            // this.$store.commit('increment', {
+            //     amount: 2
+            // })
+            // console.log(this.$store.getters.doneTodos)
+            // this.$store.commit('changeTodos', {
+            //     newTodos: this.$store.getters.doneTodos
+            // })
+            // console.log(this.$store.state.todos)
 
-            this.$store.commit('increment', {
-                amount: 2
-            })
-
-            console.log(this.$store.getters.doneTodos)
-
-            this.$store.commit('changeTodos', {
-                newTodos: this.$store.getters.doneTodos
-            })
-
-            console.log(this.$store.state.todos)
+            //
+            this.$emit('childData', false)
 
             // 检查登陆
-            this.confirmUserName()
+            this.confirmUserName();
+
+
+            let params = {
+                userName: 'li'
+            };
+            console.log(headRequestMod(interfaceMod.userLogin, params))
         },
 
         methods: {
@@ -84,7 +109,7 @@
                     this.text = '欢迎，' + this.userName;
                     setTimeout(function () {
                         _this.showKeyboard = true
-                    },500)
+                    }, 500)
                 }
             },
             // 确认登录
@@ -93,6 +118,14 @@
                 if (this.password.length == 5) {
                     console.log(this.password)
                     console.log(this.userName)
+
+                    this.$notify({
+                        type: 'success',
+                        duration: 1000,
+                        message: '登陆成功'
+                    });
+
+                    this.$router.push({path: '/home',})
                 }
             },
             // 删除
@@ -168,8 +201,4 @@
     .van-password-input {
         margin-top: 30px;
     }
-
-
-
-
 </style>

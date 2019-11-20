@@ -1,18 +1,18 @@
 <template>
     <van-row>
-        home
-
+        setting
     </van-row>
 </template>
 
 <script>
     export default {
-        name: 'home',
+        name: 'setting',
         data() {
             return {
-
+                
             }
         },
+
         created() {
             //
             this.$emit('childData', true)

@@ -6,10 +6,12 @@ import Vant from 'vant';
 import 'vant/lib/index.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import plus from 'vue-h5-plus'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.use(Vant);
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
+Vue.use(plus)
 
 new Vue({
   router,
