@@ -1,18 +1,11 @@
 <template>
     <div id="app">
         <router-view />
-        <common></common>
     </div>
 </template>
 
 <script>
-    // @ is an alias to /src
-    import common from '@/components/common.vue'
-
     export default {
-        components: {
-            common,
-        },
         data() {
             return {
 

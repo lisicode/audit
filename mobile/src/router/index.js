@@ -10,25 +10,10 @@ const routes = [
         component: resolve => require(['@/views/login'],resolve)
     },
     {
-        path: '/home',
-        name: 'home',
-        component: resolve => require(['@/views/home'],resolve)
-    },
-    {
-        path: '/flow',
-        name: 'flow',
-        component: resolve => require(['@/views/flow'],resolve)
-    },
-    {
-        path: '/query',
-        name: 'query',
-        component: resolve => require(['@/views/query'],resolve)
-    },
-    {
-        path: '/setting',
-        name: 'setting',
-        component: resolve => require(['@/views/setting'],resolve)
-    },
+        path: '/index',
+        name: 'index',
+        component: resolve => require(['@/views/index'],resolve)
+    }
 ];
 
 const router = new VueRouter({

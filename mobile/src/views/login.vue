@@ -120,7 +120,7 @@
                         message: '登陆成功'
                     });
 
-                    this.$router.push({path: '/home',})
+                    this.$router.push({path: '/index',})
                 }
             },
             // 键盘事件
@@ -134,10 +134,6 @@
 <style scoped lang="scss">
     @import '../assets/css/animate.css';
     .van-row {
-        position: relative;
-        z-index: 2;
-        height: 100vh;
-        background-color: #fff;
         .banner {
             position: relative;
             color: white;
