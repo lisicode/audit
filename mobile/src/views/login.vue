@@ -69,7 +69,6 @@
                 text: '请登录，<span class="animated flash infinite">__</span>',
             }
         },
-
         created() {
             // console.log(this.$store.state.count)
             // this.$store.commit('increment', {
@@ -90,7 +89,6 @@
             };
             console.log(headRequestMod(interfaceMod.userLogin, params))
         },
-
         methods: {
             // 用户切换
             switchUser() {

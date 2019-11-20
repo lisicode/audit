@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <router-view />
-        <component :is="module"></component>
+        <common></common>
     </div>
 </template>
 
@@ -15,8 +15,11 @@
         },
         data() {
             return {
-                module: 'common',
+
             }
+        },
+        created() {
+
         }
     }
 </script>
