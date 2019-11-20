@@ -82,7 +82,7 @@
             // console.log(this.$store.state.todos)
 
             //
-            this.$emit('childData', false)
+            this.$emit('childData', false);
 
             // 检查登陆
             this.confirmUserName();

@@ -18,7 +18,6 @@ const routes = [
         path: '/flow',
         name: 'flow',
         component: resolve => require(['@/views/flow'],resolve)
-
     },
     {
         path: '/query',
