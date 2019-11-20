@@ -81,9 +81,6 @@
             // })
             // console.log(this.$store.state.todos)
 
-            //
-            this.$emit('childData', false);
-
             // 检查登陆
             this.confirmUserName();
 
@@ -128,7 +125,7 @@
                     this.$router.push({path: '/home',})
                 }
             },
-            // 删除
+            // 键盘事件
             onDelete() {
                 this.password = this.password.slice(0, this.password.length - 1);
             },
@@ -138,67 +135,73 @@
 
 <style scoped lang="scss">
     @import '../assets/css/animate.css';
-    .banner {
+    .van-row {
         position: relative;
-        color: white;
-        overflow: hidden;
-        background: linear-gradient(60deg, #409EFF 0%, #409EFF 100%);
-        svg {
+        z-index: 2;
+        height: 100vh;
+        background-color: #fff;
+        .banner {
             position: relative;
-            width: 100%;
-            height: 15vh;
-            margin-bottom: -7px;
-            min-height: 100px;
-            max-height: 150px;
-            g {
-                use {
-                    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-                }
-                use:nth-child(1) {
-                    animation-delay: -2s;
-                    animation-duration: 7s;
-                }
-                use:nth-child(2) {
-                    animation-delay: -3s;
-                    animation-duration: 10s;
-                }
-                use:nth-child(3) {
-                    animation-delay: -4s;
-                    animation-duration: 13s;
-                }
-                use:nth-child(4) {
-                    animation-delay: -5s;
-                    animation-duration: 20s;
-                }
-                @keyframes move-forever {
-                    0% {
-                        transform: translate3d(-90px, 0, 0);
+            color: white;
+            overflow: hidden;
+            background: linear-gradient(60deg, #409EFF 0%, #409EFF 100%);
+            svg {
+                position: relative;
+                width: 100%;
+                height: 15vh;
+                margin-bottom: -7px;
+                min-height: 100px;
+                max-height: 150px;
+                g {
+                    use {
+                        animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
                     }
-                    100% {
-                        transform: translate3d(85px, 0, 0);
+                    use:nth-child(1) {
+                        animation-delay: -2s;
+                        animation-duration: 7s;
+                    }
+                    use:nth-child(2) {
+                        animation-delay: -3s;
+                        animation-duration: 10s;
+                    }
+                    use:nth-child(3) {
+                        animation-delay: -4s;
+                        animation-duration: 13s;
+                    }
+                    use:nth-child(4) {
+                        animation-delay: -5s;
+                        animation-duration: 20s;
+                    }
+                    @keyframes move-forever {
+                        0% {
+                            transform: translate3d(-90px, 0, 0);
+                        }
+                        100% {
+                            transform: translate3d(85px, 0, 0);
+                        }
                     }
                 }
             }
+            h1 {
+                margin-top: 60px;
+                margin-left: 20px;
+                margin-bottom: 0;
+                font-size: 30px;
+                font-weight: 400;
+            }
+            p {
+                font-size: 20px;
+                margin-left: 20px;
+            }
+            .van-icon {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 20px;
+            }
         }
-        h1 {
-            margin-top: 60px;
-            margin-left: 20px;
-            margin-bottom: 0;
-            font-size: 30px;
-            font-weight: 400;
+        .van-password-input {
+            margin-top: 30px;
         }
-        p {
-            font-size: 20px;
-            margin-left: 20px;
-        }
-        .van-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-        }
-    }
-    .van-password-input {
-        margin-top: 30px;
     }
 </style>

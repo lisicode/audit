@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <router-view v-on:childData="childEvent" />
-        <component :is="module" v-if="active"></component>
+        <router-view />
+        <component :is="module"></component>
     </div>
 </template>
 
@@ -15,13 +15,7 @@
         },
         data() {
             return {
-                active: true,
                 module: 'common',
-            }
-        },
-        methods: {
-            childEvent(e) {
-                this.active = e
             }
         }
     }

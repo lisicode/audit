@@ -12,10 +12,7 @@
                 
             }
         },
-
         created() {
-            //
-            this.$emit('childData', true)
 
         },
     }

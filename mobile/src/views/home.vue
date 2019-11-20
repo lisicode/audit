@@ -1,7 +1,6 @@
 <template>
     <van-row>
         home
-
     </van-row>
 </template>
 
@@ -14,8 +13,6 @@
             }
         },
         created() {
-            //
-            this.$emit('childData', true)
 
         },
     }
