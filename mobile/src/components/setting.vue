@@ -15,6 +15,9 @@
         created() {
 
         },
+        methods: {
+
+        }
     }
 </script>
 
