@@ -104,7 +104,7 @@
                     this.text = '欢迎，' + this.userName;
                     setTimeout(function () {
                         _this.showKeyboard = true
-                    }, 500)
+                    }, 600)
                 }
             },
             // 确认登录

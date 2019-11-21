@@ -1,12 +1,16 @@
 <template>
     <van-row>
-        <component :is="currentComponent"></component>
-        <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133">
-            <van-tabbar-item @click="to('home')" icon="home-o">首页</van-tabbar-item>
-            <van-tabbar-item @click="to('flow')" icon="description">流程</van-tabbar-item>
-            <van-tabbar-item @click="to('query')" icon="search">查询</van-tabbar-item>
-            <van-tabbar-item @click="to('setting')" icon="setting-o">设置</van-tabbar-item>
-        </van-tabbar>
+        <transition name="van-slide-down">
+            <component :is="currentComponent" v-show="tabBar"></component>
+        </transition>
+        <transition name="van-slide-up">
+            <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
+                <van-tabbar-item @click="to('home')" icon="home-o">首页</van-tabbar-item>
+                <van-tabbar-item @click="to('flow')" icon="description">流程</van-tabbar-item>
+                <van-tabbar-item @click="to('query')" icon="search">查询</van-tabbar-item>
+                <van-tabbar-item @click="to('setting')" icon="setting-o">设置</van-tabbar-item>
+            </van-tabbar>
+        </transition>
     </van-row>
 </template>
 
@@ -26,11 +30,16 @@
         },
         data() {
             return {
+                tabBar: false,
                 active: 0,
                 currentComponent: 'home'
             }
         },
         created() {
+            let _this = this;
+            setTimeout(function () {
+                _this.tabBar = true
+            },600)
 
         },
         methods: {
