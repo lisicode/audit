@@ -7,7 +7,7 @@
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('home')" icon="home-o">首页</van-tabbar-item>
                 <van-tabbar-item @click="to('flow')" icon="description">流程</van-tabbar-item>
-                <van-tabbar-item @click="to('query')" icon="search">查询</van-tabbar-item>
+                <van-tabbar-item @click="to('statistics')" icon="bar-chart-o">统计</van-tabbar-item>
                 <van-tabbar-item @click="to('setting')" icon="setting-o">设置</van-tabbar-item>
             </van-tabbar>
         </transition>
@@ -17,7 +17,7 @@
 <script>
     const home = resolve => require(['@/components/home.vue'],resolve);
     const flow = resolve => require(['@/components/flow.vue'],resolve);
-    const query = resolve => require(['@/components/query.vue'],resolve);
+    const statistics = resolve => require(['@/components/statistics.vue'],resolve);
     const setting = resolve => require(['@/components/setting.vue'],resolve);
 
     export default {
@@ -25,13 +25,13 @@
         components: {
             home,
             flow,
-            query,
+            statistics,
             setting
         },
         data() {
             return {
-                tabBar: false,
                 active: 0,
+                tabBar: false,
                 currentComponent: 'home'
             }
         },

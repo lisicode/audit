@@ -1,12 +1,12 @@
 <template>
     <van-row>
-        query
+        statistics
     </van-row>
 </template>
 
 <script>
     export default {
-        name: 'query',
+        name: 'statistics',
         data() {
             return {
 
