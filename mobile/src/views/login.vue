@@ -47,7 +47,7 @@
 </template>
 
 <script>
-    import {interfaceMod, headRequestMod, requestMod} from '../assets/js/config'
+    import {interfaceMod, headRequestMod, requestMod} from '@/assets/js/config'
 
     export default {
         name: 'login',
@@ -82,12 +82,6 @@
 
             // 检查登陆
             this.confirmUserName();
-
-
-            let params = {
-                userName: 'li'
-            };
-            console.log(headRequestMod(interfaceMod.userLogin, params))
         },
         methods: {
             // 用户切换
@@ -114,6 +108,11 @@
                     console.log(this.password)
                     console.log(this.userName)
 
+                    let params = {
+                        userName: 'li'
+                    };
+                    console.log(headRequestMod(interfaceMod.userLogin, params))
+
                     this.$notify({
                         type: 'success',
                         duration: 1000,
@@ -133,69 +132,65 @@
 
 <style scoped lang="scss">
     @import '../assets/css/animate.css';
-    .van-row {
-        .banner {
+    .banner {
+        position: relative;
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: white;
+        background: linear-gradient(60deg, #409EFF 0%, #409EFF 100%);
+        svg {
             position: relative;
-            color: white;
-            overflow: hidden;
-            background: linear-gradient(60deg, #409EFF 0%, #409EFF 100%);
-            svg {
-                position: relative;
-                width: 100%;
-                height: 15vh;
-                margin-bottom: -7px;
-                min-height: 100px;
-                max-height: 150px;
-                g {
-                    use {
-                        animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+            width: 100%;
+            height: 15vh;
+            margin-bottom: -7px;
+            min-height: 100px;
+            max-height: 150px;
+            g {
+                use {
+                    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+                }
+                use:nth-child(1) {
+                    animation-delay: -2s;
+                    animation-duration: 7s;
+                }
+                use:nth-child(2) {
+                    animation-delay: -3s;
+                    animation-duration: 10s;
+                }
+                use:nth-child(3) {
+                    animation-delay: -4s;
+                    animation-duration: 13s;
+                }
+                use:nth-child(4) {
+                    animation-delay: -5s;
+                    animation-duration: 20s;
+                }
+                @keyframes move-forever {
+                    0% {
+                        transform: translate3d(-90px, 0, 0);
                     }
-                    use:nth-child(1) {
-                        animation-delay: -2s;
-                        animation-duration: 7s;
-                    }
-                    use:nth-child(2) {
-                        animation-delay: -3s;
-                        animation-duration: 10s;
-                    }
-                    use:nth-child(3) {
-                        animation-delay: -4s;
-                        animation-duration: 13s;
-                    }
-                    use:nth-child(4) {
-                        animation-delay: -5s;
-                        animation-duration: 20s;
-                    }
-                    @keyframes move-forever {
-                        0% {
-                            transform: translate3d(-90px, 0, 0);
-                        }
-                        100% {
-                            transform: translate3d(85px, 0, 0);
-                        }
+                    100% {
+                        transform: translate3d(85px, 0, 0);
                     }
                 }
             }
-            h1 {
-                margin-top: 60px;
-                margin-left: 20px;
-                margin-bottom: 0;
-                font-size: 30px;
-                font-weight: 400;
-            }
-            p {
-                font-size: 20px;
-                margin-left: 20px;
-            }
-            .van-icon {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 20px;
-            }
         }
-        .van-password-input {
-            margin-top: 30px;
+        h1 {
+            margin-top: 60px;
+            margin-left: 20px;
+            margin-bottom: 0;
+            font-size: 30px;
+            font-weight: 400;
+        }
+        p {
+            font-size: 20px;
+            margin-left: 20px;
+        }
+        .van-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
         }
     }
 </style>
