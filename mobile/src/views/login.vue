@@ -61,7 +61,7 @@
         },
         data() {
             return {
-                userName: '李思',
+                userName: 'lisi',
                 password: '',
                 userNameInput: false,
                 userPasswordInput: false,
@@ -109,17 +109,22 @@
                     console.log(this.userName)
 
                     let params = {
-                        userName: 'li'
+                        userNo: this.userName,
+                        passwordType: 'string',
+                        password: this.password
                     };
+                    
                     console.log(headRequestMod(interfaceMod.userLogin, params))
 
-                    this.$notify({
-                        type: 'success',
-                        duration: 1000,
-                        message: '登陆成功'
-                    });
-
-                    this.$router.push({path: '/index',})
+                    requestMod(headRequestMod(interfaceMod.userLogin, params), function (e) {
+                        console.log(e)
+                    })
+                    // this.$notify({
+                    //     type: 'success',
+                    //     duration: 1000,
+                    //     message: '登陆成功'
+                    // });
+                    // this.$router.push({path: '/index',})
                 }
             },
             // 键盘事件

@@ -5,26 +5,20 @@ const environmentMod = {
         url: '',
     },
     'UAT': {
-        type: 'UAT',
-        url: 'http://192.168.200.201/agw-web/fintech/common/gatewayService',
+        type: '/uat',
+        businessChannel: 'XDFXD',
+        channelId: "01",
+        inputSource: "I001",
+        versionId: "1.0.0",
+        org: "000004332361",
+        updateMode: "auto"
     },
     'PROD': {
         url: '',
     }
 };
 
-const UAT_url = 'http://192.168.200.201/agw-web/fintech/common/gatewayService';
-const UAT_businessChannel = "XDFXD";
-const UAT_channelId = "01";
-const UAT_inputSource = "I001";
-const UAT_versionId = "1.0.0";
-const UAT_org = "000004332361";
-const UAT_updateMode = "auto";
-
 const environment = environmentMod['UAT'];
-const app_businessChannel = eval(environment.type + "_businessChannel");
-
-
 
 const interfaceMod = {
     userLogin: '00B005',
@@ -74,13 +68,25 @@ const headRequestMod = (serviceId, paramsStr) => {
             tokenNo: publicMod['getToken'](),
             mac: publicMod['getImei'](),
             phoneIMEI: publicMod['getImsi'](),
+            businessChannel: environment.businessChannel,
+            channelId: environment.channelId,
+            inputSource: environment.inputSource,
+            org: environment.org,
+            versionId: environment.versionId
         },
         request: paramsStr
-    };
+    }
 };
 
-const requestMod = (data, callBack) => {
-    axios.post(environment.url, data)
+const requestMod = (headRequest, callBack) => {
+    axios({
+        method: 'post',
+        baseURL: environment.type,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: headRequest
+    })
         .then((response) => {
             callBack(response);
         })
