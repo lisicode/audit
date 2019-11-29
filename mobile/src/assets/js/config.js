@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-const environmentMod = {
+// 环境
+const EnvironmentConfig = {
     'DEV': {
         url: '',
+        businessChannel: 'XDFXD',
+        channelId: "01",
+        inputSource: "I001",
+        versionId: "1.0.0",
+        org: "000004332361",
+        updateMode: "auto"
     },
     'UAT': {
         url: '/uat',
@@ -15,16 +22,22 @@ const environmentMod = {
     },
     'PROD': {
         url: '',
+        businessChannel: 'XDFXD',
+        channelId: "01",
+        inputSource: "I001",
+        versionId: "1.0.0",
+        org: "000004332361",
+        updateMode: "auto"
     }
 };
 
-const environment = environmentMod['UAT'];
-
-const interfaceMod = {
+// 接口编号
+const InterfaceCode = {
     userLogin: '00B005',
 };
 
-const publicMod = {
+// 公共函数
+const PublicMethods = {
     'getUserNo': () => {
         return ''
     },
@@ -58,41 +71,47 @@ const publicMod = {
     },
 };
 
-const headRequestMod = (serviceId, paramsStr) => {
+// 环境定义
+const Environment = EnvironmentConfig['UAT'];
+
+// 组装请求数据
+const AssembleRequestData = (serviceId, paramsStr) => {
     return {
         head: {
             serviceId: serviceId,
-            opId: publicMod['getUserNo'](),
-            serviceSn: publicMod['getImei']() + publicMod['getTimes'](),
-            requestTime: publicMod['getTimes'](),
-            tokenNo: publicMod['getToken'](),
-            mac: publicMod['getImei'](),
-            phoneIMEI: publicMod['getImsi'](),
-            businessChannel: environment.businessChannel,
-            channelId: environment.channelId,
-            inputSource: environment.inputSource,
-            org: environment.org,
-            versionId: environment.versionId
+            opId: PublicMethods['getUserNo'](),
+            serviceSn: PublicMethods['getImei']() + PublicMethods['getTimes'](),
+            requestTime: PublicMethods['getTimes'](),
+            tokenNo: PublicMethods['getToken'](),
+            mac: PublicMethods['getImei'](),
+            phoneIMEI: PublicMethods['getImsi'](),
+            businessChannel: Environment.businessChannel,
+            channelId: Environment.channelId,
+            inputSource: Environment.inputSource,
+            org: Environment.org,
+            versionId: Environment.versionId
         },
         request: paramsStr
     }
 };
 
-const requestMod = (headRequest, callBack) => {
-    axios({
-        method: 'post',
-        baseURL: environment.url,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: headRequest
-    })
-        .then((response) => {
-            callBack(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
+// 创建请求实例
+const Request = axios.create({
+    timeout: 7000,
+    baseURL: Environment.url,
+    headers: {'Content-Type': 'application/json'}
+});
 
-export {interfaceMod, headRequestMod, requestMod}
+// 添加请求拦截器
+Request.interceptors.request.use(config => {
+    return config
+});
+
+// 添加响应拦截器
+Request.interceptors.response.use(response => {
+    return response.data
+}, error => {
+    console.log(error)
+});
+
+export { InterfaceCode, AssembleRequestData, Request }

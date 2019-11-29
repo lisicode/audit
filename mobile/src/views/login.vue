@@ -47,7 +47,8 @@
 </template>
 
 <script>
-    import {interfaceMod, headRequestMod, requestMod} from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+
 
     export default {
         name: 'login',
@@ -113,17 +114,20 @@
                         passwordType: 'string',
                         password: this.password
                     };
-                    
-                    console.log(headRequestMod(interfaceMod.userLogin, params))
 
-                    requestMod(headRequestMod(interfaceMod.userLogin, params), function (e) {
-                        console.log(e)
-                    })
+                    Request({
+                        method: 'post',
+                        data: AssembleRequestData(InterfaceCode.userLogin, params)
+                        }).then(res => {
+                            console.log(res)
+                        })
+
                     // this.$notify({
                     //     type: 'success',
                     //     duration: 1000,
                     //     message: '登陆成功'
                     // });
+
                     // this.$router.push({path: '/index',})
                 }
             },
