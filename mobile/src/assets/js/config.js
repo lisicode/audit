@@ -5,7 +5,7 @@ const environmentMod = {
         url: '',
     },
     'UAT': {
-        type: '/uat',
+        url: '/uat',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -81,7 +81,7 @@ const headRequestMod = (serviceId, paramsStr) => {
 const requestMod = (headRequest, callBack) => {
     axios({
         method: 'post',
-        baseURL: environment.type,
+        baseURL: environment.url,
         headers: {
             'Content-Type': 'application/json'
         },
