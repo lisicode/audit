@@ -39,7 +39,11 @@ const InterfaceCode = {
 // 公共函数
 const PublicMethods = {
     'getUserNo': () => {
-        return ''
+        if (PublicMethods['getLocalStorage']('user')) {
+            return PublicMethods['getLocalStorage']('user').response.userNo
+        } else {
+            return ''
+        }
     },
     'getTimes': () => {
         let date = new Date();
@@ -61,7 +65,11 @@ const PublicMethods = {
         // return year + '' + month + '' + day + '' + hours + '' + minutes + '' + second + '' + milliseconds;
     },
     'getToken': () => {
-        return ''
+        if (PublicMethods['getLocalStorage']('user')) {
+            return PublicMethods['getLocalStorage']('user').head.tokenNo
+        } else {
+            return ''
+        }
     },
     'getImei': () => {
         return '88888888'
@@ -69,6 +77,12 @@ const PublicMethods = {
     'getImsi': () => {
         return '88888888'
     },
+    'setLocalStorage': (type, data) => {
+        return localStorage.setItem(type, JSON.stringify(data));
+    },
+    'getLocalStorage': (type) => {
+        return JSON.parse(localStorage.getItem(type))
+    }
 };
 
 // 环境定义
@@ -109,9 +123,10 @@ Request.interceptors.request.use(config => {
 
 // 添加响应拦截器
 Request.interceptors.response.use(response => {
+    console.log(response.data);
     return response.data
 }, error => {
     console.log(error)
 });
 
-export { InterfaceCode, AssembleRequestData, Request }
+export { InterfaceCode, AssembleRequestData, Request, PublicMethods }

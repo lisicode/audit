@@ -47,7 +47,7 @@
 </template>
 
 <script>
-    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
 
 
     export default {
@@ -62,7 +62,7 @@
         },
         data() {
             return {
-                userName: 'lisi',
+                userName: PublicMethods['getUserNo'](),
                 password: '',
                 userNameInput: false,
                 userPasswordInput: false,
@@ -71,18 +71,10 @@
             }
         },
         created() {
-            // console.log(this.$store.state.count)
-            // this.$store.commit('increment', {
-            //     amount: 2
-            // })
-            // console.log(this.$store.getters.doneTodos)
-            // this.$store.commit('changeTodos', {
-            //     newTodos: this.$store.getters.doneTodos
-            // })
-            // console.log(this.$store.state.todos)
-
             // 检查登陆
             this.confirmUserName();
+
+            // localStorage.removeItem('user');
         },
         methods: {
             // 用户切换
@@ -92,6 +84,9 @@
             },
             // 确认用户名
             confirmUserName() {
+
+                // console.log(PublicMethods['getUserNo']())
+
                 let _this = this;
                 if (this.userName != '') {
                     this.userNameInput = false;
@@ -106,29 +101,26 @@
             confirmLogin(key) {
                 this.password = (this.password + key).slice(0, 5);
                 if (this.password.length == 5) {
-                    console.log(this.password)
-                    console.log(this.userName)
-
                     let params = {
                         userNo: this.userName,
                         passwordType: 'string',
                         password: this.password
                     };
-
                     Request({
                         method: 'post',
                         data: AssembleRequestData(InterfaceCode.userLogin, params)
-                        }).then(res => {
-                            console.log(res)
-                        })
-
-                    // this.$notify({
-                    //     type: 'success',
-                    //     duration: 1000,
-                    //     message: '登陆成功'
-                    // });
-
-                    // this.$router.push({path: '/index',})
+                    }).then(res => {
+                        if (res.head.code == '000000') {
+                            PublicMethods['setLocalStorage']('user', res);
+                            this.$router.push({path: '/index'})
+                        } else {
+                            this.$notify({
+                                type: 'danger',
+                                duration: 1000,
+                                message: '登陆失败'
+                            });
+                        }
+                    })
                 }
             },
             // 键盘事件
