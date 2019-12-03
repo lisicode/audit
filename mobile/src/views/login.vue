@@ -2,21 +2,8 @@
     <van-row>
         <van-col span="24">
             <div class="banner">
-                <van-icon name="wap-nav"/>
                 <h1 @click="switchUser" v-html="text"></h1>
                 <p>信贷移动审批系统</p>
-                <svg viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
-                    <defs>
-                        <path id="gentle-wave"
-                              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
-                    </defs>
-                    <g>
-                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7"></use>
-                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)"></use>
-                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)"></use>
-                        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff"></use>
-                    </g>
-                </svg>
                 <van-popup v-model="userNameInput" position="top" :style="{ width: '100%' }">
                     <van-cell-group>
                         <van-field v-model="userName" placeholder="请输入用户名">
@@ -67,7 +54,7 @@
                 userNameInput: false,
                 userPasswordInput: false,
                 showKeyboard: false,
-                text: '请登录，<span class="animated flash infinite">__</span>',
+                text: '请登录',
             }
         },
         created() {
@@ -85,7 +72,7 @@
             // 确认用户名
             confirmUserName() {
 
-                // console.log(PublicMethods['getUserNo']())
+                console.log(PublicMethods['getLocalStorage']('user'))
 
                 let _this = this;
                 if (this.userName != '') {
@@ -132,50 +119,9 @@
 </script>
 
 <style scoped lang="scss">
-    @import '../assets/css/animate.css';
     .banner {
-        position: relative;
+        width: 100%;
         margin-bottom: 30px;
-        overflow: hidden;
-        color: white;
-        background: linear-gradient(60deg, #409EFF 0%, #409EFF 100%);
-        svg {
-            position: relative;
-            width: 100%;
-            height: 15vh;
-            margin-bottom: -7px;
-            min-height: 100px;
-            max-height: 150px;
-            g {
-                use {
-                    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
-                }
-                use:nth-child(1) {
-                    animation-delay: -2s;
-                    animation-duration: 7s;
-                }
-                use:nth-child(2) {
-                    animation-delay: -3s;
-                    animation-duration: 10s;
-                }
-                use:nth-child(3) {
-                    animation-delay: -4s;
-                    animation-duration: 13s;
-                }
-                use:nth-child(4) {
-                    animation-delay: -5s;
-                    animation-duration: 20s;
-                }
-                @keyframes move-forever {
-                    0% {
-                        transform: translate3d(-90px, 0, 0);
-                    }
-                    100% {
-                        transform: translate3d(85px, 0, 0);
-                    }
-                }
-            }
-        }
         h1 {
             margin-top: 60px;
             margin-left: 20px;
@@ -186,12 +132,6 @@
         p {
             font-size: 20px;
             margin-left: 20px;
-        }
-        .van-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
         }
     }
 </style>
