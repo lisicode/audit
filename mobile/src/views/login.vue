@@ -99,7 +99,7 @@
                     }).then(res => {
                         if (res.head.code == '000000') {
                             PublicMethods['setLocalStorage']('user', res);
-                            this.$router.push({path: '/index'})
+                            this.$router.push({path: '/'})
                         } else {
                             this.$notify({
                                 type: 'danger',
