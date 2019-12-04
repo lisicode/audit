@@ -5,10 +5,22 @@
         </transition>
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
-                <van-tabbar-item @click="to('home')" icon="home-o">首页</van-tabbar-item>
-                <van-tabbar-item @click="to('flow')" icon="description">流程</van-tabbar-item>
-                <van-tabbar-item @click="to('statistics')" icon="bar-chart-o">统计</van-tabbar-item>
-                <van-tabbar-item @click="to('setting')" icon="setting-o">设置</van-tabbar-item>
+                <van-tabbar-item @click="to('home')">
+                    <i class="iconfont">&#xeb96;</i>
+                    <span>首页</span>
+                </van-tabbar-item>
+                <van-tabbar-item @click="to('flow')">
+                    <i class="iconfont">&#xeb94;</i>
+                    <span>流程</span>
+                </van-tabbar-item>
+                <van-tabbar-item @click="to('statistics')">
+                    <i class="iconfont">&#xeb97;</i>
+                    <span>统计</span>
+                </van-tabbar-item>
+                <van-tabbar-item @click="to('setting')">
+                    <i class="iconfont">&#xeb9d;</i>
+                    <span>设置</span>
+                </van-tabbar-item>
             </van-tabbar>
         </transition>
     </van-row>
@@ -52,5 +64,15 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+    .van-tabbar-item {
+        text-align: center;
+        font-size: 13px;
+        i {
+            font-size: 20px;
+        }
+        span {
+            display: block;
+            line-height: 20px;
+        }
+    }
 </style>
