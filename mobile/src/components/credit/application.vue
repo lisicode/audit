@@ -1,77 +1,82 @@
 <template>
     <div class="application">
-        <van-sticky v-show="show">
+        <van-sticky>
             <header>
                 <h1 @click="back">
                     <i class="iconfont">&#xeb99;</i>
-                    申请信息
+                    申请详情
                 </h1>
             </header>
-            <van-tabbar v-model="active" :fixed="false" :border="false" active-color="#409EFF" inactive-color="#303133">
-                <van-tabbar-item url="#a">
-                    客户信息
-                </van-tabbar-item>
-                <van-tabbar-item url="#b">
-                    贷款信息
-                </van-tabbar-item>
-                <van-tabbar-item url="#c">
-                    审批信息
-                </van-tabbar-item>
-                <van-tabbar-item url="#d">
-                    操作
-                </van-tabbar-item>
-            </van-tabbar>
         </van-sticky>
-        <h5>
-            <a name="a">客户信息</a>
-        </h5>
-        <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-        </van-cell-group>
-        <h5>
-            <a name="b">贷款信息</a>
-        </h5>
-        <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-        </van-cell-group>
-        <h5>
-            <a name="c">审批信息</a>
-        </h5>
-        <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
-        </van-cell-group>
-        <h5>
-            <a name="d">操作</a>
-        </h5>
-
-
+        <van-tabs v-model="active" color="#65BFFE" title-active-color="#65BFFE" swipeable animated>
+            <van-tab title="客户信息">
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
+            </van-tab>
+            <van-tab title="贷款信息">
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
+            </van-tab>
+            <van-tab title="审批信息">
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
+                </van-cell-group>
+            </van-tab>
+            <van-tab title="用户审批">
+                <h5>申请信息</h5>
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
+                <h5>审批信息</h5>
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
+                <van-field
+                        v-model="message"
+                        rows="2"
+                        autosize
+                        label="处理意见"
+                        type="textarea"
+                        maxlength="50"
+                        placeholder="请输入处理意见"
+                        show-word-limit
+                />
+                <van-field
+                        readonly
+                        clickable
+                        label="审批动作"
+                        :value="value"
+                        placeholder="请选择"
+                        @click="picker = true"
+                />
+            </van-tab>
+        </van-tabs>
+        <van-popup v-model="picker" position="bottom">
+            <van-picker
+                    show-toolbar
+                    :columns="columns"
+                    @cancel="picker = false"
+                    @confirm="onConfirm"
+            />
+        </van-popup>
     </div>
 </template>
 
@@ -81,9 +86,10 @@
         data() {
             return {
                 active: 0,
-                show: true,
-                num: 0
-
+                message: '',
+                value: '',
+                picker: false,
+                columns: ['同意', '有条件同意', '否决']
             }
         },
         created() {
@@ -99,8 +105,13 @@
                 });
                 this.$router.push({path: '/'})
             },
+            onConfirm(value) {
 
+                console.log(value)
 
+                this.value = value;
+                this.picker = false;
+            }
         }
     }
 </script>
@@ -118,7 +129,7 @@
                 margin: 0;
                 color: #fff;
                 font-size: 20px;
-                font-weight: 500;
+                font-weight: 400;
             }
         }
         h5 {
@@ -139,6 +150,9 @@
         }
         .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after {
             border: none;
+        }
+        .van-field {
+            margin-top: 10px;
         }
     }
 </style>

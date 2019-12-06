@@ -7,23 +7,23 @@
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('application')">
-                    <i class="iconfont">&#xeb96;</i>
+                    <i class="iconfont">&#xe767;</i>
                     <span>申请详情</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('detail')">
-                    <i class="iconfont">&#xeb94;</i>
+                    <i class="iconfont">&#xe752;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('pledge')">
-                    <i class="iconfont">&#xeb97;</i>
-                    <span>抵质押人</span>
+                    <i class="iconfont">&#xe6ef;</i>
+                    <span>抵质押详情</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('trajectory')">
-                    <i class="iconfont">&#xeb9d;</i>
+                    <i class="iconfont">&#xe76a;</i>
                     <span>审批轨迹</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('material')">
-                    <i class="iconfont">&#xeb9d;</i>
+                    <i class="iconfont">&#xe751;</i>
                     <span>影像材料</span>
                 </van-tabbar-item>
             </van-tabbar>
@@ -74,7 +74,7 @@
         text-align: center;
         font-size: 13px;
         i {
-            font-size: 20px;
+            font-size: 22px;
         }
         span {
             display: block;
