@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import 'vant/lib/icon/local.css';
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import plus from 'vue-h5-plus'

@@ -3,23 +3,28 @@
         <transition name="van-slide-down">
             <component :is="currentComponent" v-show="tabBar"></component>
         </transition>
+
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
-                <van-tabbar-item @click="to('home')">
+                <van-tabbar-item @click="to('application')">
                     <i class="iconfont">&#xeb96;</i>
-                    <span>首页</span>
+                    <span>申请详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('flow')">
+                <van-tabbar-item @click="to('detail')">
                     <i class="iconfont">&#xeb94;</i>
-                    <span>流程</span>
+                    <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('statistics')">
+                <van-tabbar-item @click="to('pledge')">
                     <i class="iconfont">&#xeb97;</i>
-                    <span>统计</span>
+                    <span>抵质押人</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('setting')">
+                <van-tabbar-item @click="to('trajectory')">
                     <i class="iconfont">&#xeb9d;</i>
-                    <span>设置</span>
+                    <span>审批轨迹</span>
+                </van-tabbar-item>
+                <van-tabbar-item @click="to('material')">
+                    <i class="iconfont">&#xeb9d;</i>
+                    <span>影像材料</span>
                 </van-tabbar-item>
             </van-tabbar>
         </transition>
@@ -27,38 +32,37 @@
 </template>
 
 <script>
-    const home = resolve => require(['@/components/home.vue'],resolve);
-    const flow = resolve => require(['@/components/flow.vue'],resolve);
-    const statistics = resolve => require(['@/components/statistics.vue'],resolve);
-    const setting = resolve => require(['@/components/setting.vue'],resolve);
+    const application = resolve => require(['@/components/credit/application.vue'],resolve);
+    const detail = resolve => require(['@/components/credit/detail.vue'],resolve);
+    const pledge = resolve => require(['@/components/credit/pledge.vue'],resolve);
+    const trajectory = resolve => require(['@/components/credit/trajectory.vue'],resolve);
+    const material = resolve => require(['@/components/credit/material.vue'],resolve);
 
     export default {
-        name: 'index',
+        name: 'credit',
         components: {
-            home,
-            flow,
-            statistics,
-            setting
+            application,
+            detail,
+            pledge,
+            trajectory,
+            material
         },
         data() {
             return {
-                active: 0,
                 tabBar: false,
-                currentComponent: 'home'
+                active: 0,
+                currentComponent: 'application',
             }
         },
         created() {
             let _this = this;
             setTimeout(function () {
                 _this.tabBar = true;
-                _this.currentComponent = _this.$store.state.nav.type;
-                _this.active = _this.$store.state.nav.index;
             },600)
-
         },
         methods: {
-            to(e) {
-                this.currentComponent = e;
+            to(name) {
+                this.currentComponent = name;
             }
         }
     }
@@ -68,7 +72,7 @@
 <style scoped lang="scss">
     .van-tabbar-item {
         text-align: center;
-        font-size: 12px;
+        font-size: 13px;
         i {
             font-size: 20px;
         }

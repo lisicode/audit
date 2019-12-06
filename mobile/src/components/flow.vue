@@ -1,8 +1,11 @@
 <template>
     <van-row>
         <header>
-            <h1>流程列表</h1>
-            <i class="iconfont" @click="showPopup">&#xe8b6;</i>
+            <h1>流程列表<small>已处理(10条)</small><small>未处理(5条)</small></h1>
+            <div @click="showPopup">
+                <i class="iconfont">&#xe8b6;</i>
+                <small>筛选</small>
+            </div>
         </header>
         <van-list
                 v-model="loading"
@@ -15,12 +18,12 @@
                  :key="item"
             >
                 <div class="item">
-                    <b>合同签订</b>
-                    <p>申请额度(元): <span>100,000</span></p>
-                    <small>贷款期限(月): 36期<span>利率: 26.77</span></small>
+                    <b>字段1 <span>字段2: 内容</span></b>
+                    <p>字段3: 内容<span>字段4: 内容</span></p>
+                    <small>字段5: 内容<span>字段6: 内容</span></small>
                     <div>
-                        <van-button color="#F8C448">按钮</van-button>
-                        <van-button color="#52C797">按钮</van-button>
+                        <van-button round color="#52C797" @click="to">按钮</van-button>
+                        <van-button round color="#F8C448" @click="to">按钮</van-button>
                     </div>
                 </div>
             </div>
@@ -72,6 +75,9 @@
             },
             showPopup() {
                 this.show = true;
+            },
+            to() {
+                this.$router.push({path:'/credit',})
             }
         }
     }
@@ -91,10 +97,20 @@
             font-size: 20px;
             font-weight: 500;
             margin: 0;
+            small {
+                margin-left: 10px;
+                font-size: 12px;
+            }
         }
-        i {
-            font-size: 20px;
-            color: #606266;
+        div {
+            text-align: center;
+            i {
+                font-size: 15px;
+                color: #606266;
+            }
+            small {
+                font-size: 15px;
+            }
         }
     }
     .container {
@@ -110,12 +126,14 @@
             box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
             b {
                 font-weight: 400;
-
+                overflow: hidden;
+                span {
+                    float: right;
+                }
             }
             p {
                 span {
-                    font-weight: 400;
-                    color: #F56B54;
+                    margin-left: 15px;
                 }
             }
             small {
@@ -127,7 +145,6 @@
                 margin-top: 10px;
                 padding-top: 10px;
                 overflow: hidden;
-                /*border-top: 1px solid #F8F9FA;*/
                 .van-button {
                     float: right;
                     margin-left: 10px;
