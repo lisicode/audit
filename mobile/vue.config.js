@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: '/approveApp/',
     devServer: {
         open: true,
         hotOnly: false,

@@ -3,7 +3,7 @@
         <header>
             <h1>流程列表<small>已处理(10条)</small><small>未处理(5条)</small></h1>
             <div @click="showPopup">
-                <i class="iconfont">&#xe8b6;</i>
+                <i class="iconfont">&#xec6b;</i>
                 <small>筛选</small>
             </div>
         </header>
@@ -22,8 +22,8 @@
                     <p>字段3: 内容<span>字段4: 内容</span></p>
                     <small>字段5: 内容<span>字段6: 内容</span></small>
                     <div>
-                        <van-button round color="#52C797" @click="to">按钮</van-button>
-                        <van-button round color="#F8C448" @click="to">按钮</van-button>
+                        <van-button round color="#52C797" @click="to('/credit')">按钮</van-button>
+                        <van-button round color="#F8C448" @click="to('/contract')">按钮</van-button>
                     </div>
                 </div>
             </div>
@@ -76,8 +76,8 @@
             showPopup() {
                 this.show = true;
             },
-            to() {
-                this.$router.push({path:'/credit',})
+            to(e) {
+                this.$router.push({path: e,})
             }
         }
     }
@@ -107,6 +107,7 @@
             i {
                 font-size: 15px;
                 color: #606266;
+                margin-right: 5px;
             }
             small {
                 font-size: 15px;

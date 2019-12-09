@@ -6,19 +6,19 @@
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('home')">
-                    <i class="iconfont">&#xeb96;</i>
+                    <i class="iconfont">&#xec24;</i>
                     <span>首页</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('flow')">
-                    <i class="iconfont">&#xeb94;</i>
+                    <i class="iconfont">&#xec23;</i>
                     <span>流程</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('statistics')">
-                    <i class="iconfont">&#xeb97;</i>
+                    <i class="iconfont">&#xeb95;</i>
                     <span>统计</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('setting')">
-                    <i class="iconfont">&#xeb9d;</i>
+                    <i class="iconfont">&#xeb8d;</i>
                     <span>设置</span>
                 </van-tabbar-item>
             </van-tabbar>
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-    const home = resolve => require(['@/components/home.vue'],resolve);
-    const flow = resolve => require(['@/components/flow.vue'],resolve);
-    const statistics = resolve => require(['@/components/statistics.vue'],resolve);
-    const setting = resolve => require(['@/components/setting.vue'],resolve);
+    const home = resolve => require(['@/components/home/home.vue'],resolve);
+    const flow = resolve => require(['@/components/home/flow.vue'],resolve);
+    const statistics = resolve => require(['@/components/home/statistics.vue'],resolve);
+    const setting = resolve => require(['@/components/home/setting.vue'],resolve);
 
     export default {
         name: 'index',
@@ -68,7 +68,7 @@
 <style scoped lang="scss">
     .van-tabbar-item {
         text-align: center;
-        font-size: 12px;
+        font-size: 13px;
         i {
             font-size: 20px;
         }

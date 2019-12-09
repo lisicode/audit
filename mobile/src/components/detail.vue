@@ -3,7 +3,7 @@
         <van-sticky>
             <header>
                 <h1 @click="back">
-                    <i class="iconfont">&#xeb99;</i>
+                    <i class="iconfont">&#xe611;</i>
                     客户详情
                 </h1>
             </header>

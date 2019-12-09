@@ -1,42 +1,21 @@
 <template>
-    <div class="application">
+    <div class="approve">
         <van-sticky>
             <header>
                 <h1 @click="back">
-                    <i class="iconfont">&#xeb99;</i>
-                    申请详情
+                    <i class="iconfont">&#xe611;</i>
+                    用户审批
                 </h1>
             </header>
         </van-sticky>
         <van-tabs v-model="active" color="#65BFFE" title-active-color="#65BFFE" swipeable animated>
-            <van-tab title="客户信息">
-                <van-cell-group>
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                </van-cell-group>
-            </van-tab>
-            <van-tab title="贷款信息">
-                <van-cell-group>
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                </van-cell-group>
-            </van-tab>
-            <van-tab title="审批信息">
-                <van-cell-group>
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-cell title="单元格" value="内容" />
-                    <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
-                </van-cell-group>
-            </van-tab>
             <van-tab title="用户审批">
+                <h5>客户信息</h5>
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
                 <h5>申请信息</h5>
                 <van-cell-group>
                     <van-cell title="单元格" value="内容" />
@@ -68,6 +47,22 @@
                         @click="picker = true"
                 />
             </van-tab>
+
+            <van-tab title="贷款信息">
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                </van-cell-group>
+            </van-tab>
+            <van-tab title="审批信息">
+                <van-cell-group>
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-cell title="单元格" value="内容" />
+                    <van-panel title="标题" desc="描述信息" status="状态"></van-panel>
+                </van-cell-group>
+            </van-tab>
         </van-tabs>
         <van-popup v-model="picker" position="bottom">
             <van-picker
@@ -82,7 +77,7 @@
 
 <script>
     export default {
-        name: 'application',
+        name: 'approve',
         data() {
             return {
                 active: 0,
@@ -118,7 +113,7 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    .application {
+    .approve {
         padding-bottom: 70px;
         header {
             box-sizing: border-box;

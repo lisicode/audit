@@ -6,17 +6,13 @@
 
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
-                <van-tabbar-item @click="to('approve')">
-                    <i class="iconfont">&#xeb6b;</i>
-                    <span>用户审批</span>
+                <van-tabbar-item @click="to('signing')">
+                    <i class="iconfont">&#xeb6a;</i>
+                    <span>合同签订</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('detail')">
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
-                </van-tabbar-item>
-                <van-tabbar-item @click="to('pledge')">
-                    <i class="iconfont">&#xeb67;</i>
-                    <span>抵质押详情</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('trajectory')">
                     <i class="iconfont">&#xeb68;</i>
@@ -32,18 +28,16 @@
 </template>
 
 <script>
-    const approve = resolve => require(['@/components/credit/approve.vue'],resolve);
     const detail = resolve => require(['@/components/detail.vue'],resolve);
-    const pledge = resolve => require(['@/components/credit/pledge.vue'],resolve);
+    const signing = resolve => require(['@/components/contract/signing.vue'],resolve);
     const trajectory = resolve => require(['@/components/trajectory.vue'],resolve);
     const material = resolve => require(['@/components/material.vue'],resolve);
 
     export default {
-        name: 'credit',
+        name: 'contract',
         components: {
-            approve,
             detail,
-            pledge,
+            signing,
             trajectory,
             material
         },
@@ -51,7 +45,7 @@
             return {
                 tabBar: false,
                 active: 0,
-                currentComponent: 'approve',
+                currentComponent: 'signing',
             }
         },
         created() {
@@ -74,7 +68,7 @@
         text-align: center;
         font-size: 13px;
         i {
-            font-size: 20px;
+            font-size: 22px;
         }
         span {
             display: block;
