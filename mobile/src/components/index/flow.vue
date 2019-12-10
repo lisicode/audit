@@ -22,9 +22,9 @@
                     <p>字段3: 内容<span>字段4: 内容</span></p>
                     <small>字段5: 内容<span>字段6: 内容</span></small>
                     <div>
-                        <van-button color="#0061D9" @click="to('/lending')">按钮</van-button>
-                        <van-button color="#F74D2E" @click="to('/credit')">按钮</van-button>
-                        <van-button color="#52C797" @click="to('/contract')">按钮</van-button>
+                        <van-button color="#0061D9" @click="to('/lending')">放款</van-button>
+                        <van-button color="#F74D2E" @click="to('/credit')">授信</van-button>
+                        <van-button color="#52C797" @click="to('/contract')">合同</van-button>
                     </div>
                 </div>
             </div>

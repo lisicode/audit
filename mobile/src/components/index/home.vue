@@ -87,7 +87,7 @@
                 margin-top: 70px;
                 .van-col {
                     p {
-                        margin: 0;
+                        margin: 0 0 5px 0;
                         font-size: 18px;
                         font-weight: 300;
                     }
