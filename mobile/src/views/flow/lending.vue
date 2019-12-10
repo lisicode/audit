@@ -6,9 +6,9 @@
 
         <transition name="van-slide-up">
             <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
-                <van-tabbar-item @click="to('signing')">
-                    <i class="iconfont">&#xeb6a;</i>
-                    <span>合同签订</span>
+                <van-tabbar-item @click="to('loan')">
+                    <i class="iconfont">&#xeb67;</i>
+                    <span>放款审批</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('detail')">
                     <i class="iconfont">&#xeb69;</i>
@@ -29,7 +29,7 @@
 
 <script>
     const detail = resolve => require(['@/components/detail.vue'],resolve);
-    const signing = resolve => require(['@/components/lending/signing.vue'],resolve);
+    const loan = resolve => require(['@/components/lending/loan.vue'],resolve);
     const trajectory = resolve => require(['@/components/trajectory.vue'],resolve);
     const material = resolve => require(['@/components/material.vue'],resolve);
 
@@ -37,7 +37,7 @@
         name: 'lending',
         components: {
             detail,
-            signing,
+            loan,
             trajectory,
             material
         },
@@ -45,7 +45,7 @@
             return {
                 tabBar: false,
                 active: 0,
-                currentComponent: 'signing',
+                currentComponent: 'loan',
             }
         },
         created() {

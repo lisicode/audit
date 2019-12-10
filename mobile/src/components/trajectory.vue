@@ -57,10 +57,8 @@
         methods: {
             back() {
                 this.$store.commit('change', {
-                    nav: {
-                        type: 'flow',
-                        index: 1
-                    }
+                    type: 'flow',
+                    index: 1
                 });
                 this.$router.push({path: '/'})
             },

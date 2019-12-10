@@ -13,7 +13,7 @@ export default new Vuex.Store({
     getters: {},
     mutations: {
         change(state, payload) {
-            state.nav = payload.nav
+            state.nav = payload
         }
     },
     actions: {},
