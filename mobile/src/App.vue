@@ -12,15 +12,15 @@
             return {}
         },
         created() {
-            if (PublicMethods['getLocalStorage']('user')) {
-                if(this.$route.path != '/') {
-                    this.$router.push({path:'/',})
-                }
-            } else {
-                if(this.$route.path != '/login') {
-                    this.$router.push({path:'/login',})
-                }
-            }
+            // if (PublicMethods['getLocalStorage']('user')) {
+            //     if(this.$route.path != '/') {
+            //         this.$router.push({path:'/',})
+            //     }
+            // } else {
+            //     if(this.$route.path != '/login') {
+            //         this.$router.push({path:'/login',})
+            //     }
+            // }
 
         }
     }

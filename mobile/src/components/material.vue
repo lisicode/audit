@@ -42,8 +42,7 @@
         methods: {
             back() {
                 this.$store.commit('change', {
-                    type: 'flow',
-                    index: 1
+                    url: 'flow',
                 });
                 this.$router.push({path: '/'})
             },

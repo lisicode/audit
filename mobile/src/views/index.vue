@@ -1,23 +1,23 @@
 <template>
     <div>
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-show="tabBar"></component>
+            <component :is="currentComponent" v-on:childEvent="to" v-show="tabBar"></component>
         </transition>
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
-                <van-tabbar-item @click="to('home')">
+            <van-tabbar v-model="currentComponent" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
+                <van-tabbar-item name="home" @click="to('home')">
                     <i class="iconfont">&#xec24;</i>
                     <span>首页</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('flow')">
+                <van-tabbar-item name="flow" @click="to('flow')">
                     <i class="iconfont">&#xec23;</i>
                     <span>流程</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('statistics')">
+                <van-tabbar-item name="statistics" @click="to('statistics')">
                     <i class="iconfont">&#xeb95;</i>
                     <span>统计</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('setting')">
+                <van-tabbar-item name="setting" @click="to('setting')">
                     <i class="iconfont">&#xeb8d;</i>
                     <span>设置</span>
                 </van-tabbar-item>
@@ -42,7 +42,6 @@
         },
         data() {
             return {
-                active: 0,
                 tabBar: false,
                 currentComponent: 'home'
             }
@@ -51,8 +50,7 @@
             let _this = this;
             setTimeout(function () {
                 _this.tabBar = true;
-                _this.currentComponent = _this.$store.state.nav.type;
-                _this.active = _this.$store.state.nav.index;
+                _this.currentComponent = _this.$store.state.nav.url;
             },600)
 
         },

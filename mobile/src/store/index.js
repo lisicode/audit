@@ -6,8 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         nav: {
-            type: 'home',
-            index: 0
+            url: 'home',
         }
     },
     getters: {},

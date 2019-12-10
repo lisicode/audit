@@ -20,7 +20,7 @@
         </header>
         <section>
             <van-row>
-                <van-col span="6">
+                <van-col span="6" @click="to('flow')">
                     <i class="iconfont">&#xeba4;</i>
                     <span>授信审批</span>
                 </van-col>
@@ -59,7 +59,11 @@
         created() {
 
         },
-        methods: {}
+        methods: {
+            to() {
+                this.$emit('childEvent', 'flow')
+            }
+        }
     }
 </script>
 
