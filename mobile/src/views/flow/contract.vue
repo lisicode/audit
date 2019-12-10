@@ -5,7 +5,7 @@
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('signing')">
                     <i class="iconfont">&#xeb6a;</i>
                     <span>合同签订</span>

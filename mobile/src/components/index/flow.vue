@@ -22,8 +22,9 @@
                     <p>字段3: 内容<span>字段4: 内容</span></p>
                     <small>字段5: 内容<span>字段6: 内容</span></small>
                     <div>
-                        <van-button round color="#52C797" @click="to('/credit')">按钮</van-button>
-                        <van-button round color="#F8C448" @click="to('/contract')">按钮</van-button>
+                        <van-button color="#0061D9" @click="to('/lending')">按钮</van-button>
+                        <van-button color="#F74D2E" @click="to('/credit')">按钮</van-button>
+                        <van-button color="#52C797" @click="to('/contract')">按钮</van-button>
                     </div>
                 </div>
             </div>
@@ -91,9 +92,11 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding: 20px 10px 10px 10px;
+        padding: 20px 10px 20px 10px;
+        background-color: #0061D9;
+        color: #fff;
         h1 {
-            color: #303133;
+            /*color: #303133;*/
             font-size: 20px;
             font-weight: 500;
             margin: 0;
@@ -106,7 +109,7 @@
             text-align: center;
             i {
                 font-size: 15px;
-                color: #606266;
+                /*color: #606266;*/
                 margin-right: 5px;
             }
             small {

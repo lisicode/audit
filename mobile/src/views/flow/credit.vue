@@ -5,10 +5,10 @@
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('approve')">
                     <i class="iconfont">&#xeb6b;</i>
-                    <span>用户审批</span>
+                    <span>授信审批</span>
                 </van-tabbar-item>
                 <van-tabbar-item @click="to('detail')">
                     <i class="iconfont">&#xeb69;</i>

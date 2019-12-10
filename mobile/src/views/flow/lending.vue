@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="lending">
         <transition name="van-slide-down">
             <component :is="currentComponent" v-show="tabBar"></component>
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('signing')">
                     <i class="iconfont">&#xeb6a;</i>
                     <span>合同签订</span>
@@ -34,7 +34,7 @@
     const material = resolve => require(['@/components/material.vue'],resolve);
 
     export default {
-        name: 'contract',
+        name: 'lending',
         components: {
             detail,
             signing,
@@ -64,15 +64,17 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    .van-tabbar-item {
-        text-align: center;
-        font-size: 13px;
-        i {
-            font-size: 22px;
-        }
-        span {
-            display: block;
-            line-height: 20px;
+    .lending {
+        .van-tabbar-item {
+            text-align: center;
+            font-size: 13px;
+            i {
+                font-size: 22px;
+            }
+            span {
+                display: block;
+                line-height: 20px;
+            }
         }
     }
 </style>

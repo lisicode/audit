@@ -8,7 +8,7 @@
                 </h1>
             </header>
         </van-sticky>
-        <van-tabs v-model="active" color="#65BFFE" title-active-color="#65BFFE" swipeable animated>
+        <van-tabs v-model="active" color="#0061D9" title-active-color="#303133" swipeable animated>
             <van-tab title="主要信息">
                 <van-cell-group>
                     <van-cell title="单元格" value="内容" />
@@ -135,7 +135,7 @@
             box-sizing: border-box;
             padding: 10px;
             width: 100%;
-            background-color: #65BFFE;
+            background-color: #0061D9;
             h1 {
                 margin: 0;
                 color: #fff;

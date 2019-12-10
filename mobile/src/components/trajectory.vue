@@ -76,7 +76,7 @@
             box-sizing: border-box;
             padding: 10px;
             width: 100%;
-            background-color: #65BFFE;
+            background-color: #0061D9;
             h1 {
                 margin: 0;
                 color: #fff;

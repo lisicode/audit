@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import credit from '../views/flow/credit.vue'
 import contract from '../views/flow/contract.vue'
+import lending from '../views/flow/lending.vue'
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
         path: '/contract',
         name: 'contract',
         component: contract
+    },
+    {
+        path: '/lending',
+        name: 'lending',
+        component: lending
     }
 ];
 

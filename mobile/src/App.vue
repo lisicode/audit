@@ -12,15 +12,15 @@
             return {}
         },
         created() {
-            // if (PublicMethods['getLocalStorage']('user')) {
-            //     if(this.$route.path != '/') {
-            //         this.$router.push({path:'/',})
-            //     }
-            // } else {
-            //     if(this.$route.path != '/login') {
-            //         this.$router.push({path:'/login',})
-            //     }
-            // }
+            if (PublicMethods['getLocalStorage']('user')) {
+                if(this.$route.path != '/') {
+                    this.$router.push({path:'/',})
+                }
+            } else {
+                if(this.$route.path != '/login') {
+                    this.$router.push({path:'/login',})
+                }
+            }
 
         }
     }
@@ -48,21 +48,5 @@
     .iconfont {
         font-family: "iconfont" !important;
         font-style: normal;
-    }
-
-    .red {
-        color: #F56B54;
-    }
-
-    .blue {
-        color: #65BFFE;
-    }
-
-    .green {
-        color: #52C797;
-    }
-
-    .yellow {
-        color: #F8C448;
     }
 </style>

@@ -4,7 +4,7 @@
             <component :is="currentComponent" v-show="tabBar"></component>
         </transition>
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#409EFF" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
                 <van-tabbar-item @click="to('home')">
                     <i class="iconfont">&#xec24;</i>
                     <span>首页</span>
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-    const home = resolve => require(['@/components/home/home.vue'],resolve);
-    const flow = resolve => require(['@/components/home/flow.vue'],resolve);
-    const statistics = resolve => require(['@/components/home/statistics.vue'],resolve);
-    const setting = resolve => require(['@/components/home/setting.vue'],resolve);
+    const home = resolve => require(['@/components/index/home.vue'],resolve);
+    const flow = resolve => require(['@/components/index/flow.vue'],resolve);
+    const statistics = resolve => require(['@/components/index/statistics.vue'],resolve);
+    const setting = resolve => require(['@/components/index/setting.vue'],resolve);
 
     export default {
         name: 'index',

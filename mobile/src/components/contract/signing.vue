@@ -14,7 +14,7 @@
             <van-cell title="单元格" value="内容" />
             <van-cell title="单元格" value="内容" />
         </van-cell-group>
-        <h5>审批信息</h5>
+        <h5>合同审批</h5>
         <van-cell-group>
             <van-cell title="单元格" value="内容" />
             <van-cell title="单元格" value="内容" />
@@ -92,19 +92,7 @@
             box-sizing: border-box;
             padding: 10px;
             width: 100%;
-            background-color: #65BFFE;
-            h1 {
-                margin: 0;
-                color: #fff;
-                font-size: 20px;
-                font-weight: 400;
-            }
-        }
-        header {
-            box-sizing: border-box;
-            padding: 10px;
-            width: 100%;
-            background-color: #65BFFE;
+            background-color: #0061D9;
             h1 {
                 margin: 0;
                 color: #fff;
