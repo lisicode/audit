@@ -1,28 +1,28 @@
 <template>
     <div>
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-show="show"></component>
+            <component :is="currentComponent" v-if="show"></component>
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="show">
-                <van-tabbar-item @click="to('approve')">
+            <van-tabbar v-model="currentComponent" active-color="#0061D9" inactive-color="#303133" v-show="show">
+                <van-tabbar-item name="approve" @click="to('approve')">
                     <i class="iconfont">&#xeb6b;</i>
                     <span>授信审批</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('detail')">
+                <van-tabbar-item name="detail" @click="to('detail')">
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('pledge')">
+                <van-tabbar-item name="pledge" @click="to('pledge')">
                     <i class="iconfont">&#xeb67;</i>
                     <span>抵质押详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('trajectory')">
+                <van-tabbar-item name="trajectory" @click="to('trajectory')">
                     <i class="iconfont">&#xeb68;</i>
                     <span>审批轨迹</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('material')">
+                <van-tabbar-item name="material" @click="to('material')">
                     <i class="iconfont">&#xec17;</i>
                     <span>影像材料</span>
                 </van-tabbar-item>
@@ -50,7 +50,6 @@
         data() {
             return {
                 show: false,
-                active: 0,
                 currentComponent: 'approve',
             }
         },

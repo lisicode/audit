@@ -5,20 +5,20 @@
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="show">
-                <van-tabbar-item @click="to('loan')">
+            <van-tabbar v-model="currentComponent" active-color="#0061D9" inactive-color="#303133" v-show="show">
+                <van-tabbar-item name="loan" @click="to('loan')">
                     <i class="iconfont">&#xeb67;</i>
                     <span>放款审批</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('detail')">
+                <van-tabbar-item name="detail" @click="to('detail')">
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('trajectory')">
+                <van-tabbar-item name="trajectory" @click="to('trajectory')">
                     <i class="iconfont">&#xeb68;</i>
                     <span>审批轨迹</span>
                 </van-tabbar-item>
-                <van-tabbar-item @click="to('material')">
+                <van-tabbar-item name="material" @click="to('material')">
                     <i class="iconfont">&#xec17;</i>
                     <span>影像材料</span>
                 </van-tabbar-item>
@@ -44,7 +44,6 @@
         data() {
             return {
                 show: false,
-                active: 0,
                 currentComponent: 'loan',
             }
         },
