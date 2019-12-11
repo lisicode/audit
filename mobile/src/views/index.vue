@@ -13,10 +13,10 @@
                     <i class="iconfont">&#xec23;</i>
                     <span>流程</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="statistics" @click="to('statistics')">
-                    <i class="iconfont">&#xeb95;</i>
-                    <span>统计</span>
-                </van-tabbar-item>
+<!--                <van-tabbar-item name="statistics" @click="to('statistics')">-->
+<!--                    <i class="iconfont">&#xeb95;</i>-->
+<!--                    <span>统计</span>-->
+<!--                </van-tabbar-item>-->
                 <van-tabbar-item name="setting" @click="to('setting')">
                     <i class="iconfont">&#xeb8d;</i>
                     <span>设置</span>

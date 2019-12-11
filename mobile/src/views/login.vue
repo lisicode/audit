@@ -32,7 +32,7 @@
             }
         },
         created() {
-            localStorage.removeItem('user');
+            // localStorage.removeItem('user');
         },
         methods: {
             // 确认登录

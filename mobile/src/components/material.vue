@@ -8,10 +8,22 @@
                 </h1>
             </header>
         </van-sticky>
-        <van-cell-group>
-            <van-cell title="征信查询审批单" is-link value="查看" @click="preview" />
-        </van-cell-group>
-
+        <van-collapse v-model="activeNames">
+            <van-collapse-item title="征信查询审批单" name="1">
+                <div class="item">
+                    <span>征信查询审批单</span>
+                    <van-button color="#0061D9" size="small">查看</van-button>
+                </div>
+                <div class="item">
+                    <span>征信查询审批单</span>
+                    <van-button color="#0061D9" size="small">查看</van-button>
+                </div>
+                <div class="item">
+                    <span>征信查询审批单</span>
+                    <van-button color="#0061D9" size="small">查看</van-button>
+                </div>
+            </van-collapse-item>
+        </van-collapse>
         <van-image-preview
                 v-model="show"
                 :images="images"
@@ -19,7 +31,6 @@
         >
             <template v-slot:index>第{{ index }}页</template>
         </van-image-preview>
-
     </div>
 </template>
 
@@ -28,6 +39,7 @@
         name: 'material',
         data() {
             return {
+                activeNames: ['1'],
                 show: false,
                 index: 1,
                 images: [
@@ -72,5 +84,14 @@
             }
         }
 
+        .item {
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span {
+                font-size: 13px;
+            }
+        }
     }
 </style>
