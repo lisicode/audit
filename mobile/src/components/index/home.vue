@@ -6,7 +6,7 @@
             <van-row>
                 <van-col span="8">
                     <p>累计放款</p>
-                    <b>56笔</b>
+                    <b>56</b>
                 </van-col>
                 <van-col span="8">
                     <p>累计金额</p>
@@ -14,7 +14,7 @@
                 </van-col>
                 <van-col span="8">
                     <p>已处理</p>
-                    <b>26笔</b>
+                    <b>26</b>
                 </van-col>
             </van-row>
         </header>
@@ -24,15 +24,15 @@
                     <i class="iconfont">&#xeba4;</i>
                     <span>授信审批</span>
                 </van-col>
-                <van-col span="6">
+                <van-col span="6" @click="to('flow')">
                     <i class="iconfont">&#xebab;</i>
                     <span>合同签订</span>
                 </van-col>
-                <van-col span="6">
+                <van-col span="6" @click="to('flow')">
                     <i class="iconfont">&#xeba8;</i>
                     <span>放款审批</span>
                 </van-col>
-                <van-col span="6">
+                <van-col span="6" @click="openMessage">
                     <i class="iconfont">&#xeba5;</i>
                     <span>消息列表</span>
                 </van-col>
@@ -62,6 +62,9 @@
         methods: {
             to() {
                 this.$emit('childEvent', 'flow')
+            },
+            openMessage() {
+                this.$router.push({path: '/message',})
             }
         }
     }
@@ -105,7 +108,6 @@
             }
         }
         section {
-            margin-top: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
             padding-top: 10px;

@@ -11,7 +11,7 @@ export default new Vuex.Store({
     },
     getters: {},
     mutations: {
-        change(state, payload) {
+        changeNav(state, payload) {
             state.nav = payload
         }
     },

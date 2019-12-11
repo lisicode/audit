@@ -1,11 +1,11 @@
 <template>
     <div class="lending">
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-show="tabBar"></component>
+            <component :is="currentComponent" v-show="show"></component>
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="show">
                 <van-tabbar-item @click="to('loan')">
                     <i class="iconfont">&#xeb67;</i>
                     <span>放款审批</span>
@@ -43,7 +43,7 @@
         },
         data() {
             return {
-                tabBar: false,
+                show: false,
                 active: 0,
                 currentComponent: 'loan',
             }
@@ -51,7 +51,7 @@
         created() {
             let _this = this;
             setTimeout(function () {
-                _this.tabBar = true;
+                _this.show = true;
             },600)
         },
         methods: {

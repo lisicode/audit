@@ -2,7 +2,7 @@
     <van-row>
         <header>
             <h1>流程列表<small>已处理(10条)</small><small>未处理(5条)</small></h1>
-            <div @click="showPopup">
+            <div @click="show = true">
                 <i class="iconfont">&#xec6b;</i>
                 <small>筛选</small>
             </div>
@@ -73,9 +73,6 @@
                         this.finished = true;
                     }
                 }, 500);
-            },
-            showPopup() {
-                this.show = true;
             },
             to(e) {
                 this.$router.push({path: e,})

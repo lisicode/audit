@@ -1,10 +1,10 @@
 <template>
     <div>
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-on:childEvent="to" v-show="tabBar"></component>
+            <component :is="currentComponent" v-on:childEvent="to" v-show="show"></component>
         </transition>
         <transition name="van-slide-up">
-            <van-tabbar v-model="currentComponent" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="currentComponent" active-color="#0061D9" inactive-color="#303133" v-show="show">
                 <van-tabbar-item name="home" @click="to('home')">
                     <i class="iconfont">&#xec24;</i>
                     <span>首页</span>
@@ -42,14 +42,14 @@
         },
         data() {
             return {
-                tabBar: false,
+                show: false,
                 currentComponent: 'home'
             }
         },
         created() {
             let _this = this;
             setTimeout(function () {
-                _this.tabBar = true;
+                _this.show = true;
                 _this.currentComponent = _this.$store.state.nav.url;
             },600)
 

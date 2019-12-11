@@ -1,11 +1,11 @@
 <template>
     <div>
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-show="tabBar"></component>
+            <component :is="currentComponent" v-show="show"></component>
         </transition>
 
         <transition name="van-slide-up">
-            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="tabBar">
+            <van-tabbar v-model="active" active-color="#0061D9" inactive-color="#303133" v-show="show">
                 <van-tabbar-item @click="to('signing')">
                     <i class="iconfont">&#xeb6a;</i>
                     <span>合同签订</span>
@@ -43,7 +43,7 @@
         },
         data() {
             return {
-                tabBar: false,
+                show: false,
                 active: 0,
                 currentComponent: 'signing',
             }
@@ -51,7 +51,7 @@
         created() {
             let _this = this;
             setTimeout(function () {
-                _this.tabBar = true;
+                _this.show = true;
             },600)
         },
         methods: {
