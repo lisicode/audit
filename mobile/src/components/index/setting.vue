@@ -7,8 +7,7 @@
                 <b>职务</b>
             </div>
         </header>
-
-        <van-cell title="账户设置" is-link />
+        <van-cell title="账户设置" is-link to="account" />
     </div>
 </template>
 

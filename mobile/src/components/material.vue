@@ -11,15 +11,15 @@
         <van-collapse v-model="activeNames">
             <van-collapse-item title="征信查询审批单" name="1">
                 <div class="item">
-                    <span>征信查询审批单</span>
+                    <span>文件名</span>
+                    <van-button color="#0061D9" size="small" @click="preview">查看</van-button>
+                </div>
+                <div class="item">
+                    <span>文件名</span>
                     <van-button color="#0061D9" size="small">查看</van-button>
                 </div>
                 <div class="item">
-                    <span>征信查询审批单</span>
-                    <van-button color="#0061D9" size="small">查看</van-button>
-                </div>
-                <div class="item">
-                    <span>征信查询审批单</span>
+                    <span>文件名</span>
                     <van-button color="#0061D9" size="small">查看</van-button>
                 </div>
             </van-collapse-item>
