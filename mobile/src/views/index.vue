@@ -47,6 +47,8 @@
             }
         },
         created() {
+            // localStorage.removeItem('user');
+
             let _this = this;
             setTimeout(function () {
                 _this.show = true;

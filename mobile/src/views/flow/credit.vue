@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition name="van-slide-down">
-            <component :is="currentComponent" v-if="show"></component>
+            <component :is="currentComponent" v-show="show"></component>
         </transition>
 
         <transition name="van-slide-up">
@@ -57,7 +57,7 @@
             let _this = this;
             setTimeout(function () {
                 _this.show = true;
-            },600)
+            },600);
         },
         methods: {
             to(name) {

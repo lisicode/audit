@@ -20,15 +20,15 @@
         </van-row>
 
         <van-row class="i-2">
-            <van-col span="6" @click="to('flow')">
+            <van-col span="6" @click="to('B')">
                 <i class="iconfont">&#xeba4;</i>
                 <span>授信审批</span>
             </van-col>
-            <van-col span="6" @click="to('flow')">
+            <van-col span="6" @click="to('D')">
                 <i class="iconfont">&#xebab;</i>
                 <span>合同签订</span>
             </van-col>
-            <van-col span="6" @click="to('flow')">
+            <van-col span="6" @click="to('E')">
                 <i class="iconfont">&#xeba8;</i>
                 <span>放款审批</span>
             </van-col>
@@ -54,11 +54,13 @@
 
             }
         },
-        created() {
-
-        },
+        created() {},
         methods: {
-            to() {
+            to(e) {
+                this.$store.commit('changeScreening', {
+                    flowType: e,
+                    dealflag: '1',
+                });
                 this.$emit('childEvent', 'flow')
             },
             openMessage() {

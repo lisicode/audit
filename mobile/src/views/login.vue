@@ -31,9 +31,7 @@
                 password: '',
             }
         },
-        created() {
-            // localStorage.removeItem('user');
-        },
+        created() {},
         methods: {
             // 确认登录
             confirmLogin() {
@@ -44,10 +42,11 @@
                 };
                 Request({
                     method: 'post',
-                    data: AssembleRequestData(InterfaceCode.userLogin, params)
+                    data: AssembleRequestData(InterfaceCode.UserLogin, params)
                 }).then(res => {
                     if (res.head.code == '000000') {
-                        PublicMethods['setLocalStorage']('user', res);
+                        PublicMethods['setLocalStorage']('tokenNo', res.head.tokenNo);
+                        PublicMethods['setLocalStorage']('user', res.response);
                         this.$router.push({path: '/'})
                     } else {
                         this.$notify({

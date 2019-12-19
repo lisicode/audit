@@ -33,14 +33,18 @@ const EnvironmentConfig = {
 
 // 接口编号
 const InterfaceCode = {
-    userLogin: '00B005',
+    UserLogin: '00B301',
+    QueryFlow: '02B302',
+    QueryAllUntreated: '02B317',
+    QueryApplyDetails: '02B303',
+
 };
 
 // 公共函数
 const PublicMethods = {
     'getUserNo': () => {
         if (PublicMethods['getLocalStorage']('user')) {
-            return PublicMethods['getLocalStorage']('user').response.userNo
+            return PublicMethods['getLocalStorage']('user').userNo
         } else {
             return ''
         }
@@ -65,8 +69,8 @@ const PublicMethods = {
         // return year + '' + month + '' + day + '' + hours + '' + minutes + '' + second + '' + milliseconds;
     },
     'getToken': () => {
-        if (PublicMethods['getLocalStorage']('user')) {
-            return PublicMethods['getLocalStorage']('user').head.tokenNo
+        if (PublicMethods['getLocalStorage']('tokenNo')) {
+            return PublicMethods['getLocalStorage']('tokenNo')
         } else {
             return ''
         }
@@ -97,11 +101,11 @@ const AssembleRequestData = (serviceId, paramsStr) => {
             serviceSn: PublicMethods['getImei']() + PublicMethods['getTimes'](),
             requestTime: PublicMethods['getTimes'](),
             tokenNo: PublicMethods['getToken'](),
-            mac: PublicMethods['getImei'](),
-            phoneIMEI: PublicMethods['getImsi'](),
             businessChannel: Environment.businessChannel,
             channelId: Environment.channelId,
             inputSource: Environment.inputSource,
+            mac: PublicMethods['getImei'](),
+            phoneIMEI: PublicMethods['getImsi'](),
             org: Environment.org,
             versionId: Environment.versionId
         },
@@ -124,6 +128,7 @@ Request.interceptors.request.use(config => {
 // 添加响应拦截器
 Request.interceptors.response.use(response => {
     console.log(response.data);
+    PublicMethods['setLocalStorage']('tokenNo', response.data.head.tokenNo);
     return response.data
 }, error => {
     console.log(error)
