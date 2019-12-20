@@ -12,13 +12,10 @@ export default new Vuex.Store({
         // 流程筛选条件
         screening: {
             flowType: 'B',
-            dealflag: '1',
+            dealflag: '2',
         },
         // 流程编号
-        business: {
-            code: '',
-            status: ''
-        }
+        business: {}
     },
     getters: {},
     mutations: {

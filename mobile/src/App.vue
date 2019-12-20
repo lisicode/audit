@@ -12,7 +12,7 @@
             return {}
         },
         created() {
-           console.log(PublicMethods['getLocalStorage']('user'))
+           // console.log(PublicMethods['getLocalStorage']('user'))
         }
     }
 </script>

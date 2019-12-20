@@ -35,7 +35,7 @@
                 <div class="item">流程结束时间：<small>{{ item.endTime == '' ? '无' : item.endTime }}</small></div>
                 <div class="item">当前任务处理时间：<small>{{ item.thisNodeTime }}</small></div>
                 <van-cell
-                        @click="to(item.flowType, item.businessCode, item.onMine)"
+                        @click="to(item)"
                         :clickable="true"
                         title="操作"
                         :value-class="item.onMine == 'Y' ? 'value-2' : 'value-1'"
@@ -100,26 +100,26 @@
             },
             // 请求加载
             requestLoad(params, interfaceCode) {
-                let _this = this;
                 Request({
                     method: 'post',
                     data: AssembleRequestData(interfaceCode, params)
                 }).then(res => {
                     for (let i = 0; i < res.response.length; i++) {
-                        _this.list.push(res.response[i]);
+                        this.list.push(res.response[i]);
                     }
-                    _this.currentPage += 1;
-                    _this.loading = false;
+                    this.currentPage += 1;
+                    this.loading = false;
                     if (res.head.code == '000001') {
-                        _this.finished = true;
+                        this.finished = true;
                     }
                 });
             },
             // 页面跳转
-            to(type, code, status) {
+            to(e) {
                 this.$store.commit('changeBusiness', {
-                    code: code,
-                    status: status
+                    businessCode: e.businessCode,
+                    onMine: e.onMine,
+                    nodeKey: e.nodeKey
                 });
                 let url = {
                     'B': {
@@ -132,7 +132,7 @@
                         path: '/lending'
                     },
                 };
-                this.$router.push({path: url[type].path})
+                this.$router.push({path: url[e.flowType].path})
             },
             // 确认筛选
             confirm() {
@@ -147,6 +147,7 @@
                 };
                 this.requestLoad(params, InterfaceCode.QueryFlow)
             },
+            // 筛选全部待处理
             all() {
                 this.list = [];
                 this.show = false;
