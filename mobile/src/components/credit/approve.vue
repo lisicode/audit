@@ -21,16 +21,16 @@
                 <section v-if="businessData.onMine == 'Y'">
                     <h5>审批信息</h5>
                     <van-cell-group>
-                        <van-field label="审批金额(元)" v-model="details.approveAmt" :disabled="roleDisabled" />
-                        <van-field label="审批利率(%)" v-model="details.approveRate" :disabled="roleDisabled" />
-                        <van-field label="审批期限" v-model="details.approveLoanTerm" :disabled="roleDisabled" />
+                        <van-field label="审批金额(元)" v-model="details.approveAmt" :disabled="!roleDisabled" />
+                        <van-field label="审批利率(%)" v-model="details.approveRate" :disabled="!roleDisabled" />
+                        <van-field label="审批期限" v-model="details.approveLoanTerm" :disabled="!roleDisabled" />
                         <van-field
                                 readonly
                                 clickable
                                 label="期限单位"
                                 :value="unitValue"
                                 :placeholder="changeUnit"
-                                @click="onPicker('unit')"
+                                @click="onPickerUnit"
                         />
                         <van-field
                                 readonly
@@ -38,7 +38,7 @@
                                 label="还款方式"
                                 :value="modeValue"
                                 :placeholder="changeMethod"
-                                @click="onPicker('mode')"
+                                @click="onPickerMethod"
                         />
                     </van-cell-group>
                     <van-cell-group>
@@ -58,11 +58,11 @@
                                 label="审批动作"
                                 :value="resultValue"
                                 placeholder="请选择"
-                                @click="onPickerApprove"
+                                @click="pickerApprove = true"
                         />
                     </van-cell-group>
                     <footer>
-                        <van-button color="#0061D9" @click="nextConfirm">提交</van-button>
+                        <van-button color="#0061D9" :disabled="confirmDisabled" @click="confirmNext">提交</van-button>
                     </footer>
                 </section>
             </van-tab>
@@ -113,12 +113,20 @@
                 </van-cell-group>
             </van-tab>
         </van-tabs>
-        <van-popup v-model="picker" position="bottom">
+        <van-popup v-model="pickerUnit" position="bottom">
             <van-picker
                     show-toolbar
-                    :columns="columns"
-                    @cancel="picker = false"
-                    @confirm="onConfirm"
+                    :columns="columnsUnit"
+                    @cancel="pickerUnit = false"
+                    @confirm="onConfirmUnit"
+            />
+        </van-popup>
+        <van-popup v-model="pickerMethod" position="bottom">
+            <van-picker
+                    show-toolbar
+                    :columns="columnsMethod"
+                    @cancel="pickerMethod = false"
+                    @confirm="onConfirmMethod"
             />
         </van-popup>
         <van-popup v-model="pickerApprove" position="bottom">
@@ -135,6 +143,7 @@
 <script>
     import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
     import { Dictionaries } from '@/assets/js/dictionaries'
+    import { Role } from '@/assets/js/role'
 
     export default {
         name: 'approve',
@@ -144,14 +153,20 @@
                 resultValue: '',
                 unitValue: '',
                 modeValue: '',
-                picker: false,
-                columns: [],
+
+                pickerUnit: false,
+                columnsUnit: [],
+                changeUnit: '',
+
+                pickerMethod: false,
+                columnsMethod: [],
+                changeMethod: '',
+
                 pickerApprove: false,
                 columnsApprove: [],
-                roleDisabled: true,
+                roleDisabled: false,
+                confirmDisabled: false,
                 details: {},
-                changeUnit: '',
-                changeMethod: '',
                 businessData: {
                     businessCode: this.$store.state.business.businessCode,
                     onMine: this.$store.state.business.onMine,
@@ -169,10 +184,14 @@
             }).then(res => {
                 // 如果是待处理
                 if (this.$store.state.business.onMine == 'Y') {
-                    // 根据节点判断是否可修改
-                    if (this.processNode()) {
-                        this.roleDisabled = false
-                    }
+                    // 根据节点判断是否可修改/配置审查动作
+                    // console.log(this.businessData.nodeKey)
+                    // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
+
+                    this.roleDisabled = Role[this.businessData.nodeKey]().modifyPermissions;
+                    this.columnsApprove = Role[this.businessData.nodeKey]().approveColumns;
+                    this.columnsUnit = Role[this.businessData.nodeKey]().columnsUnit;
+                    this.columnsMethod = Role[this.businessData.nodeKey]().columnsMethod;
                 }
                 this.details = res.response;
                 // this.details.creditValue = this.details.creditValue.toLocaleString();
@@ -201,72 +220,45 @@
                 this.$router.push({path: '/'})
             },
 
-            // 节点配置
-            processNode() {
-                // 会后秘书 授信部负责人 审查人
-                if (this.businessData.nodeKey == 'countersignSecretaryTask' || this.businessData.nodeKey == 'grantingCreditTask' || this.businessData.nodeKey == 'creditCheckerTask') {
-                    return true;
-                } else {
-                    return false;
+            // 打开期限单位
+            onPickerUnit() {
+                if (this.roleDisabled) {
+                    this.pickerUnit = true;
                 }
             },
 
-            // 打开审批动作菜单
-            onPickerApprove() {
-                this.pickerApprove = true;
-                this.columnsApprove = [
-                    {"keyId": 'OK', "text": "同意", "type": 'result'},
-                    {"keyId": 'OC', "text": "有条件同意", "type": 'result'},
-                    {"keyId": 'FL', "text": "遵循贷审会决议", "type": 'result'},
-                    {"keyId": 'RE', "text": "补件", "type": 'result'},
-                    {"keyId": 'RJ', "text": "拒绝", "type": 'result'}
-                ];
+            // 确认期限单位
+            onConfirmUnit(value) {
+                this.pickerUnit = false;
+                this.unitValue = value.text;
+                this.details.approveLoanUnit = value.key;
+            },
+
+            // 打开还款方式
+            onPickerMethod() {
+                if (this.roleDisabled) {
+                    this.pickerMethod = true;
+                }
+            },
+
+            // 确认还款方式
+            onConfirmMethod(value) {
+                this.pickerMethod = false;
+                this.changeMethod = value.text;
+                this.details.approveRepaymentMethod = value.key;
             },
 
             // 确认审批动作
             onConfirmApprove(value) {
                 this.pickerApprove = false;
                 this.resultValue = value.text;
-                this.details.approveCode = value.keyId;
-            },
-
-            // 打开期限单位/还款方式菜单
-            onPicker(e) {
-                if (this.processNode()) {
-                    this.picker = true;
-                    if (e == 'unit') {
-                        this.columns = [
-                            {"keyId": 'D', "text": "日", "type": 'unit'},
-                            {"keyId": 'M', "text": "月", "type": 'unit'},
-                            {"keyId": 'S', "text": "季", "type": 'unit'},
-                            {"keyId": 'Y', "text": "年", "type": 'unit'},
-                        ];
-                    } else if (e == 'mode') {
-                        this.columns = [
-                            {"keyId": '1', "text": "等额本金", "type": 'mode'},
-                            {"keyId": '2', "text": "等额本息", "type": 'mode'},
-                            {"keyId": '3', "text": "定期还息，到期还本", "type": 'mode'},
-                            {"keyId": '4', "text": "到期还本付息", "type": 'mode'},
-                        ];
-                    }
-                }
-            },
-
-            // 确认期限单位/还款方式
-            onConfirm(value) {
-                this.picker = false;
-                if (value.type == 'unit') { // 期限单位
-                    this.unitValue = value.text;
-                    this.details.approveLoanUnit = value.keyId;
-                } else if (value.type == 'mode') { // 还款方式
-                    this.modeValue = value.text;
-                    this.details.approveRepaymentMethod = value.keyId;
-                }
+                this.details.approveCode = value.key;
             },
 
             // 提交下一岗
-            nextConfirm() {
-                if (this.processNode()) {
+            confirmNext() {
+                this.confirmDisabled = true;
+                if (this.roleDisabled) {
                     let params = {
                         businessCode: this.details.businessCode,
                         approveCode: this.details.approveCode,
@@ -281,6 +273,7 @@
                         method: 'post',
                         data: AssembleRequestData(InterfaceCode.ChangeProcessSubmit, params)
                     }).then(res => {
+                        this.confirmDisabled = false;
                         if (res.head.code == '000000') {
                             this.$notify({
                                 type: 'success',
@@ -306,6 +299,7 @@
                         method: 'post',
                         data: AssembleRequestData(InterfaceCode.ProcessSubmit, params)
                     }).then(res => {
+                        this.confirmDisabled = false;
                         if (res.head.code == '000000') {
                             this.$notify({
                                 type: 'success',
