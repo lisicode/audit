@@ -15,7 +15,9 @@ export default new Vuex.Store({
             dealflag: '2',
         },
         // 流程编号
-        business: {}
+        business: {},
+        // 客户号
+        custId: ''
     },
     getters: {},
     mutations: {
@@ -30,6 +32,10 @@ export default new Vuex.Store({
         // 更改流程编号
         changeBusiness(state, payload) {
             state.business = payload
+        },
+        // 更改客户号
+        changeCustId(state, payload) {
+            state.custId = payload
         }
     },
     actions: {},

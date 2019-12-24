@@ -39,6 +39,8 @@ const InterfaceCode = {
     QueryApplyDetails: '02B303',
     ProcessSubmit: '02B311',
     ChangeProcessSubmit: '02B312',
+    QueryUserDetails: '01B310',
+
 };
 
 // 公共函数
@@ -128,6 +130,7 @@ Request.interceptors.request.use(config => {
 
 // 添加响应拦截器
 Request.interceptors.response.use(response => {
+    console.log('接口编号>> ' + response.data.head.serviceId);
     console.log(response.data);
     if (response.data.head.tokenNo) {
         PublicMethods['setLocalStorage']('tokenNo', response.data.head.tokenNo);

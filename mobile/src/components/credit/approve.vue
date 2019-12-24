@@ -187,13 +187,13 @@
                     // 根据节点判断是否可修改/配置审查动作
                     // console.log(this.businessData.nodeKey)
                     // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
-
                     this.roleDisabled = Role[this.businessData.nodeKey]().modifyPermissions;
                     this.columnsApprove = Role[this.businessData.nodeKey]().approveColumns;
                     this.columnsUnit = Role[this.businessData.nodeKey]().columnsUnit;
                     this.columnsMethod = Role[this.businessData.nodeKey]().columnsMethod;
                 }
                 this.details = res.response;
+                this.$store.commit('changeCustId', res.response.custId);
                 // this.details.creditValue = this.details.creditValue.toLocaleString();
                 this.details.loanYearsUnit = Dictionaries.deadlineUnit[this.details.loanYearsUnit];
                 this.details.repaymentMethod = Dictionaries.reimbursementMeans[this.details.repaymentMethod];
