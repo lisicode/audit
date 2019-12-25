@@ -10,8 +10,7 @@
         </van-sticky>
         <van-tabs v-model="active" color="#0061D9" title-active-color="#303133" swipeable animated>
             <van-tab title="审批信息">
-                <h5>申请信息</h5>
-                <van-cell-group>
+                <van-cell-group title="申请信息">
                     <van-cell title="申请金额(元)" :value="details.creditValue" />
                     <van-cell title="执行年利率(%)" :value="details.executionRate" />
                     <van-cell title="贷款期限" :value="details.loanYears" />
@@ -19,8 +18,7 @@
                     <van-cell title="还款方式" :value="details.repaymentMethod" />
                 </van-cell-group>
                 <section v-if="businessData.onMine == 'Y'">
-                    <h5>审批信息</h5>
-                    <van-cell-group>
+                    <van-cell-group title="审批信息">
                         <van-field label="审批金额(元)" v-model="details.approveAmt" :disabled="!roleDisabled" />
                         <van-field label="审批利率(%)" v-model="details.approveRate" :disabled="!roleDisabled" />
                         <van-field label="审批期限" v-model="details.approveLoanTerm" :disabled="!roleDisabled" />
@@ -67,14 +65,12 @@
                 </section>
             </van-tab>
             <van-tab title="申请信息">
-                <h5>客户信息</h5>
-                <van-cell-group>
+                <van-cell-group title="客户信息">
                     <van-cell title="客户姓名" :value="details.name" />
                     <van-cell title="客户证件类型" :value="details.certificateType" />
                     <van-cell title="客户证件号码" :value="details.certificateNo" />
                 </van-cell-group>
-                <h5>贷款申请信息</h5>
-                <van-cell-group>
+                <van-cell-group title="贷款申请信息">
                     <van-cell title="申请金额(元)" :value="details.creditValue" />
                     <van-cell title="贷款期限" :value="details.loanYears" />
                     <van-cell title="贷款期限单位" :value="details.loanYearsUnit" />
@@ -102,8 +98,7 @@
                     <van-cell title="借款人情况概述及管户方案" :label="details.managePlan" />
                     <van-cell title="调查意见" :label="details.investOpinion" />
                 </van-cell-group>
-                <h5>审批信息</h5>
-                <van-cell-group>
+                <van-cell-group title="审批信息">
                     <van-cell title="审批金额(元)" :value="details.approveAmt" />
                     <van-cell title="审批期限" :value="details.approveLoanTerm" />
                     <van-cell title="期限单位" :value="changeUnit" />
@@ -194,6 +189,8 @@
                 }
                 this.details = res.response;
                 this.$store.commit('changeCustId', res.response.custId);
+                this.$store.commit('changeGuaranteeMode', res.response.guaranteeMode);
+
                 // this.details.creditValue = this.details.creditValue.toLocaleString();
                 this.details.loanYearsUnit = Dictionaries.deadlineUnit[this.details.loanYearsUnit];
                 this.details.repaymentMethod = Dictionaries.reimbursementMeans[this.details.repaymentMethod];
@@ -335,19 +332,6 @@
                 color: #fff;
                 font-size: 20px;
                 font-weight: 400;
-            }
-        }
-        h5 {
-            margin: 0;
-            line-height: 50px;
-            box-sizing: border-box;
-            padding-left: 10px;
-            font-size: 15px;
-            a {
-                font-weight: 400;
-                display: inline-block;
-                width: 100%;
-                height: 100%;
             }
         }
         section {

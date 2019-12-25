@@ -14,7 +14,7 @@
                 finished-text="没有更多了"
                 @load="onLoad"
         >
-            <van-cell-group v-for="item in list">
+            <van-cell-group v-for="item in list" :key='item.id'>
                 <van-cell
                         :title="item.flowType == 'A' ? '征信查询'
                         : item.flowType == 'B' ? '一般授信'
@@ -56,7 +56,7 @@
                 <span @click="flowType = 'E'" :class="flowType == 'E' ? 'status-2' : 'status-1'">放款流程</span>
             </div>
             <div>
-                <span @click="dealflag = '1'" :class="dealflag == '1' ? 'status-2' : 'status-1'">全部</span>
+<!--                <span @click="dealflag = '1'" :class="dealflag == '1' ? 'status-2' : 'status-1'">全部</span>-->
                 <span @click="dealflag = '2'" :class="dealflag == '2' ? 'status-2' : 'status-1'">待处理</span>
                 <span @click="dealflag = '3'" :class="dealflag == '3' ? 'status-2' : 'status-1'">已处理</span>
             </div>
@@ -237,7 +237,7 @@
         }
         div {
             display: flex;
-            justify-content: space-between;
+            /*justify-content: space-between;*/
             span {
                 display: inline-block;
                 width: 70px;

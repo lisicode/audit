@@ -14,9 +14,13 @@
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="pledge" @click="to('pledge')">
+                <van-tabbar-item name="pledge" @click="to('pledge')" v-if="this.$store.state.guaranteeMode == '1' || this.$store.state.guaranteeMode == '2'">
                     <i class="iconfont">&#xeb67;</i>
                     <span>抵质押详情</span>
+                </van-tabbar-item>
+                <van-tabbar-item name="guarantee" @click="to('guarantee')" v-if="this.$store.state.guaranteeMode == '3'">
+                    <i class="iconfont">&#xeb67;</i>
+                    <span>保证人详情</span>
                 </van-tabbar-item>
                 <van-tabbar-item name="trajectory" @click="to('trajectory')">
                     <i class="iconfont">&#xeb68;</i>
@@ -35,6 +39,7 @@
     const approve = resolve => require(['@/components/credit/approve.vue'],resolve);
     const detail = resolve => require(['@/components/detail.vue'],resolve);
     const pledge = resolve => require(['@/components/credit/pledge.vue'],resolve);
+    const guarantee = resolve => require(['@/components/credit/guarantee.vue'],resolve);
     const trajectory = resolve => require(['@/components/trajectory.vue'],resolve);
     const material = resolve => require(['@/components/material.vue'],resolve);
 
@@ -44,6 +49,7 @@
             approve,
             detail,
             pledge,
+            guarantee,
             trajectory,
             material
         },

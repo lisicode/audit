@@ -17,7 +17,9 @@ export default new Vuex.Store({
         // 流程编号
         business: {},
         // 客户号
-        custId: ''
+        custId: '',
+        // 担保方式
+        guaranteeMode: ''
     },
     getters: {},
     mutations: {
@@ -36,6 +38,10 @@ export default new Vuex.Store({
         // 更改客户号
         changeCustId(state, payload) {
             state.custId = payload
+        },
+        // 更改担保方式
+        changeGuaranteeMode(state, payload) {
+            state.guaranteeMode = payload
         }
     },
     actions: {},

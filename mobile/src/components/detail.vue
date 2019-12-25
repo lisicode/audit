@@ -330,19 +330,6 @@
                 font-weight: 400;
             }
         }
-        h5 {
-            margin: 0;
-            line-height: 50px;
-            box-sizing: border-box;
-            padding-left: 10px;
-            font-size: 15px;
-            a {
-                font-weight: 400;
-                display: inline-block;
-                width: 100%;
-                height: 100%;
-            }
-        }
         .item {
             margin-bottom: 20px;
         }

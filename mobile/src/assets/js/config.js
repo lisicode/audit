@@ -40,6 +40,8 @@ const InterfaceCode = {
     ProcessSubmit: '02B311',
     ChangeProcessSubmit: '02B312',
     QueryUserDetails: '01B310',
+    QueryPledge: '02B304',
+    QueryGuarantee: '02B305',
 
 };
 
