@@ -434,6 +434,53 @@ const Dictionaries = {
         '3': '出库',
         '4': '临时出库'
     },
+    // 借款人与保证人关系
+    custGuarantorResult_relawithManager: {
+        '00': '父母',
+        '01': '配偶',
+        '02': '亲属',
+        '03': '子女',
+        '04': '朋友',
+        '05': '师生',
+        '06': '同学',
+        '07': '同事',
+        '10': '其他',
+        '21': '开拓人',
+        '22': '保证人',
+        '23': '抵质押人',
+        '24': '客户经理',
+        '30': '法人',
+        '31': '股东',
+        '11': '本人'
+    },
+    // 有无保证承诺书
+    custGuarantorResult_haveBook: {
+        '1': '有',
+        '2': '无'
+    },
+    // 保证人是否在申请表上签字
+    custGuarantorResult_haveSign: {
+        '1': '有',
+        '2': '没有'
+    },
+    // 对保证人调查方式
+    custGuarantorResult_examMode: {
+        '1': '现场',
+        '2': '电话',
+        '3': '外围'
+    },
+    // 有无工资账户流水
+    custGuarantorResult_haveWagesWater : {
+        '1' : '有',
+        '2' : '无'
+    },
+
+    // 是否核实保证人的职业信息
+    custGuarantorResult_checkInfo : {
+        '1' : '是',
+        '2' : '有'
+    },
+
 
 
 };

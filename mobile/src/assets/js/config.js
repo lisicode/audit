@@ -42,6 +42,8 @@ const InterfaceCode = {
     QueryUserDetails: '01B310',
     QueryPledge: '02B304',
     QueryGuarantee: '02B305',
+    QueryGuarantor: '02B313',
+
 
 };
 
