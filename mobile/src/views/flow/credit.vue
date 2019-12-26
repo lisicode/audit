@@ -14,11 +14,11 @@
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="pledge" @click="to('pledge')" v-if="this.$store.state.guaranteeMode == '1' || this.$store.state.guaranteeMode == '2'">
+                <van-tabbar-item name="pledge" @click="to('pledge')" v-show="this.$store.state.guaranteeMode == '1' || this.$store.state.guaranteeMode == '2'">
                     <i class="iconfont">&#xeb67;</i>
                     <span>抵质押详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="guarantor" @click="to('guarantor')" v-if="this.$store.state.guaranteeMode == '3'">
+                <van-tabbar-item name="guarantor" @click="to('guarantor')" v-show="this.$store.state.guaranteeMode == '3'">
                     <i class="iconfont">&#xeb67;</i>
                     <span>保证人详情</span>
                 </van-tabbar-item>

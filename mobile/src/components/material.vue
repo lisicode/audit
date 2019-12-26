@@ -8,24 +8,39 @@
                 </h1>
             </header>
         </van-sticky>
-        <van-collapse v-model="activeNames">
-            <van-collapse-item title="征信查询审批单" name="1">
-                <div class="item">
-                    <span>文件名</span>
-                    <van-button color="#0061D9" size="small" @click="preview">查看</van-button>
-                </div>
-                <div class="item">
-                    <span>文件名</span>
-                    <van-button color="#0061D9" size="small">查看</van-button>
-                </div>
-                <div class="item">
-                    <span>文件名</span>
-                    <van-button color="#0061D9" size="small">查看</van-button>
-                </div>
-            </van-collapse-item>
-        </van-collapse>
+
+
+        <van-cell-group>
+            <van-cell
+                    v-for="item in materialsClassification"
+                    :key="item.id"
+                    :title="item.dirsName"
+                    value="打开"
+                    @click="open(item.dirsNo,item.businessCode)"
+                    is-link />
+        </van-cell-group>
+
+        <van-popup
+                v-model="popup"
+                position="right"
+                :style="{ width: '80%',height: '100%' }"
+        >
+            <van-cell-group title="影像件列表">
+                <van-cell
+                        v-for="item in materialsList"
+                        :key="item.id"
+                        :clickable="true"
+                        title-class="title van-ellipsis"
+                        value-class="value"
+                        :title="item.fileName"
+                        :label="item.businessCode"
+                        @click="examine(item)"
+                        value="查看" />
+            </van-cell-group>
+        </van-popup>
+
         <van-image-preview
-                v-model="show"
+                v-model="imagePreview"
                 :images="images"
                 @change="onChange"
         >
@@ -35,21 +50,32 @@
 </template>
 
 <script>
+    import {InterfaceCode, AssembleRequestData, Request} from '@/assets/js/config'
+    import {Dictionaries} from '@/assets/js/dictionaries'
+
     export default {
         name: 'material',
         data() {
             return {
-                activeNames: ['1'],
-                show: false,
+                activeNames: ['0'],
+                imagePreview: false,
+                popup: false,
                 index: 1,
-                images: [
-                    'https://reviveimg.hellorf.com/www/images/4227145d3701174b83a50379c83a35b4.jpg',
-                    'https://reviveimg.hellorf.com/www/images/f89729b009c73f65382e92853a6c96b9.jpg'
-                ]
+                images: [],
+                materialsClassification: [],
+                materialsList: []
             }
         },
         created() {
-
+            let params = {
+                businessCode: this.$store.state.business.businessCode
+            };
+            Request({
+                method: 'post',
+                data: AssembleRequestData(InterfaceCode.QueryMaterialsClassification, params)
+            }).then(res => {
+                this.materialsClassification = res.response;
+            });
         },
         methods: {
             back() {
@@ -58,11 +84,39 @@
                 });
                 this.$router.push({path: '/'})
             },
-            preview() {
-              this.show = true
-            },
+
+
             onChange(index) {
                 this.index = index + 1;
+            },
+
+            // 打开资料列表
+            open(dirsNo,businessCode) {
+                this.popup = true;
+                let params = {
+                    dirsNo: dirsNo,
+                    businessCode: businessCode
+                };
+                Request({
+                    method: 'post',
+                    data: AssembleRequestData(InterfaceCode.QueryMaterialsList, params)
+                }).then(res => {
+                    this.materialsList = res.response;
+                    if(res.response.length) {
+                        this.images = [];
+                        let imagesUrl = res.response.filter(item => item.fileType === 'jpg');
+                        for(let i = 0;i < imagesUrl.length;i++) {
+                            this.images.push(imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
+                        }
+                    }
+                });
+            },
+            // 查看资料
+            examine(e) {
+                this.popup = false;
+                if(e.fileType == 'jpg') {
+                    this.imagePreview = true
+                }
             }
         }
     }
@@ -92,6 +146,13 @@
             span {
                 font-size: 13px;
             }
+        }
+
+        .title {
+            width: 100px;
+        }
+        .value {
+            line-height: 45px;
         }
     }
 </style>

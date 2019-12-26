@@ -44,6 +44,10 @@ const InterfaceCode = {
     QueryGuarantee: '02B305',
     QueryGuarantor: '02B313',
     QueryProgress: '02B306',
+    QueryProgressDetails: '02B307',
+    QueryMaterialsClassification: '02B308',
+    QueryMaterialsList: '02B309',
+
 
 };
 

@@ -11,13 +11,37 @@
         <van-steps direction="vertical" :active="0">
             <van-step v-for="item in progressNode" :key='item.id'>
                 <h3>{{ item.taskName }}</h3>
+                <p>审批人姓名：{{ item.userName }}</p>
+                <p>审批状态：{{ item.approveCode }}</p>
                 <p>审批开始时间：{{ item.startDate }}</p>
                 <p>审批结束时间：{{ item.finishDate }}</p>
-                <van-cell title="审批人姓名" :value="item.userName" />
-                <van-cell title="审批状态" :value="item.approveCode" />
-                <van-cell title="审批详情" @click="check()" value="查看" is-link/>
+                <van-cell title="审批详情" @click="check(item.id)" value="查看" is-link/>
             </van-step>
         </van-steps>
+        <van-popup
+                v-model="show"
+                position="right"
+                :style="{ width: '80%',height: '100%' }"
+        >
+            <van-cell-group title="审批轨迹详情">
+                <van-cell title="流程名称" :label="QueryProgressDetails.procName" />
+                <van-cell title="审批备忘" :label="QueryProgressDetails.memo" />
+                <van-cell title="上一流程节点名称" :value="QueryProgressDetails.preTaskName" />
+                <van-cell title="流程节点名称" :value="QueryProgressDetails.taskName" />
+                <van-cell title="审批人姓名" :value="QueryProgressDetails.userName" />
+                <van-cell title="审批人机构" :value="QueryProgressDetails.branchCode" />
+                <van-cell title="拒绝原因代码" :value="QueryProgressDetails.refuseCode" />
+                <van-cell title="审批金额" :value="QueryProgressDetails.approveAmt" />
+                <van-cell title="审批利率" :value="QueryProgressDetails.approveRate" />
+                <van-cell title="审批贷款期限" :value="QueryProgressDetails.approveloanTerm" />
+                <van-cell title="审批贷款期限单位" :value="QueryProgressDetails.approveTermUnit" />
+                <van-cell title="审批类型" :value="QueryProgressDetails.approveType" />
+                <van-cell title="审批开始日期" :value="QueryProgressDetails.startDate" />
+                <van-cell title="审批结束日期" :value="QueryProgressDetails.finishDate" />
+                <van-cell title="创建日期" :value="QueryProgressDetails.createDate" />
+                <van-cell title="创建人" :value="QueryProgressDetails.createBy" />
+            </van-cell-group>
+        </van-popup>
     </div>
 </template>
 
@@ -29,7 +53,9 @@
         name: 'schedule',
         data() {
             return {
-                progressNode: []
+                progressNode: [],
+                QueryProgressDetails: {},
+                show: false
 
             }
         },
@@ -42,6 +68,7 @@
                 data: AssembleRequestData(InterfaceCode.QueryProgress, params)
             }).then(res => {
                 this.progressNode = res.response;
+                this.progressNode.reverse();
             });
         },
         methods: {
@@ -53,6 +80,17 @@
             },
             check(e) {
                 console.log(e)
+                let params = {
+                    id: e
+                };
+                Request({
+                    method: 'post',
+                    data: AssembleRequestData(InterfaceCode.QueryProgressDetails, params)
+                }).then(res => {
+                    this.show = true;
+                    this.QueryProgressDetails = res.response;
+                    this.QueryProgressDetails.approveTermUnit = Dictionaries.deadlineUnit[this.QueryProgressDetails.approveTermUnit];
+                });
             }
         }
     }
@@ -73,6 +111,9 @@
                 font-size: 20px;
                 font-weight: 400;
             }
+        }
+        p {
+
         }
         .van-cell {
             background-color: #F5F7FA;

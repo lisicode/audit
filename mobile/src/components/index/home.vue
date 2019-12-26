@@ -59,7 +59,7 @@
             to(e) {
                 this.$store.commit('changeScreening', {
                     flowType: e,
-                    dealflag: '1',
+                    dealflag: '2',
                 });
                 this.$emit('childEvent', 'flow')
             },
