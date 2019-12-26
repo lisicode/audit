@@ -43,7 +43,7 @@ const InterfaceCode = {
     QueryPledge: '02B304',
     QueryGuarantee: '02B305',
     QueryGuarantor: '02B313',
-
+    QueryProgress: '02B306',
 
 };
 

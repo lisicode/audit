@@ -14,7 +14,7 @@
                     <i class="iconfont">&#xeb69;</i>
                     <span>客户详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="trajectory" @click="to('trajectory')">
+                <van-tabbar-item name="schedule" @click="to('schedule')">
                     <i class="iconfont">&#xeb68;</i>
                     <span>审批轨迹</span>
                 </van-tabbar-item>
@@ -30,7 +30,7 @@
 <script>
     const detail = resolve => require(['@/components/detail.vue'],resolve);
     const signing = resolve => require(['@/components/contract/signing.vue'],resolve);
-    const trajectory = resolve => require(['@/components/trajectory.vue'],resolve);
+    const schedule = resolve => require(['@/components/schedule.vue'],resolve);
     const material = resolve => require(['@/components/material.vue'],resolve);
 
     export default {
@@ -38,7 +38,7 @@
         components: {
             detail,
             signing,
-            trajectory,
+            schedule,
             material
         },
         data() {

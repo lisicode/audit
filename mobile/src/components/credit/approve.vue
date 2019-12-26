@@ -46,7 +46,6 @@
                                 autosize
                                 label="处理意见"
                                 type="textarea"
-                                maxlength="100"
                                 placeholder="请输入处理意见"
                                 show-word-limit
                         />

@@ -22,7 +22,7 @@
                     <i class="iconfont">&#xeb67;</i>
                     <span>保证人详情</span>
                 </van-tabbar-item>
-                <van-tabbar-item name="trajectory" @click="to('trajectory')">
+                <van-tabbar-item name="schedule" @click="to('schedule')">
                     <i class="iconfont">&#xeb68;</i>
                     <span>审批轨迹</span>
                 </van-tabbar-item>
@@ -40,7 +40,7 @@
     const detail = resolve => require(['@/components/detail.vue'],resolve);
     const pledge = resolve => require(['@/components/credit/pledge.vue'],resolve);
     const guarantor = resolve => require(['@/components/credit/guarantor.vue'],resolve);
-    const trajectory = resolve => require(['@/components/trajectory.vue'],resolve);
+    const schedule = resolve => require(['@/components/schedule.vue'],resolve);
     const material = resolve => require(['@/components/material.vue'],resolve);
 
     export default {
@@ -50,7 +50,7 @@
             detail,
             pledge,
             guarantor,
-            trajectory,
+            schedule,
             material
         },
         data() {
