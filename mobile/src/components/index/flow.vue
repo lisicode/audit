@@ -1,5 +1,5 @@
 <template>
-    <van-row>
+    <div class="flow">
         <header>
 <!--            <h1>流程列表<small>已处理(10条)</small><small>未处理(5条)</small></h1>-->
             <h1>流程列表</h1>
@@ -65,7 +65,7 @@
                 <van-button color="#0061D9" @click="confirm">确认</van-button>
             </section>
         </van-popup>
-    </van-row>
+    </div>
 </template>
 
 <script>
@@ -167,104 +167,107 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    header {
-        box-sizing: border-box;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        padding: 10px;
-        background-color: #0061D9;
-        color: #fff;
-        h1 {
-            font-size: 20px;
-            font-weight: 500;
-            margin: 0;
-            small {
-                margin-left: 10px;
-                font-size: 12px;
-            }
-        }
-        div {
-            text-align: center;
-            i {
-                font-size: 15px;
-                margin-right: 5px;
-            }
-            small {
-                font-size: 15px;
-            }
-        }
-    }
-    .van-cell-group {
-        color: #606266;
-        margin-top: 20px;
-        .van-cell {
-            padding: 10px 15px;
-        }
-        .title,
-        .value {
-            font-size: 16px;
-            font-weight: 500;
-        }
-        .value-1 {
-            color: #0061D9;
-        }
-        .value-2 {
-            color: #F74D2E;
-        }
-        .item {
-            padding: 3px 15px;
-            color: #303133;
-            font-size: 13px;
+    .flow {
+        padding-bottom: 50px;
+        header {
             box-sizing: border-box;
-            overflow: hidden;
-            small {
-                font-size: 13px;
-                color: #606266;
-                float: right;
-            }
-        }
-    }
-    .van-popup {
-        box-sizing: border-box;
-        padding: 10px;
-        h5 {
-            margin-top: 10px;
-            margin-bottom: 20px;
-            color: #303133;
-            font-weight: 400;
-            font-size: 20px;
-        }
-        div {
             display: flex;
-            /*justify-content: space-between;*/
-            span {
-                display: inline-block;
-                width: 70px;
-                height: 40px;
-                font-size: 13px;
-                margin-right: 10px;
-                margin-bottom: 10px;
-                text-align: center;
-                line-height: 40px;
-                border-radius: 5px;
-            }
-        }
-        section {
-            display: flex;
-            margin-top: 20px;
-            .van-button {
-                width: 100%;
-                margin-right: 10px;
-            }
-        }
-        .status-1 {
-            background-color: #EDEFF2;
-        }
-        .status-2 {
-            color: #fff;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px;
             background-color: #0061D9;
+            color: #fff;
+            h1 {
+                font-size: 20px;
+                font-weight: 500;
+                margin: 0;
+                small {
+                    margin-left: 10px;
+                    font-size: 12px;
+                }
+            }
+            div {
+                text-align: center;
+                i {
+                    font-size: 15px;
+                    margin-right: 5px;
+                }
+                small {
+                    font-size: 15px;
+                }
+            }
+        }
+        .van-cell-group {
+            color: #606266;
+            margin-bottom: 20px;
+            .van-cell {
+                padding: 10px 15px;
+            }
+            .title,
+            .value {
+                font-size: 16px;
+                font-weight: 500;
+            }
+            .value-1 {
+                color: #0061D9;
+            }
+            .value-2 {
+                color: #F74D2E;
+            }
+            .item {
+                padding: 3px 15px;
+                color: #303133;
+                font-size: 13px;
+                box-sizing: border-box;
+                overflow: hidden;
+                small {
+                    font-size: 13px;
+                    color: #606266;
+                    float: right;
+                }
+            }
+        }
+        .van-popup {
+            box-sizing: border-box;
+            padding: 10px;
+            h5 {
+                margin-top: 10px;
+                margin-bottom: 20px;
+                color: #303133;
+                font-weight: 400;
+                font-size: 20px;
+            }
+            div {
+                display: flex;
+                /*justify-content: space-between;*/
+                span {
+                    display: inline-block;
+                    width: 70px;
+                    height: 40px;
+                    font-size: 13px;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                    text-align: center;
+                    line-height: 40px;
+                    border-radius: 5px;
+                }
+            }
+            section {
+                display: flex;
+                margin-top: 20px;
+                .van-button {
+                    width: 100%;
+                    margin-right: 10px;
+                }
+            }
+            .status-1 {
+                background-color: #EDEFF2;
+            }
+            .status-2 {
+                color: #fff;
+                background-color: #0061D9;
+            }
         }
     }
 </style>

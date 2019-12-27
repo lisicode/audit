@@ -90,7 +90,7 @@
             };
             Request({
                 method: 'post',
-                data: AssembleRequestData(InterfaceCode.QuerycontractDetails, params)
+                data: AssembleRequestData(InterfaceCode.QueryContractDetails, params)
             }).then(res => {
                 // 如果是待处理
                 if (this.businessData.onMine == 'Y') {

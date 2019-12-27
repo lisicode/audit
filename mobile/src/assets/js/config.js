@@ -47,7 +47,7 @@ const InterfaceCode = {
     QueryProgressDetails: '02B307',
     QueryMaterialsClassification: '02B308',
     QueryMaterialsList: '02B309',
-    QuerycontractDetails: '02B314',
+    QueryLoanDetails: '02B315',
 
 
 
