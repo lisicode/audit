@@ -15,7 +15,7 @@
                 <p>审批状态：{{ item.approveCode }}</p>
                 <p>审批开始时间：{{ item.startDate }}</p>
                 <p>审批结束时间：{{ item.finishDate }}</p>
-                <van-cell title="审批详情" @click="check(item.id)" value="查看" is-link/>
+                <van-cell title="审批详情" @click="check(item.id)" value="查看" />
             </van-step>
         </van-steps>
         <van-popup

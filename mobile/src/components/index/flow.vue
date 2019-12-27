@@ -121,6 +121,7 @@
                     onMine: e.onMine,
                     nodeKey: e.nodeKey
                 });
+                this.$store.commit('changeCustId', e.custId);
                 let url = {
                     'B': {
                         path: '/credit'

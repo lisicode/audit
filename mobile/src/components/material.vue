@@ -17,7 +17,7 @@
                     :title="item.dirsName"
                     value="打开"
                     @click="open(item.dirsNo,item.businessCode)"
-                    is-link />
+            />
         </van-cell-group>
 
         <van-popup
@@ -35,7 +35,8 @@
                         :title="item.fileName"
                         :label="item.businessCode"
                         @click="examine(item)"
-                        value="查看" />
+                        value="查看"
+                />
             </van-cell-group>
         </van-popup>
 
@@ -62,6 +63,7 @@
                 popup: false,
                 index: 1,
                 images: [],
+                pdf: '',
                 materialsClassification: [],
                 materialsList: []
             }
@@ -108,6 +110,12 @@
                         for(let i = 0;i < imagesUrl.length;i++) {
                             this.images.push(imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
                         }
+
+                        // let pdfUrl = res.response.filter(item => item.fileType === 'pdf');
+                        // for(let i = 0;i < pdfUrl.length;i++) {
+                        //     this.pdf = pdfUrl[i].urlPrefix + pdfUrl[i].urlSuffix
+                        // }
+
                     }
                 });
             },
@@ -116,6 +124,18 @@
                 this.popup = false;
                 if(e.fileType == 'jpg') {
                     this.imagePreview = true
+                } else {
+                    // console.log(this.pdf)
+                    // plus.downloader.createDownload(this.pdf, {}, function (d, status) {
+                    //     if (status == 200) {
+                    //         var fileUrl = d.filename;
+                    //         plus.runtime.openFile(fileUrl, {}, function (e) {
+                    //             console.log(e)
+                    //         });
+                    //     } else {
+                    //         alert("Download failed: " + status);
+                    //     }
+                    // });
                 }
             }
         }

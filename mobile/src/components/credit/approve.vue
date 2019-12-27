@@ -177,7 +177,7 @@
                 data: AssembleRequestData(InterfaceCode.QueryApplyDetails, params)
             }).then(res => {
                 // 如果是待处理
-                if (this.$store.state.business.onMine == 'Y') {
+                if (this.businessData.onMine == 'Y') {
                     // 根据节点判断是否可修改/配置审查动作
                     // console.log(this.businessData.nodeKey)
                     // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
@@ -187,7 +187,6 @@
                     this.columnsMethod = Role[this.businessData.nodeKey]().columnsMethod;
                 }
                 this.details = res.response;
-                this.$store.commit('changeCustId', res.response.custId);
                 this.$store.commit('changeGuaranteeMode', res.response.guaranteeMode);
 
                 // this.details.creditValue = this.details.creditValue.toLocaleString();

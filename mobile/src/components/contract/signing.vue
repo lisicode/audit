@@ -8,36 +8,49 @@
                 </h1>
             </header>
         </van-sticky>
-        <h5>合同信息</h5>
-        <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
+        <van-cell-group title="合同信息">
+            <van-cell title="申请编号" :value="details.contractAppNo" />
+            <van-cell title="贷款种类" :value="details.creditType" />
+            <van-cell title="客户号" :value="details.custId" />
+            <van-cell title="客户姓名" :value="details.custName" />
+            <van-cell title="客户证件类型" :value="details.certificateType" />
+            <van-cell title="客户证件号码" :value="details.certificateNo" />
+            <van-cell title="额度申请编号" :value="details.businessCode" />
+            <van-cell title="担保方式" :value="details.guaranteeMode" />
+            <van-cell title="管户人" :value="details.manageUser" />
         </van-cell-group>
-        <h5>合同审批</h5>
-        <van-cell-group>
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-            <van-cell title="单元格" value="内容" />
-        </van-cell-group>
-        <van-field
-                v-model="message"
-                rows="2"
-                autosize
-                label="处理意见"
-                type="textarea"
-                maxlength="50"
-                placeholder="请输入处理意见"
-                show-word-limit
-        />
-        <van-field
-                readonly
-                clickable
-                label="审批动作"
-                :value="value"
-                placeholder="请选择"
-                @click="picker = true"
-        />
+        <section v-if="businessData.onMine == 'Y'">
+            <van-cell-group title="合同审批">
+                <van-cell title="合同金额(元)" :value="details.contractAmt" />
+                <van-cell title="合同利率(%)" :value="details.contractRate" />
+                <van-cell title="合同期限" :value="details.contractTerm" />
+                <van-cell title="合同期限单位" :value="details.contractTermUnit" />
+                <van-cell title="合同起始日期" :value="details.validFrom" />
+                <van-cell title="合同到期日期" :value="details.validTo" />
+                <van-cell title="还款方式" :value="details.repaymentMethod" />
+
+            </van-cell-group>
+            <van-field
+                    v-model="memo"
+                    rows="2"
+                    autosize
+                    label="处理意见"
+                    type="textarea"
+                    placeholder="请输入处理意见"
+                    show-word-limit
+            />
+            <van-field
+                    readonly
+                    clickable
+                    label="审批动作"
+                    :value="value"
+                    placeholder="请选择"
+                    @click="picker = true"
+            />
+            <footer>
+                <van-button color="#0061D9" :disabled="confirmDisabled" @click="confirmNext">提交</van-button>
+            </footer>
+        </section>
         <van-popup v-model="picker" position="bottom">
             <van-picker
                     show-toolbar
@@ -50,18 +63,49 @@
 </template>
 
 <script>
+    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+    import { Dictionaries } from '@/assets/js/dictionaries'
+    import { Role } from '@/assets/js/role'
+
     export default {
         name: 'signing',
         data() {
             return {
-                message: '',
+                businessData: {
+                    businessCode: this.$store.state.business.businessCode,
+                    onMine: this.$store.state.business.onMine,
+                    nodeKey: this.$store.state.business.nodeKey
+                },
+                details: {},
+                columns: [],
                 value: '',
+                memo: '',
                 picker: false,
-                columns: ['同意', '有条件同意', '否决']
+                confirmDisabled: false
             }
         },
         created() {
-
+            let params = {
+                businessCode: this.businessData.businessCode
+            };
+            Request({
+                method: 'post',
+                data: AssembleRequestData(InterfaceCode.QuerycontractDetails, params)
+            }).then(res => {
+                // 如果是待处理
+                if (this.businessData.onMine == 'Y') {
+                    // 根据节点配置审查动作
+                    // console.log(this.businessData.nodeKey)
+                    // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
+                    this.columns = Role[this.businessData.nodeKey]().approveColumns
+                }
+                this.details = res.response;
+                this.details.creditType = Dictionaries.loanType[this.details.creditType];
+                this.details.certificateType = Dictionaries.certificateType[this.details.certificateType];
+                this.details.guaranteeMode = Dictionaries.guaranteeMode[this.details.guaranteeMode];
+                this.details.contractTermUnit = Dictionaries.deadlineUnit[this.details.contractTermUnit];
+                this.details.repaymentMethod = Dictionaries.reimbursementMeans[this.details.repaymentMethod];
+            });
         },
         methods: {
             back() {
@@ -71,11 +115,38 @@
                 this.$router.push({path: '/'})
             },
             onConfirm(value) {
-
-                console.log(value)
-
-                this.value = value;
                 this.picker = false;
+                this.value = value.text;
+                this.details.approveCode = value.key;
+            },
+            // 提交下一岗
+            confirmNext() {
+                this.confirmDisabled = true;
+                let params = {
+                    businessCode: this.details.businessCode,
+                    approveCode: this.details.approveCode,
+                    memo: this.memo
+                };
+                Request({
+                    method: 'post',
+                    data: AssembleRequestData(InterfaceCode.ProcessSubmit, params)
+                }).then(res => {
+                    this.confirmDisabled = false;
+                    if (res.head.code == '000000') {
+                        this.$notify({
+                            type: 'success',
+                            duration: 1000,
+                            message: '审批成功'
+                        });
+                        this.back();
+                    } else {
+                        this.$notify({
+                            type: 'danger',
+                            duration: 1000,
+                            message: res.head.desc
+                        });
+                    }
+                });
             }
         }
     }
@@ -97,17 +168,13 @@
                 font-weight: 400;
             }
         }
-        h5 {
-            margin: 0;
-            line-height: 50px;
-            box-sizing: border-box;
-            padding-left: 10px;
-            font-size: 15px;
-            a {
-                font-weight: 400;
-                display: inline-block;
-                width: 100%;
-                height: 100%;
+        section {
+            footer {
+                margin-top: 20px;
+                padding: 0 16px;
+                .van-button {
+                    width: 100%;
+                }
             }
         }
         .van-tabbar-item {

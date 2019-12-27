@@ -25,7 +25,7 @@
             </van-cell-group>
             <van-cell-group :title="'抵质押物列表' + '（' + item.mortgagorName + '）'">
                 <van-cell v-for="items in item.list" :key='items.id' :title="items.mortgageName"
-                          @click="check(items.id)" value="查看" is-link/>
+                          @click="check(items.id)" value="查看" />
             </van-cell-group>
         </div>
 
