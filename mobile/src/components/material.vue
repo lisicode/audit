@@ -110,12 +110,6 @@
                         for(let i = 0;i < imagesUrl.length;i++) {
                             this.images.push(imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
                         }
-
-                        // let pdfUrl = res.response.filter(item => item.fileType === 'pdf');
-                        // for(let i = 0;i < pdfUrl.length;i++) {
-                        //     this.pdf = pdfUrl[i].urlPrefix + pdfUrl[i].urlSuffix
-                        // }
-
                     }
                 });
             },
@@ -125,17 +119,17 @@
                 if(e.fileType == 'jpg') {
                     this.imagePreview = true
                 } else {
-                    // console.log(this.pdf)
-                    // plus.downloader.createDownload(this.pdf, {}, function (d, status) {
-                    //     if (status == 200) {
-                    //         var fileUrl = d.filename;
-                    //         plus.runtime.openFile(fileUrl, {}, function (e) {
-                    //             console.log(e)
-                    //         });
-                    //     } else {
-                    //         alert("Download failed: " + status);
-                    //     }
-                    // });
+                    let dtask = plus.downloader.createDownload(e.urlPrefix + e.urlSuffix, {}, function (d, status) {
+                        if (status == 200) {
+                            var fileUrl = d.filename;
+                            plus.runtime.openFile(fileUrl, {}, function (e) {
+                                alert('打开失败');
+                            });
+                        } else {
+                            alert("Download failed: " + status);
+                        }
+                    });
+                    dtask.start();
                 }
             }
         }

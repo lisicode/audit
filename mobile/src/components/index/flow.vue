@@ -157,7 +157,7 @@
                     currentPage: 1,
                     pageSize: 10,
                     flowType: this.flowType,
-                    dealflag: this.dealflag
+                    dealflag: '2'
                 };
                 this.requestLoad(params, InterfaceCode.QueryAllUntreated)
             }

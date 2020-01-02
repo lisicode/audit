@@ -147,15 +147,12 @@
                 resultValue: '',
                 unitValue: '',
                 modeValue: '',
-
                 pickerUnit: false,
                 columnsUnit: [],
                 changeUnit: '',
-
                 pickerMethod: false,
                 columnsMethod: [],
                 changeMethod: '',
-
                 pickerApprove: false,
                 columnsApprove: [],
                 roleDisabled: false,
@@ -172,23 +169,28 @@
             let params = {
                 businessCode: this.businessData.businessCode
             };
+            let interfaceCode;
+            // 如果是待处理
+            if (this.businessData.onMine == 'Y') {
+                // 抢占式
+                interfaceCode = InterfaceCode.QueryApplyDetails;
+                // 根据节点判断是否可修改/配置审查动作
+                // console.log(this.businessData.nodeKey)
+                // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
+                this.roleDisabled = Role[this.businessData.nodeKey]().modifyPermissions;
+                this.columnsApprove = Role[this.businessData.nodeKey]().approveColumns;
+                this.columnsUnit = Role[this.businessData.nodeKey]().columnsUnit;
+                this.columnsMethod = Role[this.businessData.nodeKey]().columnsMethod;
+            } else {
+                // 非抢占式
+                interfaceCode = InterfaceCode.QueryAlreadyApplyDetails;
+            }
             Request({
                 method: 'post',
-                data: AssembleRequestData(InterfaceCode.QueryApplyDetails, params)
+                data: AssembleRequestData(interfaceCode, params)
             }).then(res => {
-                // 如果是待处理
-                if (this.businessData.onMine == 'Y') {
-                    // 根据节点判断是否可修改/配置审查动作
-                    // console.log(this.businessData.nodeKey)
-                    // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
-                    this.roleDisabled = Role[this.businessData.nodeKey]().modifyPermissions;
-                    this.columnsApprove = Role[this.businessData.nodeKey]().approveColumns;
-                    this.columnsUnit = Role[this.businessData.nodeKey]().columnsUnit;
-                    this.columnsMethod = Role[this.businessData.nodeKey]().columnsMethod;
-                }
                 this.details = res.response;
                 this.$store.commit('changeGuaranteeMode', res.response.guaranteeMode);
-
                 // this.details.creditValue = this.details.creditValue.toLocaleString();
                 this.details.loanYearsUnit = Dictionaries.deadlineUnit[this.details.loanYearsUnit];
                 this.details.repaymentMethod = Dictionaries.reimbursementMeans[this.details.repaymentMethod];

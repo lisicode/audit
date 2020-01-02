@@ -1,4 +1,5 @@
 import axios from 'axios';
+import router from '@/router';
 
 // 环境
 const EnvironmentConfig = {
@@ -37,6 +38,7 @@ const InterfaceCode = {
     QueryFlow: '02B302',
     QueryAllUntreated: '02B317',
     QueryApplyDetails: '02B303',
+    QueryContractDetails: '02B314',
     ProcessSubmit: '02B311',
     ChangeProcessSubmit: '02B312',
     QueryUserDetails: '01B310',
@@ -48,9 +50,13 @@ const InterfaceCode = {
     QueryMaterialsClassification: '02B308',
     QueryMaterialsList: '02B309',
     QueryLoanDetails: '02B315',
-
-
-
+    messageList: '02B318',
+    messageDetails: '02B319',
+    messageDel: '02B320',
+    allMessageDel: '02B321',
+    changePassword: '00B323',
+    QueryAlreadyApplyDetails: '02B324',
+    logOut: '00B322'
 };
 
 // 公共函数
@@ -144,6 +150,8 @@ Request.interceptors.response.use(response => {
     console.log(response.data);
     if (response.data.head.tokenNo) {
         PublicMethods['setLocalStorage']('tokenNo', response.data.head.tokenNo);
+    } else {
+        router.push({path: '/login'})
     }
     return response.data
 }, error => {

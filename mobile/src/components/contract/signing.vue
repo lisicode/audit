@@ -123,7 +123,7 @@
             confirmNext() {
                 this.confirmDisabled = true;
                 let params = {
-                    businessCode: this.details.businessCode,
+                    businessCode: this.businessData.businessCode,
                     approveCode: this.details.approveCode,
                     memo: this.memo
                 };

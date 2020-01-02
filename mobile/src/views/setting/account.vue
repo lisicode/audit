@@ -11,9 +11,8 @@
                     </header>
                 </van-sticky>
                 <section>
-                    <input type="text" placeholder="请输入原密码" v-model="oldPassword">
-                    <input type="text" placeholder="请输入新密码" v-model="newPassword">
-                    <input type="text" placeholder="确认新密码" v-model="confirmPassword">
+                    <input type="text" placeholder="请输入新密码" v-model="password1">
+                    <input type="text" placeholder="请确认新密码" v-model="password2">
                     <van-button size="large" color="linear-gradient(to right, #65BFFE, #0061D9)" @click="confirm">提 交</van-button>
                 </section>
             </div>
@@ -22,14 +21,16 @@
 </template>
 
 <script>
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
+
     export default {
         name: 'account',
         data() {
             return {
                 show: false,
-                oldPassword: '',
-                newPassword: '',
-                confirmPassword: '',
+
+                password1: '',
+                password2: ''
             }
         },
         created() {
@@ -46,7 +47,23 @@
                 this.$router.push({path: '/'})
             },
             confirm() {
-
+                let params = {
+                    userNo: PublicMethods['getLocalStorage']('user').userNo,
+                    password1: this.password1,
+                    password2: this.password2
+                };
+                Request({
+                    method: 'post',
+                    data: AssembleRequestData(InterfaceCode.changePassword, params)
+                }).then(res => {
+                    if (res.head.code == '000000') {
+                        this.$notify({
+                            type: 'success',
+                            duration: 1000,
+                            message: '审批成功'
+                        });
+                    }
+                });
             }
         }
     }
