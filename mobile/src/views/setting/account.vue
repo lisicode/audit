@@ -60,7 +60,13 @@
                         this.$notify({
                             type: 'success',
                             duration: 1000,
-                            message: '审批成功'
+                            message: '修改成功'
+                        });
+                    } else {
+                        this.$notify({
+                            type: 'danger',
+                            duration: 1000,
+                            message: res.head.desc
                         });
                     }
                 });

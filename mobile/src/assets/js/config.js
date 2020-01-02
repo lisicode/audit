@@ -56,7 +56,8 @@ const InterfaceCode = {
     allMessageDel: '02B321',
     changePassword: '00B323',
     QueryAlreadyApplyDetails: '02B324',
-    logOut: '00B322'
+    logOut: '00B322',
+    QueryCurrentTaskNum: '02B316'
 };
 
 // 公共函数

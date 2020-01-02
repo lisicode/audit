@@ -5,56 +5,58 @@
             <small>NEW ORIENTAL COUNTRY BANK OF KAIFENG</small>
         </header>
         <van-row class="i-1">
-            <van-col span="8">
-                <p>累计放款</p>
-                <b>56</b>
+            <van-col span="6" style="opacity: 0.5;">
+                <i class="iconfont">&#xeba6;</i>
+                <span>征信查询</span>
             </van-col>
-            <van-col span="8">
-                <p>累计金额</p>
-                <b>26,812.51</b>
-            </van-col>
-            <van-col span="8">
-                <p>已处理</p>
-                <b>26</b>
-            </van-col>
-        </van-row>
-
-        <van-row class="i-2">
             <van-col span="6" @click="to('B')">
+                <div v-if="num.yibanshouxin">{{ num.yibanshouxin }}</div>
                 <i class="iconfont">&#xeba4;</i>
                 <span>授信审批</span>
             </van-col>
             <van-col span="6" @click="to('D')">
+                <div v-if="num.hetong">{{ num.hetong }}</div>
                 <i class="iconfont">&#xebab;</i>
                 <span>合同签订</span>
             </van-col>
-            <van-col span="6" @click="to('E')">
+            <van-col span="6" style="opacity: 0.5;">
+                <div v-if="num.fangkuan">{{ num.fangkuan }}</div>
                 <i class="iconfont">&#xeba8;</i>
                 <span>放款审批</span>
             </van-col>
-            <van-col span="6" @click="openMessage">
-                <i class="iconfont">&#xeba5;</i>
-                <span>消息列表</span>
-            </van-col>
         </van-row>
-
-        <van-cell-group>
-            <van-cell title="授信审批流程" value="内容" label="描述信息" />
-            <van-cell title="合同审批流程" value="内容" label="描述信息" />
-            <van-cell title="放款审批流程" value="内容" label="描述信息" />
+        <van-cell-group title="流程分类">
+            <van-cell title="授信审批流程" value="查看" :label="'待处理：' + num.yibanshouxin" @click="to('B')" />
+            <van-cell title="合同审批流程" value="查看" :label="'待处理：' + num.hetong" @click="to('D')" />
+            <van-cell title="放款审批流程" value="查看" :label="'待处理：' + num.fangkuan" @click="to('E')" />
+        </van-cell-group>
+        <van-cell-group title="消息提醒">
+            <van-cell title="全部消息" value="打开" @click="openMessage" />
         </van-cell-group>
     </div>
 </template>
 
 <script>
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
+
     export default {
         name: 'home',
         data() {
             return {
-
+                num: {}
             }
         },
-        created() {},
+        created() {
+            let params = {
+                businessCode: 'B'
+            };
+            Request({
+                method: 'post',
+                data: AssembleRequestData(InterfaceCode.QueryCurrentTaskNum, params)
+            }).then(res => {
+                this.num = res.response
+            });
+        },
         methods: {
             to(e) {
                 this.$store.commit('changeScreening', {
@@ -93,30 +95,11 @@
         }
         .i-1 {
             box-sizing: border-box;
-            padding: 20px;
-            color: #fff;
-            background-color: #0061D9;
-            .van-col {
-                p {
-                    margin: 0 0 5px 0;
-                    font-size: 18px;
-                    font-weight: 300;
-                }
-
-                b {
-                    font-size: 16px;
-                    font-weight: 500;
-                }
-            }
-
-        }
-        .i-2 {
-            margin-top: 10px;
-            box-sizing: border-box;
             padding-top: 10px;
             padding-bottom: 10px;
             background-color: #0061D9;
             .van-col {
+                position: relative;
                 color: #fff;
                 text-align: center;
                 i {
@@ -127,12 +110,21 @@
                     font-size: 15px;
                     font-weight: 300;
                 }
+                div {
+                    position: absolute;
+                    top: -5px;
+                    right: 20px;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    color: #fff;
+                    text-align: center;
+                    background-color: #ee0a24;
+                }
             }
 
-        }
-
-        button {
-            height: 100%;
         }
     }
 </style>

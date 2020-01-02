@@ -15,8 +15,8 @@
                     v-for="item in materialsClassification"
                     :key="item.id"
                     :title="item.dirsName"
-                    value="打开"
-                    @click="open(item.dirsNo,item.businessCode)"
+                    :value="item.dirsSize == 0 ? '空' : '打开'"
+                    @click="open(item.dirsNo,item.businessCode,item.dirsSize)"
             />
         </van-cell-group>
 
@@ -93,25 +93,27 @@
             },
 
             // 打开资料列表
-            open(dirsNo,businessCode) {
-                this.popup = true;
-                let params = {
-                    dirsNo: dirsNo,
-                    businessCode: businessCode
-                };
-                Request({
-                    method: 'post',
-                    data: AssembleRequestData(InterfaceCode.QueryMaterialsList, params)
-                }).then(res => {
-                    this.materialsList = res.response;
-                    if(res.response.length) {
-                        this.images = [];
-                        let imagesUrl = res.response.filter(item => item.fileType === 'jpg');
-                        for(let i = 0;i < imagesUrl.length;i++) {
-                            this.images.push(imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
+            open(dirsNo,businessCode,dirsSize) {
+                if (dirsSize) {
+                    this.popup = true;
+                    let params = {
+                        dirsNo: dirsNo,
+                        businessCode: businessCode
+                    };
+                    Request({
+                        method: 'post',
+                        data: AssembleRequestData(InterfaceCode.QueryMaterialsList, params)
+                    }).then(res => {
+                        this.materialsList = res.response;
+                        if(res.response.length) {
+                            this.images = [];
+                            let imagesUrl = res.response.filter(item => item.fileType === 'jpg');
+                            for(let i = 0;i < imagesUrl.length;i++) {
+                                this.images.push(imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
+                            }
                         }
-                    }
-                });
+                    });
+                }
             },
             // 查看资料
             examine(e) {
