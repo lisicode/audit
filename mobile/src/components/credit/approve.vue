@@ -122,7 +122,7 @@
 </template>
 
 <script>
-    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
     import { Dictionaries } from '@/assets/js/dictionaries'
     import { Role } from '@/assets/js/role'
 
@@ -192,6 +192,8 @@
                 this.details.riskGrade = Dictionaries.riskGrade[this.details.riskGrade];
                 this.changeUnit = Dictionaries.deadlineUnit[this.details.approveLoanUnit];
                 this.changeMethod = Dictionaries.reimbursementMeans[this.details.approveRepaymentMethod];
+                this.details.preTime = PublicMethods['TimeFormat'](this.details.preTime);
+                this.details.manageTime = PublicMethods['TimeFormat'](this.details.manageTime);
             });
         },
         methods: {

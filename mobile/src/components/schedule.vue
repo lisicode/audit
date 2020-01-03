@@ -45,7 +45,7 @@
 </template>
 
 <script>
-    import {InterfaceCode, AssembleRequestData, Request} from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
     import {Dictionaries} from '@/assets/js/dictionaries'
 
     export default {
@@ -70,8 +70,29 @@
                 this.progressNode.reverse();
                 for (let i = 0;i < this.progressNode.length;i++) {
                     this.progressNode[i].approveCode = Dictionaries.approvalStatus[this.progressNode[i].approveCode];
+                    this.progressNode[i].startDate = PublicMethods['formatDate'](this.progressNode[i].startDate);
+                    this.progressNode[i].finishDate = PublicMethods['formatDate'](this.progressNode[i].finishDate);
                 }
             });
+
+
+
+
+            function formatDate(now) {
+                var year = now.getFullYear();
+                var month = now.getMonth() + 1;
+                var date = now.getDate();
+                var hour = now.getHours();
+                var minute = now.getMinutes();
+                var second = now.getSeconds();
+                return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+            }
+            var g = 1577085651000;
+            var d = new Date(g);
+            console.log(d);
+            console.log(formatDate(d));
+
+
         },
         methods: {
             back() {

@@ -92,6 +92,9 @@
                     data: AssembleRequestData(interfaceCode, params)
                 }).then(res => {
                     for (let i = 0; i < res.response.length; i++) {
+                        res.response[i].startTime = PublicMethods['TimeFormat'](res.response[i].startTime);
+                        res.response[i].endTime = PublicMethods['TimeFormat'](res.response[i].endTime);
+                        res.response[i].thisNodeTime = PublicMethods['TimeFormat'](res.response[i].thisNodeTime);
                         this.list.push(res.response[i]);
                     }
                     this.currentPage += 1;

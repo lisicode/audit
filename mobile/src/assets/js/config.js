@@ -108,7 +108,28 @@ const PublicMethods = {
     },
     'getLocalStorage': (type) => {
         return JSON.parse(localStorage.getItem(type))
-    }
+    },
+    'TimeFormat': (e) => {
+        if (e.length > 8) {
+            return e.replace(/(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,'$1-$2-$3 $4:$5:$6')
+        } else {
+            return e.replace(/(\d{4})(\d{2})(\d{2})/,'$1-$2-$3')
+        }
+    },
+    'formatDate': (e) => {
+        if (e) {
+            let now = new Date(e);
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            let hour = now.getHours();
+            let minute = now.getMinutes();
+            let second = now.getSeconds();
+            return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        } else {
+            return '空'
+        }
+    },
 };
 
 // 环境定义

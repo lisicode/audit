@@ -188,7 +188,7 @@
 </template>
 
 <script>
-    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
     import { Dictionaries } from '@/assets/js/dictionaries'
 
     export default {
@@ -238,6 +238,8 @@
                 for (let i = 0;i < this.custResume.length;i++) {
                     this.custResume[i].jobLevel = Dictionaries.jobLevel[this.custResume[i].jobLevel];
                     this.custResume[i].performance = Dictionaries.performance[this.custResume[i].performance];
+                    this.custResume[i].startDate = PublicMethods['TimeFormat'](this.custResume[i].startDate);
+                    this.custResume[i].endDate = PublicMethods['TimeFormat'](this.custResume[i].endDate);
                 }
 
                 // 社会关系

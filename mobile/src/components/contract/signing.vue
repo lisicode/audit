@@ -19,17 +19,16 @@
             <van-cell title="担保方式" :value="details.guaranteeMode" />
             <van-cell title="管户人" :value="details.manageUser" />
         </van-cell-group>
+        <van-cell-group title="合同审批">
+            <van-cell title="合同金额(元)" :value="details.contractAmt" />
+            <van-cell title="合同利率(%)" :value="details.contractRate" />
+            <van-cell title="合同期限" :value="details.contractTerm" />
+            <van-cell title="合同期限单位" :value="details.contractTermUnit" />
+            <van-cell title="合同起始日期" :value="details.validFrom" />
+            <van-cell title="合同到期日期" :value="details.validTo" />
+            <van-cell title="还款方式" :value="details.repaymentMethod" />
+        </van-cell-group>
         <section v-if="businessData.onMine == 'Y'">
-            <van-cell-group title="合同审批">
-                <van-cell title="合同金额(元)" :value="details.contractAmt" />
-                <van-cell title="合同利率(%)" :value="details.contractRate" />
-                <van-cell title="合同期限" :value="details.contractTerm" />
-                <van-cell title="合同期限单位" :value="details.contractTermUnit" />
-                <van-cell title="合同起始日期" :value="details.validFrom" />
-                <van-cell title="合同到期日期" :value="details.validTo" />
-                <van-cell title="还款方式" :value="details.repaymentMethod" />
-
-            </van-cell-group>
             <van-field
                     v-model="memo"
                     rows="2"
@@ -63,7 +62,7 @@
 </template>
 
 <script>
-    import { InterfaceCode, AssembleRequestData, Request } from '@/assets/js/config'
+    import { InterfaceCode, AssembleRequestData, Request, PublicMethods } from '@/assets/js/config'
     import { Dictionaries } from '@/assets/js/dictionaries'
     import { Role } from '@/assets/js/role'
 
@@ -115,6 +114,8 @@
                 this.details.guaranteeMode = Dictionaries.guaranteeMode[this.details.guaranteeMode];
                 this.details.contractTermUnit = Dictionaries.deadlineUnit[this.details.contractTermUnit];
                 this.details.repaymentMethod = Dictionaries.reimbursementMeans[this.details.repaymentMethod];
+                this.details.validFrom = PublicMethods['TimeFormat'](this.details.validFrom);
+                this.details.validTo = PublicMethods['TimeFormat'](this.details.validTo);
             });
         },
         methods: {
