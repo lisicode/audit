@@ -56,6 +56,8 @@ const InterfaceCode = {
     allMessageDel: '02B321',
     changePassword: '00B323',
     QueryAlreadyApplyDetails: '02B324',
+    QueryAlreadyContractDetails: '02B325',
+    QueryAlreadyLoanDetails: '02B326',
     logOut: '00B322',
     QueryCurrentTaskNum: '02B316'
 };

@@ -85,20 +85,30 @@
             }
         },
         created() {
-            let params = {
-                businessCode: this.businessData.businessCode
-            };
+            let params;
+            let interfaceCode;
+            // 如果是待处理
+            if (this.businessData.onMine == 'Y') {
+                // 抢占式
+                params = {
+                    businessCode: this.businessData.businessCode
+                };
+                interfaceCode = InterfaceCode.QueryContractDetails;
+                // 根据节点配置审查动作
+                // console.log(this.businessData.nodeKey)
+                // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
+                this.columns = Role[this.businessData.nodeKey]().approveColumns
+            } else {
+                // 非抢占式
+                params = {
+                    contractAppNo: this.businessData.businessCode
+                };
+                interfaceCode = InterfaceCode.QueryAlreadyContractDetails;
+            }
             Request({
                 method: 'post',
-                data: AssembleRequestData(InterfaceCode.QueryContractDetails, params)
+                data: AssembleRequestData(interfaceCode, params)
             }).then(res => {
-                // 如果是待处理
-                if (this.businessData.onMine == 'Y') {
-                    // 根据节点配置审查动作
-                    // console.log(this.businessData.nodeKey)
-                    // console.log(Role[this.businessData.nodeKey]().modifyPermissions)
-                    this.columns = Role[this.businessData.nodeKey]().approveColumns
-                }
                 this.details = res.response;
                 this.details.creditType = Dictionaries.loanType[this.details.creditType];
                 this.details.certificateType = Dictionaries.certificateType[this.details.certificateType];

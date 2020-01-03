@@ -9,17 +9,13 @@
             </header>
         </van-sticky>
         <van-tabs v-model="active" color="#0061D9" title-active-color="#303133" swipeable animated>
-            <van-tab title="主要信息">
+            <van-tab title="基本信息">
                 <van-cell-group>
                     <van-cell title="客户号" :value="custMain.custId" />
                     <van-cell title="客户名称" :value="custMain.name" />
                     <van-cell title="证件类型" :value="custMain.certificateType" />
                     <van-cell title="证件号码" :value="custMain.certificateNum" />
                     <van-cell title="管户人" :value="custMain.manageUser" />
-                </van-cell-group>
-            </van-tab>
-            <van-tab title="基本信息">
-                <van-cell-group>
                     <van-cell title="性别" :value="custBasicInfo.sex" />
                     <van-cell title="婚姻状况" :value="custBasicInfo.marriage" />
                     <van-cell title="文化程度" :value="custBasicInfo.highestEdu" />

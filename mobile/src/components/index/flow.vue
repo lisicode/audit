@@ -1,11 +1,9 @@
 <template>
     <div class="flow">
         <header>
-<!--            <h1>流程列表<small>已处理(10条)</small><small>未处理(5条)</small></h1>-->
             <h1>流程列表</h1>
             <div @click="show = true">
                 <i class="iconfont">&#xec6b;</i>
-                <small>筛选</small>
             </div>
         </header>
         <van-list
@@ -15,32 +13,22 @@
                 @load="onLoad"
         >
             <van-cell-group v-for="item in list" :key='item.id'>
-                <van-cell
-                        :title="item.flowType == 'A' ? '征信查询'
-                        : item.flowType == 'B' ? '一般授信'
-                        : item.flowType == 'C' ? '低风险'
-                        : item.flowType == 'D' ? '合同流程'
-                        : item.flowType == 'E' ? '放款流程'
-                        : item.flowType"
-                        title-class="title"
-                        value-class="value"
-                        :value="item.businessCode"
-                />
-                <div class="item">流程状态：<small>{{ item.flowStatusValue }}</small></div>
-                <div class="item">客户姓名：<small>{{ item.custName }}</small></div>
-                <div class="item">管户人：<small>{{ item.manageName }}</small></div>
-                <div class="item">处理状态：<small>{{ item.onMine == 'Y' ? '待处理' : '已处理' }}</small></div>
-                <div class="item">当前岗位：<small>{{ item.nodeName }}</small></div>
-                <div class="item">流程发起时间：<small>{{ item.startTime }}</small></div>
-                <div class="item">流程结束时间：<small>{{ item.endTime == '' ? '无' : item.endTime }}</small></div>
-                <div class="item">当前任务处理时间：<small>{{ item.thisNodeTime }}</small></div>
+                <van-cell title="流程类型" :value="item.flowType == 'A' ? '征信查询' : item.flowType == 'B' ? '一般授信' : item.flowType == 'C' ? '低风险' : item.flowType == 'D' ? '合同流程' : item.flowType == 'E' ? '放款流程' : item.flowType" />
+                <van-cell title="流程编号" :value="item.businessCode" />
+                <van-cell title="流程状态" :value="item.flowStatusValue" />
+                <van-cell title="客户姓名" :value="item.custName" />
+                <van-cell title="管户人" :value="item.manageName" />
+                <van-cell title="处理状态" :value="item.onMine == 'Y' ? '待处理' : '已处理'" />
+                <van-cell title="当前岗位" :value="item.nodeName" />
+                <van-cell title="流程发起时间" :value="item.startTime" />
+                <van-cell title="流程结束时间" :value="item.endTime" />
+                <van-cell title="当前任务处理时间" :value="item.thisNodeTime" />
                 <van-cell
                         @click="to(item)"
                         :clickable="true"
                         title="操作"
                         :value-class="item.onMine == 'Y' ? 'value-2' : 'value-1'"
                         :value="item.onMine == 'Y' ? '处理' : '查看'"
-                        :style="item.onMine == 'Y' ? 'background-color: #FEF0F0;' : 'background-color: #D9ECFF;'"
                 />
             </van-cell-group>
         </van-list>
@@ -56,13 +44,12 @@
                 <span @click="flowType = 'E'" :class="flowType == 'E' ? 'status-2' : 'status-1'">放款流程</span>
             </div>
             <div>
-<!--                <span @click="dealflag = '1'" :class="dealflag == '1' ? 'status-2' : 'status-1'">全部</span>-->
                 <span @click="dealflag = '2'" :class="dealflag == '2' ? 'status-2' : 'status-1'">待处理</span>
                 <span @click="dealflag = '3'" :class="dealflag == '3' ? 'status-2' : 'status-1'">已处理</span>
             </div>
             <section>
-                <van-button plain color="#0061D9" @click="all">待处理筛选</van-button>
-                <van-button color="#0061D9" @click="confirm">确认</van-button>
+                <van-button plain color="#0061D9" size="small" @click="all">待处理筛选</van-button>
+                <van-button color="#0061D9" size="small" @click="confirm">确认</van-button>
             </section>
         </van-popup>
     </div>
@@ -188,44 +175,26 @@
                 }
             }
             div {
-                text-align: center;
                 i {
-                    font-size: 15px;
-                    margin-right: 5px;
-                }
-                small {
-                    font-size: 15px;
+                    font-size: 20px;
                 }
             }
         }
+        .van-list {
+            box-sizing: border-box;
+            padding: 0 10px;
+        }
         .van-cell-group {
+            box-sizing: border-box;
+            padding: 5px;
+            margin-top: 10px;
             color: #606266;
-            margin-bottom: 20px;
-            .van-cell {
-                padding: 10px 15px;
-            }
-            .title,
-            .value {
-                font-size: 16px;
-                font-weight: 500;
-            }
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
             .value-1 {
                 color: #0061D9;
             }
             .value-2 {
                 color: #F74D2E;
-            }
-            .item {
-                padding: 3px 15px;
-                color: #303133;
-                font-size: 13px;
-                box-sizing: border-box;
-                overflow: hidden;
-                small {
-                    font-size: 13px;
-                    color: #606266;
-                    float: right;
-                }
             }
         }
         .van-popup {
@@ -236,16 +205,15 @@
                 margin-bottom: 20px;
                 color: #303133;
                 font-weight: 400;
-                font-size: 20px;
+                font-size: 14px;
             }
             div {
                 display: flex;
-                /*justify-content: space-between;*/
                 span {
                     display: inline-block;
-                    width: 70px;
+                    width: 80px;
                     height: 40px;
-                    font-size: 13px;
+                    font-size: 12px;
                     margin-right: 10px;
                     margin-bottom: 10px;
                     text-align: center;

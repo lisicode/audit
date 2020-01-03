@@ -25,13 +25,13 @@
                 <span>放款审批</span>
             </van-col>
         </van-row>
+        <van-cell-group>
+            <van-cell title="消息列表" value="打开" @click="openMessage" />
+        </van-cell-group>
         <van-cell-group title="流程分类">
             <van-cell title="授信审批流程" value="查看" :label="'待处理：' + num.yibanshouxin" @click="to('B')" />
             <van-cell title="合同审批流程" value="查看" :label="'待处理：' + num.hetong" @click="to('D')" />
             <van-cell title="放款审批流程" value="查看" :label="'待处理：' + num.fangkuan" @click="to('E')" />
-        </van-cell-group>
-        <van-cell-group title="消息提醒">
-            <van-cell title="全部消息" value="打开" @click="openMessage" />
         </van-cell-group>
     </div>
 </template>
