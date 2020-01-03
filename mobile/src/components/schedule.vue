@@ -74,25 +74,6 @@
                     this.progressNode[i].finishDate = PublicMethods['formatDate'](this.progressNode[i].finishDate);
                 }
             });
-
-
-
-
-            function formatDate(now) {
-                var year = now.getFullYear();
-                var month = now.getMonth() + 1;
-                var date = now.getDate();
-                var hour = now.getHours();
-                var minute = now.getMinutes();
-                var second = now.getSeconds();
-                return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
-            }
-            var g = 1577085651000;
-            var d = new Date(g);
-            console.log(d);
-            console.log(formatDate(d));
-
-
         },
         methods: {
             back() {
