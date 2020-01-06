@@ -83,7 +83,6 @@
                 this.$router.push({path: '/'})
             },
             check(e) {
-                console.log(e)
                 let params = {
                     id: e
                 };

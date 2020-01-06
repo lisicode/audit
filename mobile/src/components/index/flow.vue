@@ -19,10 +19,10 @@
                 <van-cell title="客户姓名" :value="item.custName" />
                 <van-cell title="管户人" :value="item.manageName" />
                 <van-cell title="处理状态" :value="item.onMine == 'Y' ? '待处理' : '已处理'" />
-                <van-cell title="当前岗位" :value="item.nodeName" />
+                <van-cell title="当前岗位" :value="item.nodeName == '' ? '已完结' : item.nodeName" />
                 <van-cell title="流程发起时间" :value="item.startTime" />
-                <van-cell title="流程结束时间" :value="item.endTime" />
-                <van-cell title="当前任务处理时间" :value="item.thisNodeTime" />
+                <van-cell title="流程结束时间" v-if="item.onMine == 'Y' ? false : true" :value="item.endTime" />
+                <van-cell title="当前任务处理时间" v-else :value="item.thisNodeTime" />
                 <van-cell
                         @click="to(item)"
                         :clickable="true"
