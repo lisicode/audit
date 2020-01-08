@@ -4,7 +4,7 @@ import router from '@/router';
 // 环境
 const EnvironmentConfig = {
     'DEV': {
-        url: '',
+        url: '/dev',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -13,7 +13,7 @@ const EnvironmentConfig = {
         updateMode: "auto"
     },
     'UAT': {
-        url: '/uat',
+        url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",

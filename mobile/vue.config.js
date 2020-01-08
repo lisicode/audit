@@ -4,11 +4,11 @@ module.exports = {
         open: true,
         hotOnly: false,
         proxy: {
-            '/uat': {
+            '/dev': {
                 target: 'http://192.168.200.201/agw-web/fintech/common/gatewayService',
                 changeOrigin: true,
                 pathRewrite: {
-                    '^/uat': ''
+                    '^/dev': ''
                 }
             }
         },
