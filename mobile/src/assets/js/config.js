@@ -4,7 +4,7 @@ import router from '@/router';
 // 环境
 const EnvironmentConfig = {
     'DEV': {
-        url: '/dev',
+        url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -133,7 +133,7 @@ const PublicMethods = {
 };
 
 // 环境定义
-const Environment = EnvironmentConfig['UAT'];
+const Environment = EnvironmentConfig['DEV'];
 
 // 组装请求数据
 const AssembleRequestData = (serviceId, paramsStr) => {
