@@ -35,22 +35,13 @@
             <van-cell title="风险分类结果" :value="details.riskGrade" />
             <van-cell title="第一还款来源分析" :label="details.firstPayment" />
             <van-cell title="风险因素分析" :label="details.riskAnalysis" />
-            <!--                    <van-cell title="管户人ID" :value="details.manageUser" />-->
             <van-cell title="管户人姓名" :value="details.manageName" />
             <van-cell title="管户开始时间" :value="details.manageTime" />
             <van-cell title="借款人情况概述及管户方案" :label="details.managePlan" />
             <van-cell title="调查意见" :label="details.investOpinion" />
         </van-cell-group>
-        <van-cell-group title="审批信息">
-            <van-cell title="审批金额(元)" :value="details.approveAmt" />
-            <van-cell title="审批期限" :value="details.approveLoanTerm" />
-            <van-cell title="期限单位" :value="changeUnit" />
-            <van-cell title="审批利率(%)" :value="details.approveRate" />
-            <van-cell title="还款方式" :value="changeMethod" />
-            <van-cell title="前处理意见" :label="details.loanResult" />
-        </van-cell-group>
         <section v-if="businessData.onMine == 'Y'">
-            <van-cell-group title="审批信息">
+            <van-cell-group title="审批信息" v-if="roleDisabled">
                 <van-field label="审批金额(元)" v-model="details.approveAmt" :disabled="!roleDisabled" />
                 <van-field label="审批利率(%)" v-model="details.approveRate" :disabled="!roleDisabled" />
                 <van-field label="审批期限" v-model="details.approveLoanTerm" :disabled="!roleDisabled" />
@@ -70,6 +61,7 @@
                         :placeholder="changeMethod"
                         @click="onPickerMethod"
                 />
+                <van-cell title="前处理意见" :label="details.loanResult" />
             </van-cell-group>
             <van-cell-group>
                 <van-field
@@ -94,6 +86,14 @@
                 <van-button color="#0061D9" :disabled="confirmDisabled" @click="confirmNext">提交</van-button>
             </footer>
         </section>
+        <van-cell-group v-else title="审批信息">
+            <van-cell title="审批金额(元)" :value="details.approveAmt" />
+            <van-cell title="审批期限" :value="details.approveLoanTerm" />
+            <van-cell title="期限单位" :value="changeUnit" />
+            <van-cell title="审批利率(%)" :value="details.approveRate" />
+            <van-cell title="还款方式" :value="changeMethod" />
+            <van-cell title="前处理意见" :label="details.loanResult" />
+        </van-cell-group>
         <van-popup v-model="pickerUnit" position="bottom">
             <van-picker
                     show-toolbar
@@ -242,38 +242,52 @@
 
             // 提交下一岗
             confirmNext() {
-                this.confirmDisabled = true;
                 if (this.roleDisabled) {
-                    let params = {
-                        businessCode: this.details.businessCode,
-                        approveCode: this.details.approveCode,
-                        memo: this.details.memo,
-                        approveAmt: this.details.approveAmt,
-                        approveRate: this.details.approveRate,
-                        approveLoanTerm: this.details.approveLoanTerm,
-                        approveLoanUnit: this.details.approveLoanUnit,
-                        approveRepaymentMethod: this.details.approveRepaymentMethod
-                    };
-                    Request({
-                        method: 'post',
-                        data: AssembleRequestData(InterfaceCode.ChangeProcessSubmit, params)
-                    }).then(res => {
-                        this.confirmDisabled = false;
-                        if (res.head.code == '000000') {
-                            this.$notify({
-                                type: 'success',
-                                duration: 1000,
-                                message: '审批成功'
-                            });
-                            this.back();
-                        } else {
-                            this.$notify({
-                                type: 'danger',
-                                duration: 1000,
-                                message: res.head.desc
-                            });
-                        }
-                    });
+                    if(this.details.approveAmt > this.details.creditValue) {
+                        this.$notify({
+                            type: 'danger',
+                            duration: 1000,
+                            message: '审批金额不能大于申请金额'
+                        });
+                    } else if(this.details.approveRate < this.details.executionRate) {
+                        this.$notify({
+                            type: 'danger',
+                            duration: 1000,
+                            message: '审批利率不能小于执行利率'
+                        });
+                    } else {
+                        this.confirmDisabled = true;
+                        let params = {
+                            businessCode: this.details.businessCode,
+                            approveCode: this.details.approveCode,
+                            memo: this.details.memo,
+                            approveAmt: this.details.approveAmt,
+                            approveRate: this.details.approveRate,
+                            approveLoanTerm: this.details.approveLoanTerm,
+                            approveLoanUnit: this.details.approveLoanUnit,
+                            approveRepaymentMethod: this.details.approveRepaymentMethod
+                        };
+                        Request({
+                            method: 'post',
+                            data: AssembleRequestData(InterfaceCode.ChangeProcessSubmit, params)
+                        }).then(res => {
+                            this.confirmDisabled = false;
+                            if (res.head.code == '000000') {
+                                this.$notify({
+                                    type: 'success',
+                                    duration: 1000,
+                                    message: '审批成功'
+                                });
+                                this.back();
+                            } else {
+                                this.$notify({
+                                    type: 'danger',
+                                    duration: 1000,
+                                    message: res.head.desc
+                                });
+                            }
+                        });
+                    }
                 } else {
                     let params = {
                         businessCode: this.details.businessCode,
