@@ -12,12 +12,16 @@
             <van-cell title="客户姓名" :value="details.name" />
             <van-cell title="客户证件类型" :value="details.certificateType" />
             <van-cell title="客户证件号码" :value="details.certificateNo" />
+            <van-cell title="贷款共同借款人" :label="details.coBorrower" />
+            <van-cell title="管户人姓名" :value="details.manageName" />
         </van-cell-group>
         <van-cell-group title="贷款详情">
+            <van-cell title="调查意见" :label="details.investOpinion" />
+
             <van-cell title="申请金额(元)" :value="details.creditValue" />
             <van-cell title="贷款期限" :value="details.loanYears" />
             <van-cell title="贷款期限单位" :value="details.loanYearsUnit" />
-            <van-cell title="申请发起时间" :value="details.preTime" />
+<!--            <van-cell title="申请发起时间" :value="details.preTime" />-->
             <van-cell title="执行年利率(%)" :value="details.executionRate" />
             <van-cell title="是否授信" :value="details.isCredit" />
             <van-cell title="是否可循环" :value="details.isLoop" />
@@ -25,20 +29,18 @@
             <van-cell title="授信期限单位" :value="details.creditYearsUnit" />
             <van-cell title="贷款用途" :value="details.loanUse" />
             <van-cell title="贷款用途说明" :label="details.loanPurpose" />
-            <van-cell title="用途证明" :value="details.purposeProve" />
-            <van-cell title="贷款种类" :value="details.creditType" />
-            <van-cell title="还款方式" :value="details.repaymentMethod" />
-            <van-cell title="贷款共同借款人" :value="details.coBorrower" />
-            <van-cell title="结息周期" :value="details.interestCycle" />
-            <van-cell title="担保方式" :value="details.guaranteeMode" />
-            <van-cell title="支付方式" :value="details.payMode" />
-            <van-cell title="风险分类结果" :value="details.riskGrade" />
+<!--            <van-cell title="用途证明" :value="details.purposeProve" />-->
+<!--            <van-cell title="贷款种类" :value="details.creditType" />-->
+<!--            <van-cell title="还款方式" :value="details.repaymentMethod" />-->
+<!--            <van-cell title="结息周期" :value="details.interestCycle" />-->
+<!--            <van-cell title="担保方式" :value="details.guaranteeMode" />-->
+<!--            <van-cell title="支付方式" :value="details.payMode" />-->
+<!--            <van-cell title="风险分类结果" :value="details.riskGrade" />-->
             <van-cell title="第一还款来源分析" :label="details.firstPayment" />
             <van-cell title="风险因素分析" :label="details.riskAnalysis" />
-            <van-cell title="管户人姓名" :value="details.manageName" />
-            <van-cell title="管户开始时间" :value="details.manageTime" />
+<!--            <van-cell title="管户开始时间" :value="details.manageTime" />-->
             <van-cell title="借款人情况概述及管户方案" :label="details.managePlan" />
-            <van-cell title="调查意见" :label="details.investOpinion" />
+<!--            <van-cell title="前处理意见" :label="details.loanResult" />-->
         </van-cell-group>
         <section v-if="businessData.onMine == 'Y'">
             <van-cell-group title="审批信息" v-if="roleDisabled">
@@ -61,9 +63,8 @@
                         :placeholder="changeMethod"
                         @click="onPickerMethod"
                 />
-                <van-cell title="前处理意见" :label="details.loanResult" />
             </van-cell-group>
-            <van-cell-group>
+            <van-cell-group title="操作">
                 <van-field
                         v-model="details.memo"
                         rows="2"
@@ -92,7 +93,6 @@
             <van-cell title="期限单位" :value="changeUnit" />
             <van-cell title="审批利率(%)" :value="details.approveRate" />
             <van-cell title="还款方式" :value="changeMethod" />
-            <van-cell title="前处理意见" :label="details.loanResult" />
         </van-cell-group>
         <van-popup v-model="pickerUnit" position="bottom">
             <van-picker
@@ -337,13 +337,11 @@
             }
         }
         section {
-            .van-cell-group {
-                margin-bottom: 10px;
-            }
             footer {
                 padding: 0 16px;
                 .van-button {
                     width: 100%;
+                    margin-top: 10px;
                 }
             }
         }

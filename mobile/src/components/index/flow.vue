@@ -14,11 +14,11 @@
         >
             <van-cell-group v-for="item in list" :key='item.id'>
                 <van-cell title="流程类型" :value="item.flowType == 'A' ? '征信查询' : item.flowType == 'B' ? '一般授信' : item.flowType == 'C' ? '低风险' : item.flowType == 'D' ? '合同流程' : item.flowType == 'E' ? '放款流程' : item.flowType" />
-                <van-cell title="流程编号" :value="item.businessCode" />
-                <van-cell title="流程状态" :value="item.flowStatusValue" />
+<!--                <van-cell title="流程编号" :value="item.businessCode" />-->
+<!--                <van-cell title="流程状态" :value="item.flowStatusValue" />-->
                 <van-cell title="客户姓名" :value="item.custName" />
                 <van-cell title="管户人" :value="item.manageName" />
-                <van-cell title="处理状态" :value="item.onMine == 'Y' ? '待处理' : '已处理'" />
+<!--                <van-cell title="处理状态" :value="item.onMine == 'Y' ? '待处理' : '已处理'" />-->
                 <van-cell title="当前岗位" :value="item.nodeName == '' ? '已完结' : item.nodeName" />
                 <van-cell title="流程发起时间" :value="item.startTime" />
                 <van-cell title="流程结束时间" v-if="item.onMine == 'Y' ? false : true" :value="item.endTime" />

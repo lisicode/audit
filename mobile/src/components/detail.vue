@@ -34,13 +34,13 @@
             </van-tab>
             <van-tab title="工作简历">
                 <van-cell-group class="item" v-for="item in custResume" :key='item.id'>
+                    <van-cell title="开始日期" :value="item.startDate" />
+                    <van-cell title="截止日期" :value="item.endDate" />
                     <van-cell title="工作单位" :value="item.jobName" />
                     <van-cell title="岗位" :value="item.jobLevel" />
                     <van-cell title="工作成绩" :value="item.performance" />
                     <van-cell title="证明人" :value="item.witness" />
                     <van-cell title="证明人手机" :value="item.witnessPhone" />
-                    <van-cell title="开始日期" :value="item.startDate" />
-                    <van-cell title="截止日期" :value="item.endDate" />
                 </van-cell-group>
                 <van-divider>暂无更多</van-divider>
             </van-tab>
@@ -52,7 +52,7 @@
                     <van-cell title="健康状况" :value="item.health" />
                     <van-cell title="职业" :value="item.working" />
                     <van-cell title="年龄" :value="item.age" />
-                    <van-cell title="手机" :value="item.mobilPhone" />
+                    <van-cell title="手机" :value="item.mobilePhone" />
                 </van-cell-group>
                 <van-divider>暂无更多</van-divider>
             </van-tab>
@@ -77,9 +77,9 @@
                 <van-cell-group>
                     <van-cell title="经营字号" :label="custBusiness.businessName" />
                     <van-cell title="地址" :label="custBusiness.address" />
-                    <van-cell title="经营期限" :value="custBusiness.operatingPeriod" />
+                    <van-cell title="经营期限（年）" :value="custBusiness.operatingPeriod" />
                     <van-cell title="经营场所性质" :value="custBusiness.placeNature" />
-                    <van-cell title="经营场所面积" :value="custBusiness.area" />
+                    <van-cell title="经营场所面积（平方米）" :value="custBusiness.area" />
                     <van-cell title="经营规模" :value="custBusiness.businessScale" />
                     <van-cell title="经营范围" :label="custBusiness.businessScope" />
                     <van-cell title="经营模式" :value="custBusiness.businessModel" />
@@ -90,24 +90,24 @@
                     <van-cell title="进货渠道" :value="custBusiness.goodsChannel" />
                     <van-cell title="销售渠道" :value="custBusiness.saleChannel" />
                     <van-cell title="经营固定资产种类" :value="custBusiness.assetsType" />
-                    <van-cell title="经营固定资产价值" :value="custBusiness.assetsValue" />
+                    <van-cell title="经营固定资产价值（元）" :value="custBusiness.assetsValue" />
                     <van-cell title="库存存货种类" :value="custBusiness.stockType" />
-                    <van-cell title="库存存货价值" :value="custBusiness.stockValue" />
+                    <van-cell title="库存存货价值（元）" :value="custBusiness.stockValue" />
                     <van-cell title="旺季月份" :value="custBusiness.peakMonth" />
-                    <van-cell title="旺季每月营业收入" :value="custBusiness.peakMonthlyIncome" />
+                    <van-cell title="旺季每月营业收入（元）" :value="custBusiness.peakMonthlyIncome" />
                     <van-cell title="淡季月份" :value="custBusiness.lowMonth" />
-                    <van-cell title="淡季月营业收入" :value="custBusiness.lowMonthlyIncome" />
-                    <van-cell title="平均每月收入" :value="custBusiness.avgMonthlyIncome" />
-                    <van-cell title="行业平均毛利率" :value="custBusiness.avgGrossProfitRate" />
-                    <van-cell title="每月经营毛利" :value="custBusiness.monthlyProfit" />
+                    <van-cell title="淡季月营业收入（元）" :value="custBusiness.lowMonthlyIncome" />
+                    <van-cell title="平均每月收入（元）" :value="custBusiness.avgMonthlyIncome" />
+                    <van-cell title="行业平均毛利率（%）" :value="custBusiness.avgGrossProfitRate" />
+                    <van-cell title="每月经营毛利（元）" :value="custBusiness.monthlyProfit" />
                     <van-cell title="所附单据种类" :value="custBusiness.attacheType" />
-                    <van-cell title="平均月房租费" :value="custBusiness.monthlyRent" />
-                    <van-cell title="平均月水电费" :value="custBusiness.monthlyWaterAndEle" />
-                    <van-cell title="月税费" :value="custBusiness.monthlyTaxation" />
-                    <van-cell title="月通讯费" :value="custBusiness.monthlyCom" />
-                    <van-cell title="月燃油车费" :value="custBusiness.monthlyOil" />
-                    <van-cell title="每月工人工资总计" :value="custBusiness.monthlySumWage" />
-                    <van-cell title="费用合计" :value="custBusiness.totalCost" />
+                    <van-cell title="平均月房租费（元）" :value="custBusiness.monthlyRent" />
+                    <van-cell title="平均月水电费（元）" :value="custBusiness.monthlyWaterAndEle" />
+                    <van-cell title="月税费（元）" :value="custBusiness.monthlyTaxation" />
+                    <van-cell title="月通讯费（元）" :value="custBusiness.monthlyCom" />
+                    <van-cell title="月燃油车费（元）" :value="custBusiness.monthlyOil" />
+                    <van-cell title="每月工人工资总计（元）" :value="custBusiness.monthlySumWage" />
+                    <van-cell title="费用合计（元）" :value="custBusiness.totalCost" />
                     <van-cell title="费用单证种类" :value="custBusiness.feeType" />
                 </van-cell-group>
             </van-tab>
@@ -116,27 +116,27 @@
                     <van-cell title="财产项目" :value="item.assetsType" />
                     <van-cell title="权属证件名称" :value="item.certifyType" />
                     <van-cell title="权属证号" :value="item.certifyNum" />
-                    <van-cell title="原始价值" :value="item.originalValue" />
-                    <van-cell title="现市场价值" :value="item.presentValue" />
+                    <van-cell title="原始价值（元）" :value="item.originalValue" />
+                    <van-cell title="现市场价值（元）" :value="item.presentValue" />
                     <van-cell title="财产详情描述" :label="item.assetsDetail" />
                 </van-cell-group>
                 <van-divider>暂无更多</van-divider>
             </van-tab>
             <van-tab title="收支情况">
                 <van-cell-group>
-                    <van-cell title="月经营收入" :value="custIncome.manageIncome" />
-                    <van-cell title="月工资收入" :value="custIncome.wages" />
-                    <van-cell title="月租赁收入" :value="custIncome.lease" />
-                    <van-cell title="其他月收入" :value="custIncome.otherIncome" />
-                    <van-cell title="收入合计" :value="custIncome.totalIncome" />
+                    <van-cell title="月经营收入（元）" :value="custIncome.manageIncome" />
+                    <van-cell title="月工资收入（元）" :value="custIncome.wages" />
+                    <van-cell title="月租赁收入（元）" :value="custIncome.lease" />
+                    <van-cell title="其他月收入（元）" :value="custIncome.otherIncome" />
+                    <van-cell title="收入合计（元）" :value="custIncome.totalIncome" />
                     <van-cell title="收入计算依据说明" :value="custIncome.incomeDes" />
-                    <van-cell title="月还贷支出" :value="custIncome.loanExpend" />
-                    <van-cell title="月生活必须支出" :value="custIncome.lifeExpend" />
-                    <van-cell title="月租赁支出" :value="custIncome.leaseExpend" />
-                    <van-cell title="月供应学生支出" :value="custIncome.studyExpend" />
-                    <van-cell title="月赡养老人支出" :value="custIncome.oldExpend" />
-                    <van-cell title="月其他支出" :value="custIncome.otherExpend" />
-                    <van-cell title="月支出合计" :value="custIncome.totalExpend" />
+                    <van-cell title="月还贷支出（元）" :value="custIncome.loanExpend" />
+                    <van-cell title="月生活必须支出（元）" :value="custIncome.lifeExpend" />
+                    <van-cell title="月租赁支出（元）" :value="custIncome.leaseExpend" />
+                    <van-cell title="月供应学生支出（元）" :value="custIncome.studyExpend" />
+                    <van-cell title="月赡养老人支出（元）" :value="custIncome.oldExpend" />
+                    <van-cell title="月其他支出（元）" :value="custIncome.otherExpend" />
+                    <van-cell title="月支出合计（元）" :value="custIncome.totalExpend" />
                 </van-cell-group>
             </van-tab>
             <van-tab title="信用概况">
@@ -144,23 +144,23 @@
                     <van-cell title="征信报告属主" :value="item.reportType" />
                     <van-cell title="属主姓名" :value="item.name" />
                     <van-cell title="贷记卡账户数" :value="item.accountNumber" />
-                    <van-cell title="贷记卡授信总额" :value="item.totalLimit" />
-                    <van-cell title="透支额度" :value="item.overdraft" />
+                    <van-cell title="贷记卡授信总额（元）" :value="item.totalLimit" />
+                    <van-cell title="透支额度（元）" :value="item.overdraft" />
                     <van-cell title="逾期情况" :value="item.overdue" />
-                    <van-cell title="未结清贷款余额" :value="item.unclearedBalance" />
-                    <van-cell title="已结清贷款金额" :value="item.clearedBalance" />
-                    <van-cell title="对外担保额度" :value="item.guaranteeBalance" />
+                    <van-cell title="未结清贷款余额（元）" :value="item.unclearedBalance" />
+                    <van-cell title="已结清贷款金额（元）" :value="item.clearedBalance" />
+                    <van-cell title="对外担保额度（元）" :value="item.guaranteeBalance" />
                 </van-cell-group>
                 <van-divider>暂无更多</van-divider>
             </van-tab>
-            <van-tab title="未结清贷款">
+            <van-tab title="未结清">
                 <van-cell-group class="item" v-for="item in custCreditLoan" :key='item.id'>
                     <van-cell title="贷款种类" :value="item.loanType" />
                     <van-cell title="贷款期限单位" :value="item.loanDueUnit" />
                     <van-cell title="贷款期限" :value="item.loanDue" />
                     <van-cell title="到期日" :value="item.expireDate" />
-                    <van-cell title="金额" :value="item.loanAmount" />
-                    <van-cell title="余额" :value="item.loanBalance" />
+                    <van-cell title="金额（元）" :value="item.loanAmount" />
+                    <van-cell title="余额（元）" :value="item.loanBalance" />
                     <van-cell title="贷款行" :value="item.loanBank" />
                     <van-cell title="担保方式" :value="item.guaranteeMode" />
                 </van-cell-group>
@@ -288,6 +288,7 @@
                     this.custCreditLoan[i].loanType = Dictionaries.custCreditLoan_loanType[this.custCreditLoan[i].loanType];
                     this.custCreditLoan[i].loanDueUnit = Dictionaries.deadlineUnit[this.custCreditLoan[i].loanDueUnit];
                     this.custCreditLoan[i].guaranteeMode = Dictionaries.guaranteeMode[this.custCreditLoan[i].guaranteeMode];
+                    this.custCreditLoan[i].expireDate = PublicMethods['TimeFormat'](this.custCreditLoan[i].expireDate);
                 }
 
                 // 申请人及配偶征信：逾期偿还说明

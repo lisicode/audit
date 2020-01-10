@@ -19,7 +19,7 @@
                 <van-cell title="对保证人调查方式" :value="item.examMode"/>
                 <van-cell title="有无工资账户流水" :value="item.haveWagesWater"/>
                 <van-cell title="是否核实保证人的职业信息" :value="item.checkInfo"/>
-                <van-cell title="担保能力理论测算值" :value="item.guaranteeAbility"/>
+                <van-cell title="担保能力理论测算值（元）" :value="item.guaranteeAbility"/>
                 <van-cell title="调查结论" :value="item.researchResult"/>
             </van-cell-group>
         </div>
