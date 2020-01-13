@@ -18,11 +18,11 @@
         <van-cell-group title="贷款详情">
             <van-cell title="调查意见" :label="details.investOpinion" />
 
-            <van-cell title="申请金额(元)" :value="details.creditValue" />
+            <van-cell title="申请金额（元）" :value="details.creditValue" />
             <van-cell title="贷款期限" :value="details.loanYears" />
             <van-cell title="贷款期限单位" :value="details.loanYearsUnit" />
 <!--            <van-cell title="申请发起时间" :value="details.preTime" />-->
-            <van-cell title="执行年利率(%)" :value="details.executionRate" />
+            <van-cell title="执行年利率（%）" :value="details.executionRate" />
             <van-cell title="是否授信" :value="details.isCredit" />
             <van-cell title="是否可循环" :value="details.isLoop" />
             <van-cell title="授信期限" :value="details.creditYears" />
@@ -88,10 +88,10 @@
             </footer>
         </section>
         <van-cell-group v-else title="审批信息">
-            <van-cell title="审批金额(元)" :value="details.approveAmt" />
+            <van-cell title="审批金额（元）" :value="details.approveAmt" />
             <van-cell title="审批期限" :value="details.approveLoanTerm" />
             <van-cell title="期限单位" :value="changeUnit" />
-            <van-cell title="审批利率(%)" :value="details.approveRate" />
+            <van-cell title="审批利率（%）" :value="details.approveRate" />
             <van-cell title="还款方式" :value="changeMethod" />
         </van-cell-group>
         <van-popup v-model="pickerUnit" position="bottom">
