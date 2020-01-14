@@ -40,10 +40,10 @@
             <van-cell title="风险因素分析" :label="details.riskAnalysis" />
 <!--            <van-cell title="管户开始时间" :value="details.manageTime" />-->
             <van-cell title="借款人情况概述及管户方案" :label="details.managePlan" />
-<!--            <van-cell title="前处理意见" :label="details.loanResult" />-->
+            <van-cell title="前处理意见" :label="details.loanResult" />
         </van-cell-group>
         <section v-if="businessData.onMine == 'Y'">
-            <van-cell-group title="审批信息" v-if="roleDisabled">
+            <van-cell-group title="审批信息">
                 <van-field label="审批金额(元)" v-model="details.approveAmt" :disabled="!roleDisabled" />
                 <van-field label="审批利率(%)" v-model="details.approveRate" :disabled="!roleDisabled" />
                 <van-field label="审批期限" v-model="details.approveLoanTerm" :disabled="!roleDisabled" />
@@ -89,9 +89,9 @@
         </section>
         <van-cell-group v-else title="审批信息">
             <van-cell title="审批金额（元）" :value="details.approveAmt" />
+            <van-cell title="审批利率（%）" :value="details.approveRate" />
             <van-cell title="审批期限" :value="details.approveLoanTerm" />
             <van-cell title="期限单位" :value="changeUnit" />
-            <van-cell title="审批利率（%）" :value="details.approveRate" />
             <van-cell title="还款方式" :value="changeMethod" />
         </van-cell-group>
         <van-popup v-model="pickerUnit" position="bottom">

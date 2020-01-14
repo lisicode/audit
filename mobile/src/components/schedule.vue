@@ -67,7 +67,6 @@
                 data: AssembleRequestData(InterfaceCode.QueryProgress, params)
             }).then(res => {
                 this.progressNode = res.response;
-                this.progressNode.reverse();
                 for (let i = 0;i < this.progressNode.length;i++) {
                     this.progressNode[i].approveCode = Dictionaries.approvalStatus[this.progressNode[i].approveCode];
                     this.progressNode[i].startDate = PublicMethods['formatDate'](this.progressNode[i].startDate);

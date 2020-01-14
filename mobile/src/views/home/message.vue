@@ -151,6 +151,9 @@
                 font-weight: 400;
             }
         }
+        .van-swipe-cell {
+            margin-top: 10px;
+        }
         p {
             box-sizing: border-box;
             color: #969799;

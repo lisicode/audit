@@ -20,8 +20,8 @@
             <van-cell title="管户人" :value="details.manageUser" />
         </van-cell-group>
         <van-cell-group title="合同审批">
-            <van-cell title="合同金额(元)" :value="details.contractAmt" />
-            <van-cell title="合同利率(%)" :value="details.contractRate" />
+            <van-cell title="合同金额（元）" :value="details.contractAmt" />
+            <van-cell title="合同利率（%）" :value="details.contractRate" />
             <van-cell title="合同期限" :value="details.contractTerm" />
             <van-cell title="合同期限单位" :value="details.contractTermUnit" />
             <van-cell title="合同起始日期" :value="details.validFrom" />
