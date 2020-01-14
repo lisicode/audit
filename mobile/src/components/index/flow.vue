@@ -38,19 +38,21 @@
                 :style="{ width: '70%', height: '100%' }"
         >
             <h5>流程筛选</h5>
-            <div>
-                <span @click="flowType = 'B'" :class="flowType == 'B' ? 'status-2' : 'status-1'">一般授信</span>
-                <span @click="flowType = 'D'" :class="flowType == 'D' ? 'status-2' : 'status-1'">合同流程</span>
-                <span @click="flowType = 'E'" :class="flowType == 'E' ? 'status-2' : 'status-1'">放款流程</span>
-            </div>
-            <div>
-                <span @click="dealflag = '2'" :class="dealflag == '2' ? 'status-2' : 'status-1'">待处理</span>
-                <span @click="dealflag = '3'" :class="dealflag == '3' ? 'status-2' : 'status-1'">已处理</span>
-            </div>
-            <section>
-                <van-button plain color="#0061D9" size="small" @click="all">待处理筛选</van-button>
-                <van-button color="#0061D9" size="small" @click="confirm">确认</van-button>
-            </section>
+            <van-row>
+                <van-col offset="1" span="7" @click="flowType = 'B'" :class="flowType == 'B' ? 'status-2' : 'status-1'">一般授信</van-col>
+                <van-col offset="1" span="7" @click="flowType = 'D'" :class="flowType == 'D' ? 'status-2' : 'status-1'">合同流程</van-col>
+                <van-col offset="1" span="7" @click="flowType = 'E'" :class="flowType == 'E' ? 'status-2' : 'status-1'">放款流程</van-col>
+                <van-col offset="1" span="7" @click="dealflag = '2'" :class="dealflag == '2' ? 'status-2' : 'status-1'">待处理</van-col>
+                <van-col offset="1" span="7" @click="dealflag = '3'" :class="dealflag == '3' ? 'status-2' : 'status-1'">已处理</van-col>
+            </van-row>
+            <van-row>
+                <van-col offset="1" span="11">
+                    <van-button plain color="#0061D9" size="small" @click="all">待处理筛选</van-button>
+                </van-col>
+                <van-col offset="1" span="11">
+                    <van-button color="#0061D9" size="small" @click="confirm">确认</van-button>
+                </van-col>
+            </van-row>
         </van-popup>
     </div>
 </template>
@@ -210,26 +212,19 @@
                 font-weight: 400;
                 font-size: 14px;
             }
-            div {
-                display: flex;
-                span {
+            .van-row {
+                .van-col {
                     display: inline-block;
-                    width: 80px;
                     height: 40px;
                     font-size: 12px;
-                    margin-right: 10px;
                     margin-bottom: 10px;
                     text-align: center;
                     line-height: 40px;
                     border-radius: 5px;
                 }
-            }
-            section {
-                display: flex;
-                margin-top: 20px;
                 .van-button {
                     width: 100%;
-                    margin-right: 10px;
+                    margin-top: 30px;
                 }
             }
             .status-1 {
