@@ -26,19 +26,19 @@
             <van-cell-group title="审批轨迹详情">
                 <van-cell title="流程名称" :label="QueryProgressDetails.procName" />
                 <van-cell title="审批备忘" :label="QueryProgressDetails.memo" />
-                <van-cell title="上一流程节点名称" :value="QueryProgressDetails.preTaskName" />
+<!--                <van-cell title="上一流程节点名称" :value="QueryProgressDetails.preTaskName" />-->
                 <van-cell title="流程节点名称" :value="QueryProgressDetails.taskName" />
                 <van-cell title="审批人姓名" :value="QueryProgressDetails.userName" />
-                <van-cell title="审批人机构" :value="QueryProgressDetails.branchCode" />
-                <van-cell title="拒绝原因代码" :value="QueryProgressDetails.refuseCode" />
+<!--                <van-cell title="审批人机构" :value="QueryProgressDetails.branchCode" />-->
+<!--                <van-cell title="拒绝原因代码" :value="QueryProgressDetails.refuseCode" />-->
                 <van-cell title="审批金额(元)" :value="QueryProgressDetails.approveAmt" />
                 <van-cell title="审批利率(%)" :value="QueryProgressDetails.approveRate" />
-                <van-cell title="审批贷款期限" :value="QueryProgressDetails.approveloanTerm" />
+                <van-cell title="审批贷款期限" :value="QueryProgressDetails.approveLoanTerm" />
                 <van-cell title="审批贷款期限单位" :value="QueryProgressDetails.approveTermUnit" />
                 <van-cell title="审批开始日期" :value="QueryProgressDetails.startDate" />
                 <van-cell title="审批结束日期" :value="QueryProgressDetails.finishDate" />
-                <van-cell title="创建日期" :value="QueryProgressDetails.createDate" />
-                <van-cell title="创建人" :value="QueryProgressDetails.createBy" />
+<!--                <van-cell title="创建日期" :value="QueryProgressDetails.createDate" />-->
+<!--                <van-cell title="创建人" :value="QueryProgressDetails.createBy" />-->
             </van-cell-group>
         </van-popup>
     </div>
@@ -93,6 +93,9 @@
                     this.show = true;
                     this.QueryProgressDetails = res.response;
                     this.QueryProgressDetails.approveTermUnit = Dictionaries.deadlineUnit[this.QueryProgressDetails.approveTermUnit];
+                    this.QueryProgressDetails.startDate = PublicMethods['formatDate'](this.QueryProgressDetails.startDate);
+                    this.QueryProgressDetails.finishDate = PublicMethods['formatDate'](this.QueryProgressDetails.finishDate);
+
                 });
             }
         }

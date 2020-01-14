@@ -20,7 +20,7 @@
                 <van-cell title="抵质押物有无财产共有人" :value="item.haveOwner"/>
                 <van-cell title="是否取得承租人承诺" :value="item.havaPromise"/>
                 <van-cell title="对抵质押物调查方式" :value="item.examMode"/>
-                <van-cell title="抵质押率" :value="item.mortgageRate"/>
+                <van-cell title="抵质押率（%）" :value="item.mortgageRate"/>
                 <van-cell title="抵质押人情况概述" :value="item.researchResult"/>
             </van-cell-group>
             <van-cell-group :title="'抵质押物列表' + '（' + item.mortgagorName + '）'">
