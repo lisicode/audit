@@ -3,16 +3,8 @@ import router from '@/router';
 
 // 环境
 const EnvironmentConfig = {
-    'DEV': {
-        url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
-        businessChannel: 'XDFXD',
-        channelId: "01",
-        inputSource: "I001",
-        versionId: "1.0.0",
-        org: "000004332361",
-        updateMode: "auto"
-    },
     'UAT': {
+        type: 'uat',
         url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
         businessChannel: 'XDFXD',
         channelId: "01",
@@ -22,7 +14,8 @@ const EnvironmentConfig = {
         updateMode: "auto"
     },
     'PROD': {
-        url: '',
+        type: 'prod',
+        url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -98,10 +91,18 @@ const PublicMethods = {
         }
     },
     'getImei': () => {
-        return '88888888'
+        if (Environment.type == 'prod') {
+            return plus.device.imei
+        } else {
+            return '88888888'
+        }
     },
     'getImsi': () => {
-        return '88888888'
+        if (Environment.type == 'prod') {
+            return plus.device.imsi
+        } else {
+            return '88888888'
+        }
     },
     'setLocalStorage': (type, data) => {
         return localStorage.setItem(type, JSON.stringify(data));
@@ -133,7 +134,7 @@ const PublicMethods = {
 };
 
 // 环境定义
-const Environment = EnvironmentConfig['DEV'];
+const Environment = EnvironmentConfig['UAT'];
 
 // 组装请求数据
 const AssembleRequestData = (serviceId, paramsStr) => {
