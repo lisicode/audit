@@ -17,21 +17,12 @@
 
     export default {
         name: 'login',
-        load: {
-            dom() {
-
-            },
-            plus() {
-                // console.log(plus.device.imei)
-            }
-        },
         data() {
             return {
                 userName: PublicMethods['getUserNo'](),
                 password: '',
             }
         },
-        created() {},
         methods: {
             // 确认登录
             confirmLogin() {
