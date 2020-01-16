@@ -52,7 +52,7 @@
                         this.$notify({
                             type: 'danger',
                             duration: 1000,
-                            message: '登陆失败'
+                            message: res.head.desc
                         });
                     }
                 })

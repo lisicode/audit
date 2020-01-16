@@ -5,15 +5,11 @@
 </template>
 
 <script>
-    import {PublicMethods} from '@/assets/js/config'
-
     export default {
         data() {
             return {}
         },
-        created() {
-           // console.log(PublicMethods['getLocalStorage']('user'))
-        }
+        created() {}
     }
 </script>
 
