@@ -18,7 +18,7 @@
                 <van-cell title="有无抵质押承诺书" :value="item.haveBook"/>
                 <van-cell title="抵质押物是否出租" :value="item.isRentOut"/>
                 <van-cell title="抵质押物有无财产共有人" :value="item.haveOwner"/>
-                <van-cell title="是否取得承租人承诺" :value="item.havaPromise"/>
+                <van-cell title="是否取得承租人承诺" :value="item.havePromise"/>
                 <van-cell title="对抵质押物调查方式" :value="item.examMode"/>
                 <van-cell title="抵质押率（%）" :value="item.mortgageRate"/>
                 <van-cell title="抵质押人情况概述" :value="item.researchResult"/>
@@ -85,7 +85,7 @@
                     this.pledgeList[i].haveBook = Dictionaries.custMortgagorResult_haveBook[this.pledgeList[i].haveBook];
                     this.pledgeList[i].isRentOut = Dictionaries.custMortgagorResult_isRentOut[this.pledgeList[i].isRentOut];
                     this.pledgeList[i].haveOwner = Dictionaries.custMortgagorResult_haveOwner[this.pledgeList[i].haveOwner];
-                    this.pledgeList[i].havaPromise = Dictionaries.custMortgagorResult_havePromise[this.pledgeList[i].havaPromise];
+                    this.pledgeList[i].havePromise = Dictionaries.custMortgagorResult_havePromise[this.pledgeList[i].havePromise];
                     this.pledgeList[i].examMode = Dictionaries.custMortgagorResult_examMode[this.pledgeList[i].examMode];
                 }
             });
