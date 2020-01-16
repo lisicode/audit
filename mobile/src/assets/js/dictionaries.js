@@ -478,7 +478,7 @@ const Dictionaries = {
     // 是否核实保证人的职业信息
     custGuarantorResult_checkInfo : {
         '1' : '是',
-        '2' : '有'
+        '2' : '无'
     },
 
     // 审批状态

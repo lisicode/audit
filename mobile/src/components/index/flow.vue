@@ -69,6 +69,7 @@
                 show: false,
                 list: [],
                 currentPage: 1,
+                type: this.$store.state.screening.type,
                 flowType: this.$store.state.screening.flowType,
                 dealflag: this.$store.state.screening.dealflag,
             }
@@ -78,13 +79,22 @@
             // 滑动加载
             onLoad() {
                 setTimeout(() => {
-                    let params = {
-                        currentPage: this.currentPage,
-                        pageSize: 10,
-                        flowType: this.flowType,
-                        dealflag: this.dealflag
-                    };
-                    this.requestLoad(params, InterfaceCode.QueryFlow)
+                    if (this.type == 'all') {
+                        let params = {
+                            currentPage: this.currentPage,
+                            pageSize: 10,
+                            dealflag: '2'
+                        };
+                        this.requestLoad(params, InterfaceCode.QueryAllUntreated)
+                    } else if (this.type == 'single') {
+                        let params = {
+                            currentPage: this.currentPage,
+                            pageSize: 10,
+                            flowType: this.flowType,
+                            dealflag: this.dealflag
+                        };
+                        this.requestLoad(params, InterfaceCode.QueryFlow)
+                    }
                 }, 500);
             },
             // 请求加载
@@ -101,10 +111,43 @@
                     }
                     this.currentPage += 1;
                     this.loading = false;
-                    if (res.head.code == '000001') {
+                    if (res.head.code == '000000') {
+                        if (!res.response.length) {
+                            this.finished = true;
+                        }
+                    } else {
                         this.finished = true;
                     }
                 });
+            },
+            // 确认筛选
+            confirm() {
+                this.list = [];
+                this.show = false;
+                this.finished = false;
+                this.type = 'single';
+                this.currentPage = 1;
+                let params = {
+                    currentPage: 1,
+                    pageSize: 10,
+                    flowType: this.flowType,
+                    dealflag: this.dealflag
+                };
+                this.requestLoad(params, InterfaceCode.QueryFlow)
+            },
+            // 筛选全部待处理
+            all() {
+                this.list = [];
+                this.show = false;
+                this.finished = false;
+                this.type = 'all';
+                this.currentPage = 1;
+                let params = {
+                    currentPage: 1,
+                    pageSize: 10,
+                    dealflag: '2'
+                };
+                this.requestLoad(params, InterfaceCode.QueryAllUntreated)
             },
             // 页面跳转
             to(e) {
@@ -127,32 +170,6 @@
                 };
                 this.$router.push({path: url[e.flowType].path})
             },
-            // 确认筛选
-            confirm() {
-                this.list = [];
-                this.show = false;
-                this.finished = false;
-                let params = {
-                    currentPage: 1,
-                    pageSize: 10,
-                    flowType: this.flowType,
-                    dealflag: this.dealflag
-                };
-                this.requestLoad(params, InterfaceCode.QueryFlow)
-            },
-            // 筛选全部待处理
-            all() {
-                this.list = [];
-                this.show = false;
-                this.finished = false;
-                let params = {
-                    currentPage: 1,
-                    pageSize: 10,
-                    flowType: this.flowType,
-                    dealflag: '2'
-                };
-                this.requestLoad(params, InterfaceCode.QueryAllUntreated)
-            }
         }
     }
 </script>

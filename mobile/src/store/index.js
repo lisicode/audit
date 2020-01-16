@@ -11,6 +11,7 @@ export default new Vuex.Store({
         },
         // 流程筛选条件
         screening: {
+            type: 'all',
             flowType: 'B',
             dealflag: '2',
         },

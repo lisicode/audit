@@ -60,6 +60,7 @@
         methods: {
             to(e) {
                 this.$store.commit('changeScreening', {
+                    type: 'single',
                     flowType: e,
                     dealflag: '2',
                 });
