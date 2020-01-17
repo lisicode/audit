@@ -6,6 +6,7 @@ const EnvironmentConfig = {
     'UAT': {
         type: 'uat',
         url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
+        getFiles: 'http://192.168.200.208:8080/approveApp/getFiles?fullUrl=',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -15,7 +16,8 @@ const EnvironmentConfig = {
     },
     'PROD': {
         type: 'prod',
-        url: 'http://192.168.200.208:8080/approveApp/appGatewayService',
+        url: 'http://10.129.2.199:8080/approveApp/appGatewayService',
+        getFiles: 'http://10.129.2.199:8080/approveApp/getFiles?fullUrl=',
         businessChannel: 'XDFXD',
         channelId: "01",
         inputSource: "I001",
@@ -92,14 +94,26 @@ const PublicMethods = {
     },
     'getImei': () => {
         if (Environment.type == 'prod') {
-            return plus.device.imei
+            try {
+                return plus.device.imei
+            } catch (err) {
+
+            } finally {
+                return '88888888'
+            }
         } else {
             return '88888888'
         }
     },
     'getImsi': () => {
         if (Environment.type == 'prod') {
-            return plus.device.imsi
+            try {
+                return plus.device.imsi
+            } catch (err) {
+
+            } finally {
+                return '88888888'
+            }
         } else {
             return '88888888'
         }
@@ -183,4 +197,4 @@ Request.interceptors.response.use(response => {
     console.log(error)
 });
 
-export { InterfaceCode, AssembleRequestData, Request, PublicMethods }
+export { InterfaceCode, AssembleRequestData, Request, PublicMethods, Environment }

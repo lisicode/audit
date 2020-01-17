@@ -51,8 +51,7 @@
 </template>
 
 <script>
-    import {InterfaceCode, AssembleRequestData, Request} from '@/assets/js/config'
-    import {Dictionaries} from '@/assets/js/dictionaries'
+    import {InterfaceCode, AssembleRequestData, Request, Environment} from '@/assets/js/config'
 
     export default {
         name: 'material',
@@ -109,7 +108,7 @@
                             this.images = [];
                             let imagesUrl = res.response.filter(item => item.fileType === 'jpg');
                             for(let i = 0;i < imagesUrl.length;i++) {
-                                this.images.push('http://192.168.200.208:8080/approveApp/getFiles?fullUrl=' + imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
+                                this.images.push(Environment.getFiles + imagesUrl[i].urlPrefix + imagesUrl[i].urlSuffix)
                             }
                         }
                     });
@@ -121,7 +120,7 @@
                 if(e.fileType == 'jpg') {
                     this.imagePreview = true
                 } else {
-                    let dtask = plus.downloader.createDownload('http://192.168.200.208:8080/approveApp/getFiles?fullUrl=' + e.urlPrefix + e.urlSuffix, {}, function (d, status) {
+                    let dtask = plus.downloader.createDownload(Environment.getFiles + e.urlPrefix + e.urlSuffix, {}, function (d, status) {
                         if (status == 200) {
                             var fileUrl = d.filename;
                             plus.runtime.openFile(fileUrl, {}, function (e) {
