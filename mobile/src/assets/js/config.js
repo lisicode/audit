@@ -148,7 +148,7 @@ const PublicMethods = {
 };
 
 // 环境定义
-const Environment = EnvironmentConfig['PROD'];
+const Environment = EnvironmentConfig['UAT'];
 
 // 组装请求数据
 const AssembleRequestData = (serviceId, paramsStr) => {

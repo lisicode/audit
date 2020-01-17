@@ -13,10 +13,10 @@
                     <i class="iconfont">&#xec23;</i>
                     <span>流程</span>
                 </van-tabbar-item>
-<!--                <van-tabbar-item name="statistics" @click="to('statistics')">-->
-<!--                    <i class="iconfont">&#xeb95;</i>-->
-<!--                    <span>统计</span>-->
-<!--                </van-tabbar-item>-->
+                <van-tabbar-item name="query" @click="to('query')">
+                    <i class="iconfont">&#xeb9c;</i>
+                    <span>查询</span>
+                </van-tabbar-item>
                 <van-tabbar-item name="setting" @click="to('setting')">
                     <i class="iconfont">&#xeb8d;</i>
                     <span>设置</span>
@@ -29,7 +29,7 @@
 <script>
     const home = resolve => require(['@/components/index/home.vue'],resolve);
     const flow = resolve => require(['@/components/index/flow.vue'],resolve);
-    const statistics = resolve => require(['@/components/index/statistics.vue'],resolve);
+    const query = resolve => require(['@/components/index/query.vue'],resolve);
     const setting = resolve => require(['@/components/index/setting.vue'],resolve);
 
     export default {
@@ -37,7 +37,7 @@
         components: {
             home,
             flow,
-            statistics,
+            query,
             setting
         },
         data() {
